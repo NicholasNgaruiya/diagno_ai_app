@@ -40,6 +40,7 @@ dependencies:
   url_launcher: ^6.2.5
   flutter_native_splash: ^2.3.11
   smooth_page_indicator: ^1.1.0
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_frontend/features/authentication/screens.onboarding/onboarding.dart';
+import 'package:restaurant_frontend/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:restaurant_frontend/utils/theme/theme.dart';
 
 /// ---Class to setup themes,initial Bindings ,animations
