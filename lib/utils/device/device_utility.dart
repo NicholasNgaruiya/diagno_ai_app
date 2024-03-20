@@ -52,6 +52,10 @@ class TDeviceUtils {
     return kBottomNavigationBarHeight;
   }
 
+  static double getAppBarHeight(BuildContext context) {
+    return kToolbarHeight;
+  }
+
   static double getKeyboardHeight(BuildContext context) {
     final viewInsets = MediaQuery.of(context).viewInsets;
     return viewInsets.bottom;

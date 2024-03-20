@@ -30,13 +30,34 @@ class THelperFunctions {
     }
   }
 
-  // static void showSnackBar(String message) {
-  //   ScaffoldMessenger.of(Get.context!).showSnackBar(
-  //     SnackBar(
-  //       content: Text(message),
-  //     ),
-  //   );
-  // }
+  static void showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
+  static void showAlert(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   static void navigateToScreen(BuildContext context, Widget screen) {
     Navigator.push(
       context,
@@ -56,15 +77,17 @@ class THelperFunctions {
     return Theme.of(context).brightness == Brightness.dark;
   }
 
-  // static Size screenSize() {
-  //   return MediaQuery.of(Get.context).size;
-  // }
-  // static Size screenHeight() {
-  //   return MediaQuery.of(Get.context).size.height;
-  // }
-  // static Size screenWidth() {
-  //   return MediaQuery.of(Get.context).size.width;
-  // }
+  static Size screenSize(BuildContext context) {
+    return MediaQuery.of(context).size;
+  }
+
+  static double screenHeight(BuildContext context) {
+    return MediaQuery.of(context).size.height;
+  }
+
+  static double screenWidth(BuildContext context) {
+    return MediaQuery.of(context).size.width;
+  }
 
   static String getFormattedDate(DateTime date, {String format = 'dd MMM yyyy'}) {
     return DateFormat(format).format(date);
@@ -78,9 +101,11 @@ class THelperFunctions {
     final wrappedList = <Widget>[];
     for (var i = 0; i < widgets.length; i += rowSize) {
       final rowChildren = widgets.sublist(i, i + rowSize > widgets.length ? widgets.length : i + rowSize);
-      wrappedList.add(Row(
-        children: rowChildren,
-      ));
+      wrappedList.add(
+        Row(
+          children: rowChildren,
+        ),
+      );
     }
     return wrappedList;
   }
