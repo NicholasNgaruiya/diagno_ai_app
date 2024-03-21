@@ -35,11 +35,11 @@ class SignupScreen extends StatelessWidget {
               ),
 
               ///Divider
-              const TFormDivider(dividerText: TTexts.orSignUpWith),
-              const SizedBox(
-                height: TSizes.spaceBtwItems,
-              ),
-              const TSocialButtons(),
+              // const TFormDivider(dividerText: TTexts.orSignUpWith),
+              // const SizedBox(
+              //   height: TSizes.spaceBtwItems,
+              // ),
+              // const TSocialButtons(),
             ],
           ),
         ),
