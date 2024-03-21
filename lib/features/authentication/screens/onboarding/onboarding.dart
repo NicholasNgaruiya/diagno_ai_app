@@ -53,8 +53,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
-
     return Scaffold(
       body: Stack(
         children: [
@@ -70,13 +68,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
 
           ///Dot Navigation
-          OnBoardingDotNavigation(dark: dark, controller: _controller),
+          OnBoardingDotNavigation(controller: _controller),
 
           ///Skip Button
           OnBoardingSkip(controller: _controller, pages: pages),
 
           ///Next Button
-          OnBoardingNextButton(isLastPage: _isLastPage, controller: _controller, dark: dark),
+          OnBoardingNextButton(
+            isLastPage: _isLastPage,
+            controller: _controller,
+          ),
         ],
       ),
     );

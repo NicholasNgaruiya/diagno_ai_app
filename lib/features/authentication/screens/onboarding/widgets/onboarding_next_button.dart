@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_frontend/features/authentication/screens/login/login.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/device/device_utility.dart';
+import '../../../../../utils/helpers/helper_functions.dart';
+import '../../signup/signup.dart';
 
 class OnBoardingNextButton extends StatelessWidget {
   const OnBoardingNextButton({
     super.key,
     required bool isLastPage,
     required PageController controller,
-    required this.dark,
   })  : _isLastPage = isLastPage,
         _controller = controller;
 
   final bool _isLastPage;
   final PageController _controller;
-  final bool dark;
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+
     return Positioned(
       right: TSizes.defaultSpace,
       bottom: TDeviceUtils.getBottomNavigationBarHeight(),
@@ -28,7 +29,7 @@ class OnBoardingNextButton extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
+                    builder: (context) => const SignupScreen(),
                   ),
                 );
               },

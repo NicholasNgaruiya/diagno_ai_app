@@ -28,7 +28,9 @@ class TTexts {
   static const String orSignInWith = 'or sign in with';
   static const String orSignUpWith = 'or sign up with';
   static const String iAgreeTo = 'I agree to';
+  static const String and = 'and';
   static const String termsOfService = 'Terms of Service';
+  static const String privacyPolicy = 'Privacy Policy';
   static const String verificationCode = 'VerificationCode';
   static const String resendEmail = 'Resend Email';
   static const String resendEmailIn = 'Resend email in';
