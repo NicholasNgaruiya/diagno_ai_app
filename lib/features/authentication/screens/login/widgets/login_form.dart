@@ -76,6 +76,7 @@ class TLoginForm extends StatelessWidget {
               child: OutlinedButton(
                 onPressed: () {
                   //navigate to the signupScreen
+                  Navigator.pushNamed(context, '/signup');
                 },
                 child: const Text(TTexts.createAccount),
               ),
