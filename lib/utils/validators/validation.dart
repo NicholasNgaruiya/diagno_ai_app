@@ -46,5 +46,31 @@ class TValidator {
     return null;
   }
 
+  static String? validateFirstName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'First name is required';
+    }
+    // You can add more specific validations for first name if needed
+    return null;
+  }
+
+  static String? validateLastName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Last name is required';
+    }
+    // You can add more specific validations for last name if needed
+    return null;
+  }
+
+  static String? validateConfirmPassword(String? value, String password) {
+    if (value == null || value.isEmpty) {
+      return 'Please confirm your password';
+    }
+    if (value != password) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
   ///Add more custom validators as needed
 }
