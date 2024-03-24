@@ -46,7 +46,7 @@ class _SignupScreenState extends State<SignupScreen> {
             );
           } else if (state is SignUpSuccessState) {
             //Handle success state by navigating to the next screen
-            Navigator.pushNamed(context, '/login');
+            Navigator.pushNamed(context, '/otp');
           }
           // TODO: implement listener
         },
