@@ -6,46 +6,37 @@ import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 import 'terms_and_conditions_checkbox.dart';
 
-class TSignupForm extends StatefulWidget {
+class TSignupForm extends StatelessWidget {
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final TextEditingController confirmPasswordController;
+  final VoidCallback onSubmit;
+
   const TSignupForm({
-    super.key,
-    // required this.dark,
-  });
-
-  @override
-  State<TSignupForm> createState() => _TSignupFormState();
-}
-
-class _TSignupFormState extends State<TSignupForm> {
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
-  }
+    required this.firstNameController,
+    required this.lastNameController,
+    required this.emailController,
+    required this.passwordController,
+    required this.confirmPasswordController,
+    required this.onSubmit,
+    Key? key,
+  }) : super(key: key);
 
   // final bool dark;
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return Form(
-      key: _formKey,
+      key: formKey,
       // autovalidateMode: AutovalidateMode.always, // Enable auto validation
       child: Column(
         children: [
           //?firstname
           TextFormField(
             validator: (value) => TValidator.validateFirstName(value),
-            controller: _firstNameController,
+            controller: firstNameController,
             expands: false,
             decoration: const InputDecoration(
               labelText: TTexts.firstName,
@@ -57,7 +48,7 @@ class _TSignupFormState extends State<TSignupForm> {
           ),
           //?lastname
           TextFormField(
-            controller: _lastNameController,
+            controller: lastNameController,
             validator: (value) => TValidator.validateLastName(value),
             expands: false,
             decoration: const InputDecoration(
@@ -70,7 +61,7 @@ class _TSignupFormState extends State<TSignupForm> {
           ),
           //?email
           TextFormField(
-            controller: _emailController,
+            controller: emailController,
             validator: (value) => TValidator.validateEmail(value),
             expands: false,
             decoration: const InputDecoration(
@@ -83,7 +74,7 @@ class _TSignupFormState extends State<TSignupForm> {
           ),
           //?password
           TextFormField(
-            controller: _passwordController,
+            controller: passwordController,
             validator: (value) => TValidator.validatePassword(value),
             obscureText: true,
             expands: false,
@@ -98,8 +89,8 @@ class _TSignupFormState extends State<TSignupForm> {
           ),
           //? confirm password
           TextFormField(
-            controller: _confirmPasswordController,
-            validator: (value) => TValidator.validateConfirmPassword(value, _passwordController.text),
+            controller: confirmPasswordController,
+            validator: (value) => TValidator.validateConfirmPassword(value, passwordController.text),
             obscureText: true,
             expands: false,
             decoration: const InputDecoration(
@@ -123,12 +114,13 @@ class _TSignupFormState extends State<TSignupForm> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  print(_firstNameController.text);
-                  print(_lastNameController.text);
-                  print(_emailController.text);
-                  print(_passwordController.text);
-                  print(_confirmPasswordController.text);
+                if (formKey.currentState!.validate()) {
+                  onSubmit();
+                  print(firstNameController.text);
+                  print(lastNameController.text);
+                  print(emailController.text);
+                  print(passwordController.text);
+                  print(confirmPasswordController.text);
                 }
               },
               child: const Text(TTexts.createAccount),

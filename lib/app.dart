@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/data/authentication/bloc/sign_up_bloc.dart';
 import 'package:restaurant_frontend/features/authentication/screens/login/login.dart';
 import 'package:restaurant_frontend/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:restaurant_frontend/features/authentication/screens/signup/signup.dart';
@@ -10,15 +12,25 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      themeMode: ThemeMode.system,
-      theme: TAppTheme.lightTheme,
-      darkTheme: TAppTheme.darkTheme,
-      home: const OnBoardingScreen(),
-      routes: {
-        '/signup': (context) => const SignupScreen(),
-        '/login': (context) => const LoginScreen(),
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SignUpBloc(),
+        ),
+        // BlocProvider(
+        //   create: (context) => SubjectBloc(),
+        // ),
+      ],
+      child: MaterialApp(
+        themeMode: ThemeMode.system,
+        theme: TAppTheme.lightTheme,
+        darkTheme: TAppTheme.darkTheme,
+        home: const OnBoardingScreen(),
+        routes: {
+          '/signup': (context) => const SignupScreen(),
+          '/login': (context) => const LoginScreen(),
+        },
+      ),
     );
   }
 }
