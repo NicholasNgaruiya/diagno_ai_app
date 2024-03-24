@@ -51,6 +51,7 @@ class TTexts {
       'We have sent a verification code to your email address. Please enter the code below to verify your email address.';
   static const String emailNotReceivedMessage = "Didn't get the email? Check your junk/spam or resend it.";
   static const String getAccountCreatedTitle = 'Your account successfully created!';
+  static const String getAccountVerifiedSuccessfully = 'Your email has been verified successfully!';
   static const String getAccountCreatedSubTitle =
       'Welcome to your ultimate Destination: Your Account is Created,Unleash the Joy of Seamless Food Recommendations';
 }

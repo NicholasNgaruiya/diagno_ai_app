@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/data/authentication/bloc/sign_up_bloc.dart';
+
 import 'package:restaurant_frontend/features/authentication/models/user_model.dart';
 
+import '../../../../data/authentication/services/authentication/signup/bloc/sign_up_bloc.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 import 'widgets/signup_form.dart';
@@ -45,6 +46,11 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             );
           } else if (state is SignUpSuccessState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(TTexts.getAccountCreatedTitle),
+              ),
+            );
             //Handle success state by navigating to the next screen
             Navigator.pushNamed(context, '/otp');
           }

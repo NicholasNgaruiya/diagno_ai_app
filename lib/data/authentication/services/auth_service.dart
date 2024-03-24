@@ -16,4 +16,10 @@ class AuthService {
     final data = {'email': email, 'password': password};
     return await THttHelper.post('$_baseUrl/signin/', data);
   }
+
+  //Method to verify OTP
+  static Future<Map<String, dynamic>> verifyOTP(String otp) async {
+    final data = {'otp': otp};
+    return await THttHelper.post('$_baseUrl/verify-email/', data);
+  }
 }

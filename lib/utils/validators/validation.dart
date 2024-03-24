@@ -72,12 +72,5 @@ class TValidator {
     return null;
   }
 
-  static String? validateOtpField(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Required field';
-    }
-    return null;
-  }
-
   ///Add more custom validators as needed
 }

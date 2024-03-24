@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:restaurant_frontend/data/authentication/repositories/auth_repository.dart';
 
-import '../../../features/authentication/models/user_model.dart';
+import '../../../../../../features/authentication/models/user_model.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
@@ -19,7 +20,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(SignUpLoadingState());
 
     try {
-      // print('UserModel: ${event.user}');
       final response = await AuthRepository.signUpUSer(event.user);
       emit(SignUpSuccessState(response));
     } catch (error) {

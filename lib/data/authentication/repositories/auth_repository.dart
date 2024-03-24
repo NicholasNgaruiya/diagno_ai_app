@@ -1,4 +1,4 @@
-import 'package:restaurant_frontend/data/authentication/services/authentication/auth_service.dart';
+import 'package:restaurant_frontend/data/authentication/services/auth_service.dart';
 
 import '../../../features/authentication/models/user_model.dart';
 
@@ -12,6 +12,19 @@ class AuthRepository {
     } catch (error) {
       //Handle errors if any
       print('Error registering user: $error');
+      throw error;
+    }
+  }
+
+  //Method to verify OTP
+  static Future<Map<String, dynamic>> verifyEmail(String otp) async {
+    try {
+      final response = await AuthService.verifyOTP(otp);
+      //Handle the response here if necessary
+      return response;
+    } catch (error) {
+      //Handle errors if any
+      print('Error verifying OTP: $error');
       throw error;
     }
   }
