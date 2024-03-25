@@ -14,7 +14,7 @@ class AuthService {
   //Method to signin
   static Future<Map<String, dynamic>> signIn(String email, String password) async {
     final data = {'email': email, 'password': password};
-    return await THttHelper.post('$_baseUrl/signin/', data);
+    return await THttHelper.post('$_baseUrl/login/', data);
   }
 
   //Method to verify OTP

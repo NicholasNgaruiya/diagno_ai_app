@@ -10,11 +10,11 @@ class TLoginForm extends StatefulWidget {
   final TextEditingController passwordController;
   final VoidCallback onSubmit;
   const TLoginForm({
-    super.key,
+    Key? key,
     required this.emailController,
     required this.passwordController,
     required this.onSubmit,
-  });
+  }) : super(key: key);
 
   @override
   State<TLoginForm> createState() => _TLoginFormState();
@@ -33,14 +33,15 @@ class _TLoginFormState extends State<TLoginForm> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     return Form(
+      key: formKey,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
         child: Column(
           children: [
             //Email
             TextFormField(
-              controller: widget.emailController,
               validator: (value) => TValidator.validateEmail(value),
+              controller: widget.emailController,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Iconsax.direct),
                 labelText: TTexts.email,
@@ -94,13 +95,16 @@ class _TLoginFormState extends State<TLoginForm> {
               height: TSizes.spaceBtwSections,
             ),
 
-            ///Sign In Button
+            ///?Sign In Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
+                  print('Login button clicked');
                   if (formKey.currentState!.validate()) {
                     widget.onSubmit();
+                    print(widget.emailController.text);
+                    print(widget.passwordController.text);
                   }
                 },
                 child: const Text(TTexts.signIn),

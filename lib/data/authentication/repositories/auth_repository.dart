@@ -28,4 +28,15 @@ class AuthRepository {
       rethrow;
     }
   }
+
+  //Method to login in with email and password
+  static Future<Map<String, dynamic>> login(String email, String password) async {
+    try {
+      final response = await AuthService.signIn(email, password);
+      return response;
+    } catch (error) {
+      print('Error logging in: $error');
+      rethrow;
+    }
+  }
 }

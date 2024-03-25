@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/features/authentication/screens/home/home.dart';
 import 'package:restaurant_frontend/utils/theme/theme.dart';
 
+import 'data/authentication/blocs/login/bloc/login_bloc.dart';
 import 'data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import 'data/authentication/blocs/verify_email/bloc/verify_email_bloc.dart';
 import 'features/authentication/screens/login/login.dart';
@@ -23,6 +25,7 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => VerifyEmailBloc(),
         ),
+        BlocProvider(create: (context) => LoginBloc()),
       ],
       child: MaterialApp(
         themeMode: ThemeMode.system,
@@ -35,6 +38,7 @@ class App extends StatelessWidget {
           '/signup': (context) => const SignupScreen(),
           '/login': (context) => const LoginScreen(),
           '/otp': (context) => const OtpScreen(),
+          '/home': (context) => const HomeScreen(),
         },
       ),
     );

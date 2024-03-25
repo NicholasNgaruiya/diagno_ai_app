@@ -72,7 +72,8 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             );
             //Handle success state by navigating to the next screen
-            Navigator.pushNamed(context, '/otp');
+            // Navigator.pushNamed(context, '/otp');
+            Navigator.of(context).pushNamedAndRemoveUntil('/otp', (route) => false);
           }
         },
         child: SingleChildScrollView(
