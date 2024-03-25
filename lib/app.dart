@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/common/widgets/errors/flash_message_error.dart';
 import 'package:restaurant_frontend/features/authentication/screens/login/login.dart';
 import 'package:restaurant_frontend/features/authentication/screens/otpscreen/otp_screen.dart';
 import 'package:restaurant_frontend/features/authentication/screens/signup/signup.dart';
@@ -29,6 +30,7 @@ class App extends StatelessWidget {
         theme: TAppTheme.lightTheme,
         darkTheme: TAppTheme.darkTheme,
         home: const OnBoardingScreen(),
+        // home: const FlashMessageScreen(),
         // home: const OtpScreen(),
         routes: {
           '/signup': (context) => const SignupScreen(),

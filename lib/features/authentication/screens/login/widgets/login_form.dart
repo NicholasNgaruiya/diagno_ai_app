@@ -4,10 +4,23 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 
-class TLoginForm extends StatelessWidget {
+class TLoginForm extends StatefulWidget {
   const TLoginForm({
     super.key,
   });
+
+  @override
+  State<TLoginForm> createState() => _TLoginFormState();
+}
+
+class _TLoginFormState extends State<TLoginForm> {
+  late bool _passwordVisible;
+
+  @override
+  void initState() {
+    _passwordVisible = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +40,21 @@ class TLoginForm extends StatelessWidget {
             const SizedBox(height: TSizes.spaceBtwInputFields),
             //Password
             TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Iconsax.password_check),
+              obscureText: !_passwordVisible,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Iconsax.password_check),
                 labelText: TTexts.password,
-                suffixIcon: Icon(Iconsax.eye_slash),
+                // suffixIcon: Icon(Iconsax.eye_slash,),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible = !_passwordVisible;
+                    });
+                  },
+                  icon: Icon(
+                    _passwordVisible ? Iconsax.eye_slash : Iconsax.eye,
+                  ),
+                ),
                 // hintText: TTexts.email,
               ),
             ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:restaurant_frontend/features/authentication/models/user_model.dart';
 
+import '../../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../../data/authentication/services/authentication/signup/bloc/sign_up_bloc.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
@@ -42,9 +43,18 @@ class _SignupScreenState extends State<SignupScreen> {
             //Handle failure state by showing a snack bar with the error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(state.error.toString()),
+                // content: Text(state.error.toString()),
+                content: CustomSnackBarContent(
+                  errorTitle: 'Oh snap!',
+                  errorSubtitle: state.error.toString(),
+                  backgroundColor: Colors.red,
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
               ),
             );
+            // print('This is the error:${state.error.toString()}');
           } else if (state is SignUpSuccessState) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(

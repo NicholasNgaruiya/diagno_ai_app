@@ -6,7 +6,7 @@ import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 import 'terms_and_conditions_checkbox.dart';
 
-class TSignupForm extends StatelessWidget {
+class TSignupForm extends StatefulWidget {
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
   final TextEditingController emailController;
@@ -24,6 +24,21 @@ class TSignupForm extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<TSignupForm> createState() => _TSignupFormState();
+}
+
+class _TSignupFormState extends State<TSignupForm> {
+  late bool _passwordVisible;
+  late bool _confirmPasswordVisible;
+
+  @override
+  void initState() {
+    _passwordVisible = false;
+    _confirmPasswordVisible = false;
+    super.initState();
+  }
+
   // final bool dark;
   @override
   Widget build(BuildContext context) {
@@ -36,7 +51,7 @@ class TSignupForm extends StatelessWidget {
           //?firstname
           TextFormField(
             validator: (value) => TValidator.validateFirstName(value),
-            controller: firstNameController,
+            controller: widget.firstNameController,
             expands: false,
             decoration: const InputDecoration(
               labelText: TTexts.firstName,
@@ -48,7 +63,7 @@ class TSignupForm extends StatelessWidget {
           ),
           //?lastname
           TextFormField(
-            controller: lastNameController,
+            controller: widget.lastNameController,
             validator: (value) => TValidator.validateLastName(value),
             expands: false,
             decoration: const InputDecoration(
@@ -61,7 +76,7 @@ class TSignupForm extends StatelessWidget {
           ),
           //?email
           TextFormField(
-            controller: emailController,
+            controller: widget.emailController,
             validator: (value) => TValidator.validateEmail(value),
             expands: false,
             decoration: const InputDecoration(
@@ -74,14 +89,24 @@ class TSignupForm extends StatelessWidget {
           ),
           //?password
           TextFormField(
-            controller: passwordController,
+            controller: widget.passwordController,
             validator: (value) => TValidator.validatePassword(value),
-            obscureText: true,
+            obscureText: !_passwordVisible, //This will obscure text dynamically
             expands: false,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: TTexts.password,
-              prefixIcon: Icon(Iconsax.password_check),
-              suffixIcon: Icon(Iconsax.eye_slash),
+              prefixIcon: const Icon(Iconsax.password_check),
+              // suffixIcon: Icon(Iconsax.eye_slash,),
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    _passwordVisible = !_passwordVisible;
+                  });
+                },
+                icon: Icon(
+                  _passwordVisible ? Iconsax.eye_slash : Iconsax.eye,
+                ),
+              ),
             ),
           ),
           const SizedBox(
@@ -89,14 +114,24 @@ class TSignupForm extends StatelessWidget {
           ),
           //? confirm password
           TextFormField(
-            controller: confirmPasswordController,
-            validator: (value) => TValidator.validateConfirmPassword(value, passwordController.text),
-            obscureText: true,
+            controller: widget.confirmPasswordController,
+            validator: (value) => TValidator.validateConfirmPassword(value, widget.passwordController.text),
+            obscureText: !_confirmPasswordVisible,
             expands: false,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: TTexts.confirmPassword,
-              prefixIcon: Icon(Iconsax.password_check),
-              suffixIcon: Icon(Iconsax.eye_slash),
+              prefixIcon: const Icon(Iconsax.password_check),
+              // suffixIcon: Icon(Iconsax.eye_slash,),
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    _confirmPasswordVisible = !_confirmPasswordVisible;
+                  });
+                },
+                icon: Icon(
+                  _confirmPasswordVisible ? Iconsax.eye_slash : Iconsax.eye,
+                ),
+              ),
             ),
           ),
           const SizedBox(
@@ -115,12 +150,12 @@ class TSignupForm extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  onSubmit();
-                  print(firstNameController.text);
-                  print(lastNameController.text);
-                  print(emailController.text);
-                  print(passwordController.text);
-                  print(confirmPasswordController.text);
+                  widget.onSubmit();
+                  print(widget.firstNameController.text);
+                  print(widget.lastNameController.text);
+                  print(widget.emailController.text);
+                  print(widget.passwordController.text);
+                  print(widget.confirmPasswordController.text);
                 }
               },
               child: const Text(TTexts.createAccount),

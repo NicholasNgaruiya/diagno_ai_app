@@ -23,6 +23,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       final response = await AuthRepository.signUpUSer(event.user);
       emit(SignUpSuccessState(response));
     } catch (error) {
+      print(error);
       emit(SignUpErrorState(error));
     }
   }
