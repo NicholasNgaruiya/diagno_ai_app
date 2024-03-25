@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/features/authentication/models/user_model.dart';
 
 import '../../../../common/widgets/errors/custom_snackbar_content.dart';
-import '../../../../data/authentication/services/authentication/signup/bloc/sign_up_bloc.dart';
+import '../../../../data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
@@ -46,8 +46,9 @@ class _SignupScreenState extends State<SignupScreen> {
               SnackBar(
                 // content: Text(state.error.toString()),
                 content: CustomSnackBarContent(
-                  snackBarTitle: 'Oh snap!',
+                  snackBarTitle: 'Oops!',
                   snackBarSubtitle: state.error.toString(),
+                  // snackBarSubtitle: TTexts.emailAlreadyExistsError,
                   backgroundColor: TColors.error,
                 ),
                 behavior: SnackBarBehavior.floating,

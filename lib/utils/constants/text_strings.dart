@@ -35,6 +35,7 @@ class TTexts {
   static const String resendEmail = 'Resend Email';
   static const String resendEmailIn = 'Resend email in';
   static const String rememberMe = 'Remember Me';
+  static const String emailAlreadyExistsError = 'The Email you entered is already in use';
 
 //-- Authentication Heading Text
   static const String loginTitle = 'Welcome Back!';

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../repositories/auth_repository.dart';
+import '../../../repositories/auth_repository.dart';
 
 part 'verify_email_event.dart';
 part 'verify_email_state.dart';
