@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/common/widgets/errors/custom_snackbar_content.dart';
 import 'package:restaurant_frontend/utils/constants/sizes.dart';
 
 import '../../../../data/authentication/services/authentication/verify_email/bloc/verify_email_bloc.dart';
+import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/text_strings.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -39,15 +41,31 @@ class _OtpScreenState extends State<OtpScreen> {
             //Handle success state to show a snackbar and navigate to the login screen
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text(TTexts.getAccountVerifiedSuccessfully),
+                content: CustomSnackBarContent(
+                  snackBarTitle: 'Yohoo!',
+                  snackBarSubtitle: TTexts.getAccountVerifiedSuccessfully,
+                  backgroundColor: TColors.success,
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                // content: Text(TTexts.getAccountVerifiedSuccessfully),
               ),
             );
             Navigator.pushReplacementNamed(context, '/login');
           } else if (state is VerifyEmailErrorState) {
             //Handle failure state by showing a snackbar with the error message
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.error.toString()),
+              const SnackBar(
+                content: CustomSnackBarContent(
+                  snackBarTitle: 'Oops!',
+                  snackBarSubtitle: 'Account Verification failed',
+                  backgroundColor: TColors.error,
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                // content: Text(state.error.toString()),
               ),
             );
           }
@@ -55,7 +73,11 @@ class _OtpScreenState extends State<OtpScreen> {
         child: BlocBuilder<VerifyEmailBloc, VerifyEmailState>(
           builder: (context, state) {
             if (state is VerifyEmailLoadingState) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: TColors.primaryColor,
+                ),
+              );
             } else {
               return SingleChildScrollView(
                 child: Padding(

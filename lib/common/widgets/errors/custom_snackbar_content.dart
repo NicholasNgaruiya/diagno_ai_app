@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class CustomSnackBarContent extends StatelessWidget {
   const CustomSnackBarContent({
     super.key,
-    required this.errorTitle,
-    required this.errorSubtitle,
+    required this.snackBarTitle,
+    required this.snackBarSubtitle,
     required this.backgroundColor,
   });
-  final String errorTitle;
-  final String errorSubtitle;
+  final String snackBarTitle;
+  final String snackBarSubtitle;
   final Color backgroundColor;
 
   @override
@@ -17,7 +17,7 @@ class CustomSnackBarContent extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       height: 78,
       decoration: BoxDecoration(
-        color: Colors.red,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -30,7 +30,7 @@ class CustomSnackBarContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  errorTitle,
+                  snackBarTitle,
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
                 // const SizedBox(
@@ -38,7 +38,7 @@ class CustomSnackBarContent extends StatelessWidget {
                 // ),
                 // const Spacer(),
                 Text(
-                  errorSubtitle,
+                  snackBarSubtitle,
                   style: const TextStyle(
                     fontSize: 12,
                     color: Colors.white,

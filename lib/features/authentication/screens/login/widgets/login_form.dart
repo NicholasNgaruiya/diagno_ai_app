@@ -3,10 +3,17 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
+import '../../../../../utils/validators/validation.dart';
 
 class TLoginForm extends StatefulWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final VoidCallback onSubmit;
   const TLoginForm({
     super.key,
+    required this.emailController,
+    required this.passwordController,
+    required this.onSubmit,
   });
 
   @override
@@ -24,6 +31,7 @@ class _TLoginFormState extends State<TLoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return Form(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
@@ -31,6 +39,8 @@ class _TLoginFormState extends State<TLoginForm> {
           children: [
             //Email
             TextFormField(
+              controller: widget.emailController,
+              validator: (value) => TValidator.validateEmail(value),
               decoration: const InputDecoration(
                 prefixIcon: Icon(Iconsax.direct),
                 labelText: TTexts.email,
@@ -40,6 +50,8 @@ class _TLoginFormState extends State<TLoginForm> {
             const SizedBox(height: TSizes.spaceBtwInputFields),
             //Password
             TextFormField(
+              controller: widget.passwordController,
+              validator: (value) => TValidator.validatePassword(value),
               obscureText: !_passwordVisible,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Iconsax.password_check),
@@ -52,7 +64,7 @@ class _TLoginFormState extends State<TLoginForm> {
                     });
                   },
                   icon: Icon(
-                    _passwordVisible ? Iconsax.eye_slash : Iconsax.eye,
+                    _passwordVisible ? Iconsax.eye : Iconsax.eye_slash,
                   ),
                 ),
                 // hintText: TTexts.email,
@@ -86,7 +98,11 @@ class _TLoginFormState extends State<TLoginForm> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    widget.onSubmit();
+                  }
+                },
                 child: const Text(TTexts.signIn),
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:restaurant_frontend/features/authentication/models/user_model.da
 
 import '../../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../../data/authentication/services/authentication/signup/bloc/sign_up_bloc.dart';
+import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 import 'widgets/signup_form.dart';
@@ -45,9 +46,9 @@ class _SignupScreenState extends State<SignupScreen> {
               SnackBar(
                 // content: Text(state.error.toString()),
                 content: CustomSnackBarContent(
-                  errorTitle: 'Oh snap!',
-                  errorSubtitle: state.error.toString(),
-                  backgroundColor: Colors.red,
+                  snackBarTitle: 'Oh snap!',
+                  snackBarSubtitle: state.error.toString(),
+                  backgroundColor: TColors.error,
                 ),
                 behavior: SnackBarBehavior.floating,
                 backgroundColor: Colors.transparent,
@@ -58,13 +59,20 @@ class _SignupScreenState extends State<SignupScreen> {
           } else if (state is SignUpSuccessState) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text(TTexts.getAccountCreatedTitle),
+                content: CustomSnackBarContent(
+                  snackBarTitle: 'Wohoo!',
+                  snackBarSubtitle: 'Almost there ,verify your email',
+                  backgroundColor: TColors.success,
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                // content: Text(TTexts.getAccountCreatedTitle),
               ),
             );
             //Handle success state by navigating to the next screen
             Navigator.pushNamed(context, '/otp');
           }
-          // TODO: implement listener
         },
         child: SingleChildScrollView(
           child: Padding(
@@ -86,7 +94,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   builder: (context, state) {
                     if (state is SignUpLoadingState) {
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          color: TColors.primaryColor,
+                        ),
                       );
                     } else {
                       return TSignupForm(

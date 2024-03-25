@@ -6,7 +6,9 @@ import 'package:restaurant_frontend/utils/theme/custom_themes/checkbox_theme.dar
 import 'package:restaurant_frontend/utils/theme/custom_themes/chip_theme.dart';
 import 'package:restaurant_frontend/utils/theme/custom_themes/elevated_button_theme.dart';
 import 'package:restaurant_frontend/utils/theme/custom_themes/outlined_button_theme.dart';
+import 'package:restaurant_frontend/utils/theme/custom_themes/text_button_theme.dart';
 import 'package:restaurant_frontend/utils/theme/custom_themes/text_field_theme.dart';
+import 'package:restaurant_frontend/utils/theme/custom_themes/text_selection_theme.dart';
 import 'package:restaurant_frontend/utils/theme/custom_themes/text_theme.dart';
 
 class TAppTheme {
@@ -25,7 +27,9 @@ class TAppTheme {
     bottomSheetTheme: TBottomSheetTheme.lightBottomSheetTheme,
     elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
     outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
+    textButtonTheme: TTextButtonTheme.lightTextButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
+    textSelectionTheme: TTextSelectionTheme.lightTextSelectionTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -41,6 +45,8 @@ class TAppTheme {
     bottomSheetTheme: TBottomSheetTheme.darkBottomSheetTheme,
     elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
     outlinedButtonTheme: TOutlinedButtonTheme.darkOutlinedButtonTheme,
+    textButtonTheme: TTextButtonTheme.darkTextButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
+    textSelectionTheme: TTextSelectionTheme.darkTextSelectionTheme,
   );
 }

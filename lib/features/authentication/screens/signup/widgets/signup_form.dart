@@ -104,7 +104,7 @@ class _TSignupFormState extends State<TSignupForm> {
                   });
                 },
                 icon: Icon(
-                  _passwordVisible ? Iconsax.eye_slash : Iconsax.eye,
+                  _passwordVisible ? Iconsax.eye : Iconsax.eye_slash,
                 ),
               ),
             ),
@@ -129,7 +129,7 @@ class _TSignupFormState extends State<TSignupForm> {
                   });
                 },
                 icon: Icon(
-                  _confirmPasswordVisible ? Iconsax.eye_slash : Iconsax.eye,
+                  _confirmPasswordVisible ? Iconsax.eye : Iconsax.eye_slash,
                 ),
               ),
             ),

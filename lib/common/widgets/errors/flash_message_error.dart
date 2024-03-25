@@ -13,8 +13,8 @@ class FlashMessageScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: CustomSnackBarContent(
-                  errorTitle: 'Oh snap!',
-                  errorSubtitle: 'This is a flash message',
+                  snackBarTitle: 'Oh snap!',
+                  snackBarSubtitle: 'This is a flash message',
                   backgroundColor: Colors.red,
                 ),
                 behavior: SnackBarBehavior.floating,

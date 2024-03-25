@@ -12,7 +12,7 @@ class AuthRepository {
     } catch (error) {
       //Handle errors if any
       print('Error registering user: $error');
-      throw error;
+      rethrow;
     }
   }
 
@@ -25,7 +25,7 @@ class AuthRepository {
     } catch (error) {
       //Handle errors if any
       print('Error verifying OTP: $error');
-      throw error;
+      rethrow;
     }
   }
 }
