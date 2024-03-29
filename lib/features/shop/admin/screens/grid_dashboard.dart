@@ -3,24 +3,24 @@ import 'package:restaurant_frontend/features/shop/admin/models/dashboard_item.da
 
 class GridDashboard extends StatelessWidget {
   GridDashboard({super.key});
-  DashboardItem item1 = DashboardItem(
+  final DashboardItem item1 = DashboardItem(
     title: 'Add Products',
     img: 'assets/images/dashboard_images/add-item.png',
   );
 
-  DashboardItem item2 = DashboardItem(
+  final DashboardItem item2 = DashboardItem(
     title: 'View Orders',
     img: 'assets/images/dashboard_images/orders.png',
   );
-  DashboardItem item3 = DashboardItem(
+  final DashboardItem item3 = DashboardItem(
     title: 'View Orders',
     img: 'assets/images/dashboard_images/orders.png',
   );
-  DashboardItem item4 = DashboardItem(
+  final DashboardItem item4 = DashboardItem(
     title: 'View Orders',
     img: 'assets/images/dashboard_images/orders.png',
   );
-  DashboardItem item5 = DashboardItem(
+  final DashboardItem item5 = DashboardItem(
     title: 'View Orders',
     img: 'assets/images/dashboard_images/orders.png',
   );

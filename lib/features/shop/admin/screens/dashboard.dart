@@ -13,7 +13,7 @@ class Dashboard extends StatelessWidget {
     'assets/images/dashboard_images/vieworders.png',
     'assets/images/dashboard_images/vieworders.png',
   ];
-  List titles = [
+  final List titles = [
     'Add Products',
     'Edit Products',
     'Edit Categories',
@@ -26,9 +26,9 @@ class Dashboard extends StatelessWidget {
     // height = TDeviceUtils.getScreenHeight(context);
     // width = TDeviceUtils.getScreenWidth(context);
     final dark = THelperFunctions.isDarkMode(context);
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
           child: Container(
             color: TColors.primaryColor,
             height: TDeviceUtils.getScreenHeight(context),
@@ -61,6 +61,7 @@ class Dashboard extends StatelessWidget {
                                 size: 40,
                               ),
                             ),
+                            //?Use ClipReact instead
                             Container(
                               height: 50,
                               width: 50,
@@ -68,11 +69,7 @@ class Dashboard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15),
                                 // color: TColors.white,
                               ),
-                              child: const Icon(
-                                Icons.person,
-                                size: 40,
-                                // color: TColors.white,
-                              ),
+                              child: Image.asset('assets/images/dashboard_images/profilePicture.png'),
                             ),
                           ],
                         ),

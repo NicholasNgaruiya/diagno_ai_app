@@ -44,6 +44,7 @@ dependencies:
   bloc: ^8.1.3
   flutter_bloc: ^8.1.4
   equatable: ^2.0.5
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,7 @@ flutter:
     - assets/icons/
     - assets/images/on_boarding_images/
     - assets/images/dashboard_images/
+    - assets/images/products_images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

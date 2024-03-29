@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/features/authentication/screens/forgot_password/forgot_password.dart';
 import 'package:restaurant_frontend/features/authentication/screens/home/home.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/add_product.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/add_product_screen.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/dashboard.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/edit_product.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/view_orders.dart';
