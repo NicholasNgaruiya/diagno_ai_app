@@ -23,12 +23,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 TTexts.forgetPasswordTitle,
@@ -45,6 +47,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 height: TSizes.spaceBtwSections,
               ),
               Form(
+                key: formKey,
                 child: //?email
                     Column(
                   children: [
@@ -62,7 +65,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(onPressed: () {}, child: const Text('Continue')),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            print('Continue button clicked');
+                          }
+                        },
+                        child: const Text('Continue'),
+                      ),
                     ),
                   ],
                 ),

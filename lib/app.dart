@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/features/authentication/screens/forgot_password/forgot_password.dart';
 import 'package:restaurant_frontend/features/authentication/screens/home/home.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/add_product.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/dashboard.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/edit_product.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/view_orders.dart';
 import 'package:restaurant_frontend/utils/theme/theme.dart';
 
 import 'data/authentication/blocs/login/bloc/login_bloc.dart';
@@ -29,10 +33,11 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => LoginBloc()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.system,
         theme: TAppTheme.lightTheme,
         darkTheme: TAppTheme.darkTheme,
-        home: const OnBoardingScreen(),
+        home: Dashboard(),
         // home: const FlashMessageScreen(),
         // home: const OtpScreen(),
         routes: {
@@ -41,6 +46,11 @@ class App extends StatelessWidget {
           '/otp': (context) => const OtpScreen(),
           '/home': (context) => const HomeScreen(),
           '/forget_password': (context) => const ForgotPasswordScreen(),
+          '/viewOrders': (context) => const ViewOrdersPage(),
+          '/addProducts': (context) => const AddProductsPage(),
+          '/editProducts': (context) => const EditProductPage(),
+
+          // '/dashboard': (context) => const Dashboard(),
         },
       ),
     );
