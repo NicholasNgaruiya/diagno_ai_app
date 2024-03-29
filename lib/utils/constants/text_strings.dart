@@ -43,7 +43,7 @@ class TTexts {
   static const String signUpTitle = "Let's create your account";
   static const String forgetPasswordTitle = 'Forget Password';
   static const String forgetPasswordSubTitle =
-      "Don't worry sometimes people forget too,enter your eail and we will send a password reset link.";
+      "Don't worry sometimes people forget too,enter your email and we will send a password reset link.";
   static const String changeYourPasswordTitle = 'Password Reset Email Sent';
   static const String changeYourPasswordSubTitle =
       "Your Account Security is Our Priority! We've Sent You a Secure Link to Safely change Your Password and keep your Account Protected. ";

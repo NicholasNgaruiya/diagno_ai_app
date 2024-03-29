@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/features/authentication/screens/forgot_password/forgot_password.dart';
 import 'package:restaurant_frontend/features/authentication/screens/home/home.dart';
 import 'package:restaurant_frontend/utils/theme/theme.dart';
 
@@ -39,6 +40,7 @@ class App extends StatelessWidget {
           '/login': (context) => const LoginScreen(),
           '/otp': (context) => const OtpScreen(),
           '/home': (context) => const HomeScreen(),
+          '/forget_password': (context) => const ForgotPasswordScreen(),
         },
       ),
     );

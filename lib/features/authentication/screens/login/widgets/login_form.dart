@@ -88,7 +88,12 @@ class _TLoginFormState extends State<TLoginForm> {
                     ),
                   ],
                 ),
-                TextButton(onPressed: () {}, child: const Text(TTexts.forgetPasswordTitle)),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/forget_password');
+                  },
+                  child: const Text(TTexts.forgetPasswordTitle),
+                ),
               ],
             ),
             const SizedBox(

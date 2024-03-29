@@ -7,6 +7,7 @@ class AuthRepository {
   static Future<Map<String, dynamic>> signUpUSer(UserModel user) async {
     try {
       final response = await AuthService.signUp(user);
+      print(response);
       //Handle the response here if necessary
       return response;
     } catch (error) {
