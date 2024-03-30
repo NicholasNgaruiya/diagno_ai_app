@@ -23,17 +23,20 @@ class OnBoardingNextButton extends StatelessWidget {
       right: TSizes.defaultSpace,
       bottom: TDeviceUtils.getBottomNavigationBarHeight(),
       child: _isLastPage
-          ? ElevatedButton(
-              onPressed: () {
-                // Navigator.pushReplacement(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const LoginScreen(),
-                //   ),
-                // );
-                Navigator.pushReplacementNamed(context, '/login');
-              },
-              child: const Text('Start'),
+          ? SizedBox(
+              width: 130,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const LoginScreen(),
+                  //   ),
+                  // );
+                  Navigator.pushReplacementNamed(context, '/login');
+                },
+                child: const Text('Start'),
+              ),
             )
           : ElevatedButton(
               onPressed: () {

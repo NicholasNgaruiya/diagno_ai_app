@@ -36,93 +36,95 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: BlocListener<SignUpBloc, SignUpState>(
-        listener: (context, state) {
-          if (state is SignUpErrorState) {
-            //Handle failure state by showing a snack bar with the error message
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                // content: Text(state.error.toString()),
-                content: CustomSnackBarContent(
-                  snackBarTitle: 'Oops!',
-                  snackBarSubtitle: state.error.toString(),
-                  // snackBarSubtitle: TTexts.emailAlreadyExistsError,
-                  backgroundColor: TColors.error,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(),
+        body: BlocListener<SignUpBloc, SignUpState>(
+          listener: (context, state) {
+            if (state is SignUpErrorState) {
+              //Handle failure state by showing a snack bar with the error message
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  // content: Text(state.error.toString()),
+                  content: CustomSnackBarContent(
+                    snackBarTitle: 'Oops!',
+                    snackBarSubtitle: state.error.toString(),
+                    // snackBarSubtitle: TTexts.emailAlreadyExistsError,
+                    backgroundColor: TColors.error,
+                  ),
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
                 ),
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-              ),
-            );
-            // print('This is the error:${state.error.toString()}');
-          } else if (state is SignUpSuccessState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: CustomSnackBarContent(
-                  snackBarTitle: 'Wohoo!',
-                  snackBarSubtitle: 'Almost there ,verify your email',
-                  backgroundColor: TColors.success,
+              );
+              // print('This is the error:${state.error.toString()}');
+            } else if (state is SignUpSuccessState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: CustomSnackBarContent(
+                    snackBarTitle: 'Wohoo!',
+                    snackBarSubtitle: 'Almost there ,verify your email',
+                    backgroundColor: TColors.success,
+                  ),
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  // content: Text(TTexts.getAccountCreatedTitle),
                 ),
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                // content: Text(TTexts.getAccountCreatedTitle),
-              ),
-            );
-            //Handle success state by navigating to the next screen
-            // Navigator.pushNamed(context, '/otp');
-            Navigator.of(context).pushNamedAndRemoveUntil('/otp', (route) => false);
-          }
-        },
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(TSizes.defaultSpace),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ///Title
-                Text(
-                  TTexts.signUpTitle,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwSections,
-                ),
+              );
+              //Handle success state by navigating to the next screen
+              // Navigator.pushNamed(context, '/otp');
+              Navigator.of(context).pushNamedAndRemoveUntil('/otp', (route) => false);
+            }
+          },
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ///Title
+                  Text(
+                    TTexts.signUpTitle,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwSections,
+                  ),
 
-                ///Form
-                BlocBuilder<SignUpBloc, SignUpState>(
-                  builder: (context, state) {
-                    if (state is SignUpLoadingState) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: TColors.primaryColor,
-                        ),
-                      );
-                    } else {
-                      return TSignupForm(
-                        firstNameController: _firstNameController,
-                        lastNameController: _lastNameController,
-                        emailController: _emailController,
-                        passwordController: _passwordController,
-                        confirmPasswordController: _confirmPasswordController,
-                        onSubmit: _submitForm,
-                      );
-                    }
-                  },
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwItems,
-                ),
+                  ///Form
+                  BlocBuilder<SignUpBloc, SignUpState>(
+                    builder: (context, state) {
+                      if (state is SignUpLoadingState) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: TColors.primaryColor,
+                          ),
+                        );
+                      } else {
+                        return TSignupForm(
+                          firstNameController: _firstNameController,
+                          lastNameController: _lastNameController,
+                          emailController: _emailController,
+                          passwordController: _passwordController,
+                          confirmPasswordController: _confirmPasswordController,
+                          onSubmit: _submitForm,
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwItems,
+                  ),
 
-                ///Divider
-                // const TFormDivider(dividerText: TTexts.orSignUpWith),
-                // const SizedBox(
-                //   height: TSizes.spaceBtwItems,
-                // ),
-                // const TSocialButtons(),
-              ],
+                  ///Divider
+                  // const TFormDivider(dividerText: TTexts.orSignUpWith),
+                  // const SizedBox(
+                  //   height: TSizes.spaceBtwItems,
+                  // ),
+                  // const TSocialButtons(),
+                ],
+              ),
             ),
           ),
         ),

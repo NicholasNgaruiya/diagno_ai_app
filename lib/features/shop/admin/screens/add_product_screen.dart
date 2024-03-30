@@ -191,6 +191,13 @@ class _AddProductsPageState extends State<AddProductsPage> {
                                             print('Product Description: ${productDescriptionController.text}');
                                             print('Selected Category: $selectedCategoryId');
                                             print('Selected Image: $selectedImage');
+                                            setState(() {
+                                              productNameController.clear();
+                                              productPriceController.clear();
+                                              productDescriptionController.clear();
+                                              selectedCategoryId = null;
+                                              selectedImage = null;
+                                            });
                                           },
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: TColors.success,

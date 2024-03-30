@@ -51,32 +51,34 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          ///Horizontal Scrollable Pages
-          PageView(
-            controller: _controller,
-            children: pages,
-            onPageChanged: (index) {
-              setState(() {
-                _isLastPage = index == pages.length - 1;
-              });
-            },
-          ),
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            ///Horizontal Scrollable Pages
+            PageView(
+              controller: _controller,
+              children: pages,
+              onPageChanged: (index) {
+                setState(() {
+                  _isLastPage = index == pages.length - 1;
+                });
+              },
+            ),
 
-          ///Dot Navigation
-          OnBoardingDotNavigation(controller: _controller),
+            ///Dot Navigation
+            OnBoardingDotNavigation(controller: _controller),
 
-          ///Skip Button
-          OnBoardingSkip(controller: _controller, pages: pages),
+            ///Skip Button
+            OnBoardingSkip(controller: _controller, pages: pages),
 
-          ///Next Button
-          OnBoardingNextButton(
-            isLastPage: _isLastPage,
-            controller: _controller,
-          ),
-        ],
+            ///Next Button
+            OnBoardingNextButton(
+              isLastPage: _isLastPage,
+              controller: _controller,
+            ),
+          ],
+        ),
       ),
     );
   }
