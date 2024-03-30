@@ -182,7 +182,7 @@ class _AddProductImageState extends State<AddProductImage> {
   }
 
   // Method to clear the displayed image
-  void clearImage() {
+  void _clearImage() {
     setState(() {
       _image = null;
     });

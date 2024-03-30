@@ -169,20 +169,20 @@ class _AddProductsPageState extends State<AddProductsPage> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      SizedBox(
-                                        width: 130,
-                                        child: ElevatedButton(
-                                          onPressed: () {},
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: TColors.error,
-                                            side: const BorderSide(color: TColors.error),
-                                          ),
-                                          child: const Text('Clear'),
-                                        ),
-                                      ),
+                                      // SizedBox(
+                                      //   width: 130,
+                                      //   child: ElevatedButton(
+                                      //     onPressed: () {},
+                                      //     style: ElevatedButton.styleFrom(
+                                      //       backgroundColor: TColors.error,
+                                      //       side: const BorderSide(color: TColors.error),
+                                      //     ),
+                                      //     child: const Text('Clear'),
+                                      //   ),
+                                      // ),
                                       Container(
                                         color: Colors.transparent,
-                                        width: 130,
+                                        width: TDeviceUtils.getScreenWidth(context) * 0.8,
                                         child: ElevatedButton(
                                           onPressed: () {
                                             _uploadProduct();
