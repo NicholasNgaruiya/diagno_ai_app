@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.dart';
 import 'package:restaurant_frontend/features/authentication/screens/forgot_password/forgot_password.dart';
 import 'package:restaurant_frontend/features/authentication/screens/home/home.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/add_product_screen.dart';
@@ -32,6 +33,7 @@ class App extends StatelessWidget {
           create: (context) => VerifyEmailBloc(),
         ),
         BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => ProductBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

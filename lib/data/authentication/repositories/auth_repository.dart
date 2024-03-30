@@ -37,16 +37,15 @@ class AuthRepository {
       final response = await AuthService.signIn(email, password);
       // await _saveAccessToken(response['access_token']);
       await TLocalStorage.saveString('access_token', response['access_token']);
+      // await _saveAccessToken(response['access_token']);
+
+      await TLocalStorage.saveString('id', response['id']);
       print('Access Token: ${response['access_token']}');
+      print('User id: ${response['id']}');
       return response;
     } catch (error) {
       print('Error logging in: $error');
       rethrow;
     }
   }
-
-  // static Future<void> _saveAccessToken(String accessToken) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   await prefs.setString('access_token', accessToken);
-  // }
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_frontend/features/shop/admin/models/category_item.dart';
+
+import '../../../../../data/shop/repositories/admin_repository.dart';
 
 class SelectCategorywidget extends StatefulWidget {
   final void Function(String)? onCategorySelected; // Callback function
@@ -11,12 +14,28 @@ class SelectCategorywidget extends StatefulWidget {
 
 class _SelectCategorywidgetState extends State<SelectCategorywidget> {
   String? dropDownValue;
-  var items = [
-    'Drinks',
-    'Food',
-    'Snacks',
-    'Others',
-  ];
+  final AdminRepository _adminRepository = AdminRepository();
+  // List<String> categories = [];
+  List<CategoryItem> categories = []; // List of CategoryItem objects
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCategories();
+  }
+
+  Future<void> fetchCategories() async {
+    try {
+      final List<CategoryItem> categoryList = await _adminRepository.getCategories();
+      setState(() {
+        // categories = categoryList.map((category) => category.name).toList();
+        categories = categoryList;
+      });
+    } catch (e) {
+      print('Error fetching categories: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,10 +48,10 @@ class _SelectCategorywidgetState extends State<SelectCategorywidget> {
         borderRadius: BorderRadius.circular(5),
       ),
       child: DropdownButton(
-        items: items.map((String items) {
+        items: categories.map((CategoryItem category) {
           return DropdownMenuItem(
-            value: items,
-            child: Text(items),
+            value: category.id, //Pass the ID as the value
+            child: Text(category.name),
           );
         }).toList(),
         isExpanded: true,
@@ -43,13 +62,13 @@ class _SelectCategorywidgetState extends State<SelectCategorywidget> {
           Icons.arrow_drop_down,
           size: 40,
         ),
-        onChanged: (String? selectedCategory) {
+        onChanged: (String? selectedCategoryId) {
           setState(() {
-            dropDownValue = selectedCategory!;
+            dropDownValue = selectedCategoryId!;
           });
-          // Call the callback function with the selected category
+          // Call the callback function with the selected category ID
           if (widget.onCategorySelected != null) {
-            widget.onCategorySelected!(selectedCategory!);
+            widget.onCategorySelected!(selectedCategoryId!);
           }
         },
       ),
@@ -57,9 +76,9 @@ class _SelectCategorywidgetState extends State<SelectCategorywidget> {
   }
 
   // Method to clear the category field
-  void clearCategory() {
-    setState(() {
-      dropDownValue = null;
-    });
-  }
+  // void clearCategory() {
+  //   setState(() {
+  //     dropDownValue = null;
+  //   });
+  // }
 }
