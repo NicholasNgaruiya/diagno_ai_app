@@ -7,7 +7,9 @@ import 'package:restaurant_frontend/utils/device/device_utility.dart';
 import '../../../../../utils/constants/colors.dart';
 
 class AddProductImage extends StatefulWidget {
-  const AddProductImage({super.key});
+  final void Function()? onClear; // Callback function to clear the displayed image
+  final void Function(File)? onImageSelected;
+  const AddProductImage({super.key, this.onImageSelected, this.onClear});
 
   @override
   State<AddProductImage> createState() => _AddProductImageState();
@@ -99,6 +101,9 @@ class _AddProductImageState extends State<AddProductImage> {
     setState(() {
       _image = image;
     });
+    if (widget.onImageSelected != null && image != null) {
+      widget.onImageSelected!(File(image.path));
+    }
   }
 
   Future getImageFromCamera() async {
@@ -107,6 +112,9 @@ class _AddProductImageState extends State<AddProductImage> {
     setState(() {
       _image = image;
     });
+    if (widget.onImageSelected != null && image != null) {
+      widget.onImageSelected!(File(image.path));
+    }
   }
 
   void _showImagePickerModal(BuildContext context) {
@@ -171,5 +179,12 @@ class _AddProductImageState extends State<AddProductImage> {
         );
       },
     );
+  }
+
+  // Method to clear the displayed image
+  void clearImage() {
+    setState(() {
+      _image = null;
+    });
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SelectCategorywidget extends StatefulWidget {
-  const SelectCategorywidget({super.key});
+  final void Function(String)? onCategorySelected; // Callback function
+  final void Function()? onClear; // Callback function to clear the category field
+  const SelectCategorywidget({super.key, this.onCategorySelected, this.onClear});
 
   @override
   State<SelectCategorywidget> createState() => _SelectCategorywidgetState();
@@ -45,8 +47,19 @@ class _SelectCategorywidgetState extends State<SelectCategorywidget> {
           setState(() {
             dropDownValue = selectedCategory!;
           });
+          // Call the callback function with the selected category
+          if (widget.onCategorySelected != null) {
+            widget.onCategorySelected!(selectedCategory!);
+          }
         },
       ),
     );
+  }
+
+  // Method to clear the category field
+  void clearCategory() {
+    setState(() {
+      dropDownValue = null;
+    });
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/widgets/add_product_image.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/widgets/select_category.dart';
@@ -13,8 +15,23 @@ class AddProductsPage extends StatefulWidget {
 }
 
 class _AddProductsPageState extends State<AddProductsPage> {
+  final TextEditingController productNameController = TextEditingController();
+  final TextEditingController productPriceController = TextEditingController();
+  final TextEditingController productDescriptionController = TextEditingController();
   String? dropDownValue;
   var items = ['Drinks', 'Food', 'Snacks', 'Others'];
+
+  File? selectedImage;
+  String? selectedCategory;
+
+  @override
+  void dispose() {
+    productNameController.dispose();
+    productPriceController.dispose();
+    productDescriptionController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,7 +53,13 @@ class _AddProductsPageState extends State<AddProductsPage> {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 10),
-                  const AddProductImage(),
+                  AddProductImage(
+                    onImageSelected: (File image) {
+                      setState(() {
+                        selectedImage = image; //store the selected image
+                      });
+                    },
+                  ),
                   const SizedBox(height: TSizes.spaceBtwSections),
                   Text(
                     'Select Category',
@@ -57,6 +80,7 @@ class _AddProductsPageState extends State<AddProductsPage> {
                           children: [
                             Expanded(
                               child: TextFormField(
+                                controller: productNameController,
                                 expands: false,
                                 decoration: const InputDecoration(
                                   labelText: 'Product Name',
@@ -66,7 +90,9 @@ class _AddProductsPageState extends State<AddProductsPage> {
                             const SizedBox(width: TSizes.spaceBtwInputFields),
                             Expanded(
                               child: TextFormField(
+                                controller: productPriceController,
                                 expands: false,
+                                keyboardType: TextInputType.number,
                                 decoration: const InputDecoration(
                                   labelText: 'Price',
                                 ),
@@ -77,6 +103,7 @@ class _AddProductsPageState extends State<AddProductsPage> {
                         const SizedBox(height: TSizes.spaceBtwInputFields),
                         const SizedBox(height: TSizes.spaceBtwInputFields),
                         TextFormField(
+                          controller: productDescriptionController,
                           maxLines: null,
                           decoration: const InputDecoration(
                             labelText: 'Product Description',
@@ -89,7 +116,19 @@ class _AddProductsPageState extends State<AddProductsPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  // setState(() {
+                                  //   selectedCategory = null; // Clear selected category
+                                  //   selectedImage = null; // Clear selected image
+
+                                  //   // Call clear methods of child widgets
+                                  //   // Clear category field
+
+                                  //   productNameController.clear(); // Clear product name
+                                  //   productPriceController.clear(); // Clear product price
+                                  //   productDescriptionController.clear(); // Clear product description
+                                  // });
+                                },
                                 child: Container(
                                   height: 50,
                                   width: 100,
@@ -108,7 +147,20 @@ class _AddProductsPageState extends State<AddProductsPage> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  // if (selectedImage != null &&
+                                  //     productNameController.text.isNotEmpty &&
+                                  //     productPriceController.text.isNotEmpty &&
+                                  //     productDescriptionController.text.isNotEmpty &&
+                                  //     selectedCategory != null) {
+                                  //   print('Selected Image: $selectedImage');
+                                  //   print('Product Name: ${productNameController.text}');
+                                  //   print('Product Price: ${productPriceController.text}');
+                                  //   print('Product Description: ${productDescriptionController.text}');
+                                  // } else {
+                                  //   print('No Image Selected');
+                                  // }
+                                },
                                 child: Container(
                                   height: 50,
                                   width: 100,

@@ -1,4 +1,5 @@
 import 'package:restaurant_frontend/data/authentication/services/auth_service.dart';
+import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../features/authentication/models/user_model.dart';
 
@@ -34,10 +35,18 @@ class AuthRepository {
   static Future<Map<String, dynamic>> login(String email, String password) async {
     try {
       final response = await AuthService.signIn(email, password);
+      // await _saveAccessToken(response['access_token']);
+      await TLocalStorage.saveString('access_token', response['access_token']);
+      print('Access Token: ${response['access_token']}');
       return response;
     } catch (error) {
       print('Error logging in: $error');
       rethrow;
     }
   }
+
+  // static Future<void> _saveAccessToken(String accessToken) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.setString('access_token', accessToken);
+  // }
 }

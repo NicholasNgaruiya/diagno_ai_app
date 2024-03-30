@@ -8,6 +8,7 @@ import 'package:restaurant_frontend/features/shop/admin/screens/edit_product.dar
 import 'package:restaurant_frontend/features/shop/admin/screens/view_orders.dart';
 import 'package:restaurant_frontend/utils/theme/theme.dart';
 
+import 'common/widgets/errors/flash_message_error.dart';
 import 'data/authentication/blocs/login/bloc/login_bloc.dart';
 import 'data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import 'data/authentication/blocs/verify_email/bloc/verify_email_bloc.dart';
@@ -37,9 +38,8 @@ class App extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: TAppTheme.lightTheme,
         darkTheme: TAppTheme.darkTheme,
-        home: Dashboard(),
-        // home: const FlashMessageScreen(),
-        // home: const OtpScreen(),
+        // home: Dashboard(),
+        home: const OnBoardingScreen(),
         routes: {
           '/signup': (context) => const SignupScreen(),
           '/login': (context) => const LoginScreen(),
@@ -47,6 +47,7 @@ class App extends StatelessWidget {
           '/home': (context) => const HomeScreen(),
           '/forget_password': (context) => const ForgotPasswordScreen(),
           '/viewOrders': (context) => const ViewOrdersPage(),
+          '/dashboard': (context) => Dashboard(),
           '/addProducts': (context) => const AddProductsPage(),
           '/editProducts': (context) => const EditProductPage(),
 
