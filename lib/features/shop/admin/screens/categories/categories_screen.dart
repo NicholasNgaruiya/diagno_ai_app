@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/categories/category_details_screen.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 
 import '../../../../../data/shop/repositories/admin_repository.dart';
@@ -14,6 +15,7 @@ class CategoriesScreen extends StatefulWidget {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   final AdminRepository _adminRepository = AdminRepository();
   List<CategoryItem> categories = []; // List of CategoryItem objects
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -22,6 +24,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   }
 
   Future<void> _fetchCategories() async {
+    setState(() {
+      isLoading = true;
+    });
     try {
       final List<CategoryItem> categoryList = await _adminRepository.getCategories();
       print('fetched category list2$categoryList');
@@ -33,6 +38,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       });
     } catch (e) {
       print('Error fetching categories: $e');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -45,52 +54,42 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             'Edit Categories',
           ),
         ),
-        body: ListView.builder(
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: TColors.primaryColor,
-              ),
-              child: ListTile(
-                leading: CircleAvatar(
-                  radius: 32,
-                  backgroundImage: AssetImage(categories[index].image ?? 'assets/images/dashboard_images/add-item.png'),
+        body: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: TColors.primaryColor,
                 ),
-                contentPadding: const EdgeInsets.all(8),
-                title: Text(categories[index].name),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () async {
-                    print(categories[index].image);
-                    // await _adminRepository.deleteCategory(categories[index].id);
-                    // _fetchCategories();
-                  },
-                ),
+              )
+            : ListView.builder(
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: TColors.primaryColor,
+                    ),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 32,
+                        backgroundImage: NetworkImage(categories[index].image ?? 'assets/images/dashboard_images/add-item.png'),
+                      ),
+                      contentPadding: const EdgeInsets.all(8),
+                      title: Text(categories[index].name),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CategoryDetailsScreen(
+                              categories: categories[index],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-        // body: AnimatedList(
-        //   initialItemCount: categories.length,
-        //   itemBuilder: (context, index, animation) => Container(
-        //     margin: const EdgeInsets.all(8),
-        //     decoration: BoxDecoration(
-        //       borderRadius: BorderRadius.circular(12),
-        //       color: Colors.white,
-        //     ),
-        //     child: const ListTile(
-        //       contentPadding: EdgeInsets.all(8),
-        //       // title: Text(categories[index].name),
-        //       // trailing: IconButton(
-        //       //   icon: const Icon(Icons.delete),
-        //       //   onPressed: () async {},
-        //       // ),
-        //     ),
-        //   ),
-        // ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             print(categories.length);

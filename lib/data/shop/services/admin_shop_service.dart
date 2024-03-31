@@ -7,6 +7,8 @@ import 'dart:io';
 
 import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
+import '../../../utils/device/device_utility.dart';
+
 class AdminShopService {
   final String baseUrl = 'https://smart-restaurant-api.onrender.com/api/v1';
 
@@ -16,9 +18,15 @@ class AdminShopService {
     try {
       //Retrieve the access token from the local storage
       String? accessToken = await TLocalStorage.getString('access_token');
+      bool hasInternet = await TDeviceUtils.hasInternetConnection();
       if (accessToken == null) {
         throw Exception('Access token not found');
       }
+      //check if has internet connection
+      if (!hasInternet) {
+        throw Exception('No Internet Connection');
+      }
+
       var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/inventory/products/create/'));
 
       //Set authorization header with the access token
@@ -52,8 +60,12 @@ class AdminShopService {
     try {
       //Retrieve the access token from the local storage
       String? accessToken = await TLocalStorage.getString('access_token');
+      bool hasInternet = await TDeviceUtils.hasInternetConnection();
       print(accessToken);
       if (accessToken != null) {
+        if (!hasInternet) {
+          throw Exception('No Internet Connection');
+        }
         print('$baseUrl/inventory/categories/');
         final response = await http.get(
           Uri.parse('$baseUrl/inventory/categories/'),

@@ -158,7 +158,7 @@ class _AddProductsPageState extends State<AddProductsPage> {
                                 const SizedBox(height: TSizes.spaceBtwInputFields),
                                 TextFormField(
                                   controller: productDescriptionController,
-                                  maxLines: null,
+                                  maxLines: 5,
                                   decoration: const InputDecoration(
                                     labelText: 'Product Description',
                                   ),
