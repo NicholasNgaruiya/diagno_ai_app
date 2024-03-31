@@ -8,6 +8,7 @@ import 'package:restaurant_frontend/features/shop/admin/screens/categories/categ
 import 'package:restaurant_frontend/features/shop/admin/screens/dashboard/dashboard.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/edit_product.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/view_orders.dart';
+import 'package:restaurant_frontend/main.dart';
 import 'package:restaurant_frontend/utils/theme/theme.dart';
 
 import 'common/widgets/errors/flash_message_error.dart';
@@ -42,8 +43,10 @@ class App extends StatelessWidget {
         theme: TAppTheme.lightTheme,
         darkTheme: TAppTheme.darkTheme,
         // home: Dashboard(),
-        home: const OnBoardingScreen(),
+        // home: const OnBoardingScreen(),
+        initialRoute: initScreen == 0 || initScreen == null ? '/onboarding' : '/login',
         routes: {
+          '/onboarding': (context) => const OnBoardingScreen(),
           '/signup': (context) => const SignupScreen(),
           '/login': (context) => const LoginScreen(),
           '/otp': (context) => const OtpScreen(),

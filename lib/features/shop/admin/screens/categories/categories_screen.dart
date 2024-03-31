@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_frontend/utils/constants/colors.dart';
 
 import '../../../../../data/shop/repositories/admin_repository.dart';
 import '../../models/category_item.dart';
@@ -44,24 +45,52 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             'Edit Categories',
           ),
         ),
-        body: AnimatedList(
-          initialItemCount: categories.length,
-          itemBuilder: (context, index, animation) => Container(
-            margin: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.white,
-            ),
-            child: const ListTile(
-              contentPadding: EdgeInsets.all(8),
-              // title: Text(categories[index].name),
-              // trailing: IconButton(
-              //   icon: const Icon(Icons.delete),
-              //   onPressed: () async {},
-              // ),
-            ),
-          ),
+        body: ListView.builder(
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: TColors.primaryColor,
+              ),
+              child: ListTile(
+                leading: CircleAvatar(
+                  radius: 32,
+                  backgroundImage: AssetImage(categories[index].image ?? 'assets/images/dashboard_images/add-item.png'),
+                ),
+                contentPadding: const EdgeInsets.all(8),
+                title: Text(categories[index].name),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () async {
+                    print(categories[index].image);
+                    // await _adminRepository.deleteCategory(categories[index].id);
+                    // _fetchCategories();
+                  },
+                ),
+              ),
+            );
+          },
         ),
+        // body: AnimatedList(
+        //   initialItemCount: categories.length,
+        //   itemBuilder: (context, index, animation) => Container(
+        //     margin: const EdgeInsets.all(8),
+        //     decoration: BoxDecoration(
+        //       borderRadius: BorderRadius.circular(12),
+        //       color: Colors.white,
+        //     ),
+        //     child: const ListTile(
+        //       contentPadding: EdgeInsets.all(8),
+        //       // title: Text(categories[index].name),
+        //       // trailing: IconButton(
+        //       //   icon: const Icon(Icons.delete),
+        //       //   onPressed: () async {},
+        //       // ),
+        //     ),
+        //   ),
+        // ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             print(categories.length);
