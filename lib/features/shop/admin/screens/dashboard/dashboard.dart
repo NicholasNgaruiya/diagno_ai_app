@@ -127,10 +127,10 @@ class Dashboard extends StatelessWidget {
                               Navigator.pushNamed(context, '/editProducts');
                               break;
                             case 2:
-                              Navigator.pushNamed(context, '/viewOrders');
+                              Navigator.pushNamed(context, '/categoriesScreen');
                               break;
                             case 3:
-                              Navigator.pushNamed(context, '/viewOrders');
+                              Navigator.pushNamed(context, '/categoriesScreen');
                               break;
                             default:
                               break;

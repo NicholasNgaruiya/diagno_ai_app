@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.dart';
 import 'package:restaurant_frontend/features/authentication/screens/forgot_password/forgot_password.dart';
 import 'package:restaurant_frontend/features/authentication/screens/home/home.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/add_product_screen.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/dashboard.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/add_product/add_product_screen.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/categories/categories_screen.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/dashboard/dashboard.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/edit_product.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/view_orders.dart';
 import 'package:restaurant_frontend/utils/theme/theme.dart';
@@ -52,6 +53,7 @@ class App extends StatelessWidget {
           '/dashboard': (context) => Dashboard(),
           '/addProducts': (context) => const AddProductsPage(),
           '/editProducts': (context) => const EditProductPage(),
+          '/categoriesScreen': (context) => const CategoriesScreen(),
 
           // '/dashboard': (context) => const Dashboard(),
         },

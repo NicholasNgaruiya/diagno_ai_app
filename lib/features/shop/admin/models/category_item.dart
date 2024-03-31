@@ -1,8 +1,8 @@
 class CategoryItem {
   final String id;
   final String name;
-  final String description;
-  final String image;
+  final String? description;
+  final String? image;
 
   CategoryItem({
     required this.id,

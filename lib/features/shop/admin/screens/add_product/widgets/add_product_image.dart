@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
-import '../../../../../utils/constants/colors.dart';
+import '../../../../../../utils/constants/colors.dart';
 
 class AddProductImage extends StatefulWidget {
   final void Function()? onClear; // Callback function to clear the displayed image

@@ -52,24 +52,35 @@ class AdminShopService {
     try {
       //Retrieve the access token from the local storage
       String? accessToken = await TLocalStorage.getString('access_token');
-      if (accessToken == null) {
-        throw Exception('Access token not found');
-      }
-      final response = await http.get(
-        Uri.parse('$baseUrl/inventory/categories/'),
-        headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $accessToken',
-        },
-      );
-
-      if (response.statusCode == 200) {
-        // final List<dynamic> responseData = json.decode(response.body);
-        // return responseData.map((e) => CategoryItem.fromJson(e)).toList();
-        final List<dynamic> categoryList = json.decode(response.body);
-        return categoryList.map((categoryJson) => CategoryItem.fromJson(categoryJson)).toList();
+      print(accessToken);
+      if (accessToken != null) {
+        print('$baseUrl/inventory/categories/');
+        final response = await http.get(
+          Uri.parse('$baseUrl/inventory/categories/'),
+          headers: {
+            HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+          },
+        );
+        print('request sent');
+        if (response.statusCode == 200) {
+          // final List<dynamic> responseData = json.decode(response.body);
+          // return responseData.map((e) => CategoryItem.fromJson(e)).toList();
+          print('request successful');
+          final List<dynamic> categoryList = json.decode(response.body);
+          print(categoryList);
+          return categoryList.map((categoryJson) => CategoryItem.fromJson(categoryJson)).toList();
+        } else if (response.statusCode == 400) {
+          throw Exception('Invalid request');
+        } else if (response.statusCode == 401) {
+          throw Exception('Unauthorized');
+        } else if (response.statusCode == 500) {
+          throw Exception('Server error');
+        } else {
+          print('Failed to get categories ${response.statusCode}');
+          throw Exception('Failed to get categories ${response.statusCode}');
+        }
       } else {
-        print('Failed to get categories ${response.statusCode}');
-        throw Exception('Failed to get categories ${response.statusCode}');
+        throw Exception('Access token not found');
       }
     } catch (e) {
       // throw Exception('Error getting categories: $e');

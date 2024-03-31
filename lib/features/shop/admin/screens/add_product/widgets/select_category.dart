@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/category_item.dart';
 
-import '../../../../../data/shop/repositories/admin_repository.dart';
+import '../../../../../../data/shop/repositories/admin_repository.dart';
 
 class SelectCategorywidget extends StatefulWidget {
   final void Function(String)? onCategorySelected; // Callback function
@@ -27,6 +27,7 @@ class _SelectCategorywidgetState extends State<SelectCategorywidget> {
   Future<void> fetchCategories() async {
     try {
       final List<CategoryItem> categoryList = await _adminRepository.getCategories();
+      print('fetched category list$categoryList');
       setState(() {
         // categories = categoryList.map((category) => category.name).toList();
         categories = categoryList;

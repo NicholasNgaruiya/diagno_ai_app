@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/widgets/add_product_image.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/widgets/select_category.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/add_product/widgets/add_product_image.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/add_product/widgets/select_category.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
-import '../../../../common/widgets/errors/custom_snackbar_content.dart';
-import '../../../../utils/constants/sizes.dart';
+import '../../../../../common/widgets/errors/custom_snackbar_content.dart';
+import '../../../../../utils/constants/sizes.dart';
 
 class AddProductsPage extends StatefulWidget {
   const AddProductsPage({super.key});
@@ -166,47 +166,31 @@ class _AddProductsPageState extends State<AddProductsPage> {
                                 const SizedBox(height: TSizes.spaceBtwItems),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      // SizedBox(
-                                      //   width: 130,
-                                      //   child: ElevatedButton(
-                                      //     onPressed: () {},
-                                      //     style: ElevatedButton.styleFrom(
-                                      //       backgroundColor: TColors.error,
-                                      //       side: const BorderSide(color: TColors.error),
-                                      //     ),
-                                      //     child: const Text('Clear'),
-                                      //   ),
-                                      // ),
-                                      Container(
-                                        color: Colors.transparent,
-                                        width: TDeviceUtils.getScreenWidth(context) * 0.8,
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            _uploadProduct();
-                                            print('Product Name: ${productNameController.text}');
-                                            print('Product Price: ${productPriceController.text}');
-                                            print('Product Description: ${productDescriptionController.text}');
-                                            print('Selected Category: $selectedCategoryId');
-                                            print('Selected Image: $selectedImage');
-                                            setState(() {
-                                              productNameController.clear();
-                                              productPriceController.clear();
-                                              productDescriptionController.clear();
-                                              selectedCategoryId = null;
-                                              selectedImage = null;
-                                            });
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: TColors.success,
-                                            side: const BorderSide(color: TColors.success),
-                                          ),
-                                          child: const Text('Upload Product'),
-                                        ),
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    width: TDeviceUtils.getScreenWidth(context) * 0.8,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        _uploadProduct();
+                                        print('Product Name: ${productNameController.text}');
+                                        print('Product Price: ${productPriceController.text}');
+                                        print('Product Description: ${productDescriptionController.text}');
+                                        print('Selected Category: $selectedCategoryId');
+                                        print('Selected Image: $selectedImage');
+                                        setState(() {
+                                          productNameController.clear();
+                                          productPriceController.clear();
+                                          productDescriptionController.clear();
+                                          selectedCategoryId = null;
+                                          selectedImage = null;
+                                        });
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: TColors.success,
+                                        side: const BorderSide(color: TColors.success),
                                       ),
-                                    ],
+                                      child: const Text('Upload Product'),
+                                    ),
                                   ),
                                 ),
                               ],
