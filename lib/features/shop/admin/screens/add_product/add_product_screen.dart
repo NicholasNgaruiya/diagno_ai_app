@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/common/widgets/dashboard/image_selector.dart';
 import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/add_product/widgets/add_product_image.dart';
+
 import 'package:restaurant_frontend/features/shop/admin/screens/add_product/widgets/select_category.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';

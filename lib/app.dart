@@ -11,7 +11,7 @@ import 'package:restaurant_frontend/features/shop/admin/screens/view_orders.dart
 import 'package:restaurant_frontend/main.dart';
 import 'package:restaurant_frontend/utils/theme/theme.dart';
 
-import 'common/widgets/errors/flash_message_error.dart';
+// import 'common/widgets/errors/flash_message_error.dart';
 import 'data/authentication/blocs/login/bloc/login_bloc.dart';
 import 'data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import 'data/authentication/blocs/verify_email/bloc/verify_email_bloc.dart';
