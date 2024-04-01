@@ -118,6 +118,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                                     selectedImage = image; //store the selected image
                                   });
                                 },
+                                imageUrl: widget.categories.image,
                               )
                             : Container(
                                 height: 150,

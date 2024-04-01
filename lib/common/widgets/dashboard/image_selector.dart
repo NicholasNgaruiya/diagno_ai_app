@@ -8,7 +8,8 @@ import '../../../utils/helpers/image_picker_helper.dart';
 
 class ImageSelectorWidget extends StatefulWidget {
   final void Function(File)? onImageSelected;
-  const ImageSelectorWidget({super.key, this.onImageSelected});
+  final String? imageUrl;
+  const ImageSelectorWidget({super.key, this.onImageSelected, this.imageUrl});
 
   @override
   State<ImageSelectorWidget> createState() => _ImageSelectorWidgetState();
@@ -121,19 +122,23 @@ class _ImageSelectorWidgetState extends State<ImageSelectorWidget> {
                       color: Colors.grey,
                     ),
                     // color: Colors.grey[200],
-                    image: const DecorationImage(
-                      image: AssetImage('assets/images/products_images/noImageBackground.png'),
+                    image: DecorationImage(
+                      image: widget.imageUrl != null && widget.imageUrl!.isNotEmpty
+                          ? NetworkImage(widget.imageUrl!)
+                          : const AssetImage('assets/images/products_images/noImageBackground.png') as ImageProvider<Object>,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  child: const Center(
-                    child: Text(
-                      'No Image Selected',
-                      style: TextStyle(
-                        color: TColors.black,
-                        fontSize: 18,
-                      ),
-                    ),
+                  child: Center(
+                    child: _image == null && (widget.imageUrl == null || widget.imageUrl!.isEmpty)
+                        ? const Text(
+                            'No Image Selected',
+                            style: TextStyle(
+                              color: TColors.black,
+                              fontSize: 18,
+                            ),
+                          )
+                        : null,
                   ),
                 ),
               )
@@ -169,7 +174,7 @@ class _ImageSelectorWidgetState extends State<ImageSelectorWidget> {
             icon: const Icon(
               Icons.add_a_photo,
               size: 35,
-              color: TColors.black,
+              color: TColors.white,
             ),
           ),
         ),
