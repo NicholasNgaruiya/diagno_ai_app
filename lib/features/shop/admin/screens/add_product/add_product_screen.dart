@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/common/widgets/dashboard/image_selector.dart';
 import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/add_product/widgets/add_product_image.dart';
@@ -101,10 +102,17 @@ class _AddProductsPageState extends State<AddProductsPage> {
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           const SizedBox(height: 10),
-                          AddProductImage(
+                          // AddProductImage(
+                          //   onImageSelected: (File image) {
+                          //     setState(() {
+                          //       selectedImage = image; //store the selected image
+                          //     });
+                          //   },
+                          // ),
+                          ImageSelectorWidget(
                             onImageSelected: (File image) {
                               setState(() {
-                                selectedImage = image; //store the selected image
+                                selectedImage = image;
                               });
                             },
                           ),
