@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
 import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.dart';
 import 'package:restaurant_frontend/features/authentication/screens/forgot_password/forgot_password.dart';
 import 'package:restaurant_frontend/features/authentication/screens/home/home.dart';
@@ -15,6 +16,7 @@ import 'package:restaurant_frontend/utils/theme/theme.dart';
 import 'data/authentication/blocs/login/bloc/login_bloc.dart';
 import 'data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import 'data/authentication/blocs/verify_email/bloc/verify_email_bloc.dart';
+import 'data/shop/blocs/categories/category_details/bloc/category_details_bloc.dart';
 import 'features/authentication/screens/login/login.dart';
 import 'features/authentication/screens/onboarding/onboarding.dart';
 import 'features/authentication/screens/otpscreen/otp_screen.dart';

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:restaurant_frontend/features/shop/admin/models/category_item.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
 import 'package:http/http.dart' as http;
+import 'package:restaurant_frontend/features/shop/admin/models/update_category_item.dart';
 import 'dart:io';
 
 import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
@@ -53,6 +54,54 @@ class AdminShopService {
       }
     } catch (e) {
       throw Exception('Error creating product: $e');
+    }
+  }
+
+  Future<Map<String, dynamic>> updateCategory(UpdateCategoryItem updateCategoryItem) async {
+    try {
+      // Retrieve the access token and category ID from local storage
+      String? accessToken = await TLocalStorage.getString('access_token');
+      String? categoryId = await TLocalStorage.getString('selectedCategoryId');
+
+      bool hasInternet = await TDeviceUtils.hasInternetConnection();
+      if (accessToken == null) {
+        throw Exception('Access token not found');
+      }
+      if (categoryId == null) {
+        throw Exception('Category ID not found');
+      }
+      // Check for internet connection
+      if (!hasInternet) {
+        throw Exception('No Internet Connection');
+      }
+
+      //construct the request url with the category ID
+      String url = '$baseUrl/inventory/categories/$categoryId/update/';
+      print('URL: $url');
+
+      var request = http.MultipartRequest('PUT', Uri.parse(url));
+
+      //Set authorization header with the access token
+      request.headers['Authorization'] = 'Bearer $accessToken';
+
+      //Add textFields
+      request.fields['name'] = updateCategoryItem.name;
+      request.fields['description'] = updateCategoryItem.description ?? '';
+
+      // Add image file if available
+      if (updateCategoryItem.image != null) {
+        request.files.add(await http.MultipartFile.fromPath('image', updateCategoryItem.image!.path));
+      }
+
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        final responseData = await response.stream.bytesToString();
+        return json.decode(responseData);
+      } else {
+        throw Exception('Failed to update category ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error updating category: $e');
     }
   }
 

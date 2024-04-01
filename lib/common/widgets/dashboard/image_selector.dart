@@ -9,7 +9,8 @@ import '../../../utils/helpers/image_picker_helper.dart';
 class ImageSelectorWidget extends StatefulWidget {
   final void Function(File)? onImageSelected;
   final String? imageUrl;
-  const ImageSelectorWidget({super.key, this.onImageSelected, this.imageUrl});
+  final bool enabled; //property to enable or disable the widget
+  const ImageSelectorWidget({super.key, this.onImageSelected, this.imageUrl, this.enabled = true});
 
   @override
   State<ImageSelectorWidget> createState() => _ImageSelectorWidgetState();
@@ -61,42 +62,48 @@ class _ImageSelectorWidgetState extends State<ImageSelectorWidget> {
           ),
           child: Wrap(
             children: <Widget>[
-              ListTile(
-                leading: const Icon(
-                  Icons.photo_library,
-                  color: TColors.black,
-                ),
-                title: const Text(
-                  'Choose from gallery',
-                  style: TextStyle(
+              if (widget.enabled) //conditionaly show widgets based on enabled property
+
+                ListTile(
+                  leading: const Icon(
+                    Icons.photo_library,
                     color: TColors.black,
                   ),
+                  title: const Text(
+                    'Choose from gallery',
+                    style: TextStyle(
+                      color: TColors.black,
+                    ),
+                  ),
+                  onTap: () {
+                    _getImageFromGallery();
+                    Navigator.of(context).pop();
+                  },
                 ),
-                onTap: () {
-                  _getImageFromGallery();
-                  Navigator.of(context).pop();
-                },
-              ),
-              const Divider(
-                indent: 20,
-                endIndent: 20,
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.photo_camera,
-                  color: TColors.black,
+              if (widget.enabled) //conditionaly show widgets based on enabled property
+
+                const Divider(
+                  indent: 20,
+                  endIndent: 20,
                 ),
-                title: const Text(
-                  'Take a photo',
-                  style: TextStyle(
+              if (widget.enabled) //conditionaly show widgets based on enabled property
+
+                ListTile(
+                  leading: const Icon(
+                    Icons.photo_camera,
                     color: TColors.black,
                   ),
+                  title: const Text(
+                    'Take a photo',
+                    style: TextStyle(
+                      color: TColors.black,
+                    ),
+                  ),
+                  onTap: () {
+                    _getImageFromCamera();
+                    Navigator.of(context).pop();
+                  },
                 ),
-                onTap: () {
-                  _getImageFromCamera();
-                  Navigator.of(context).pop();
-                },
-              ),
             ],
           ),
         );
@@ -107,12 +114,13 @@ class _ImageSelectorWidgetState extends State<ImageSelectorWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [
+      children: <Widget>[
         _image == null
             ? InkWell(
-                onTap: () {
-                  _showImagePickerModal(context);
-                },
+                onTap: widget.enabled ? () => _showImagePickerModal(context) : null, //Disable onTap if not enabled
+                // onTap: () {
+                //   _showImagePickerModal(context);
+                // },
                 child: Container(
                   height: 150,
                   width: 200,
@@ -143,7 +151,8 @@ class _ImageSelectorWidgetState extends State<ImageSelectorWidget> {
                 ),
               )
             : InkWell(
-                onTap: () => _showImagePickerModal(context),
+                onTap: widget.enabled ? () => _showImagePickerModal(context) : null, //Disable onTap if not enabled
+                // onTap: () => _showImagePickerModal(context),
                 child: Container(
                   height: 150,
                   // width: TDeviceUtils.getScreenWidth(context) * 0.9,
@@ -168,9 +177,10 @@ class _ImageSelectorWidgetState extends State<ImageSelectorWidget> {
           bottom: 0,
           right: 0,
           child: IconButton(
-            onPressed: () {
-              _showImagePickerModal(context);
-            },
+            onPressed: widget.enabled ? () => _showImagePickerModal(context) : null, //Disable onPressed if not enabled
+            // onPressed: () {
+            //   _showImagePickerModal(context);
+            // },
             icon: const Icon(
               Icons.add_a_photo,
               size: 35,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/categories/category_details_screen.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
+import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../../../data/shop/repositories/admin_repository.dart';
 import '../../models/category_item.dart';
@@ -76,7 +77,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       ),
                       contentPadding: const EdgeInsets.all(8),
                       title: Text(categories[index].name),
-                      onTap: () {
+                      onTap: () async {
+                        print(categories[index].id);
+                        TLocalStorage.saveString('selectedCategoryId', categories[index].id);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
