@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:restaurant_frontend/common/widgets/dashboard/image_selector.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/categories/widgets/add_category_image.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
@@ -23,6 +26,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
 
   String newName = '';
   String newDescription = '';
+  File? selectedImage;
 
   @override
   void initState() {
@@ -107,8 +111,13 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                         const SizedBox(height: TSizes.spaceBtwItems),
                         //Container that displays the image
                         isEditable
-                            ? AddCategoryImage(
-                                categoryImageUrl: widget.categories.image,
+                            ? ImageSelectorWidget(
+                                //Handle on image selected like in the add product page
+                                onImageSelected: (File image) {
+                                  setState(() {
+                                    selectedImage = image; //store the selected image
+                                  });
+                                },
                               )
                             : Container(
                                 height: 150,
@@ -159,7 +168,10 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                     SizedBox(
                       width: TDeviceUtils.getScreenWidth(context) * 0.4,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          //Print saved image
+                          print('Selected image is $selectedImage');
+                        },
                         // style: ElevatedButton.styleFrom(
                         //   foregroundColor: TColors.error,
                         // ),
