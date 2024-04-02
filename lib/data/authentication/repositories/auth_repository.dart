@@ -35,13 +35,19 @@ class AuthRepository {
   static Future<Map<String, dynamic>> login(String email, String password) async {
     try {
       final response = await AuthService.signIn(email, password);
+      //Save email and password to local storage
+      await TLocalStorage.saveString('email', email);
+      await TLocalStorage.saveString('password', password);
+
       // await _saveAccessToken(response['access_token']);
       await TLocalStorage.saveString('access_token', response['access_token']);
       // await _saveAccessToken(response['access_token']);
-
+      //save user id  and name
       await TLocalStorage.saveString('id', response['id']);
+      await TLocalStorage.saveString('user_name', response['full_name']);
       print('Access Token: ${response['access_token']}');
       print('User id: ${response['id']}');
+      print('User id: ${response['full_name']}');
       return response;
     } catch (error) {
       print('Error logging in: $error');

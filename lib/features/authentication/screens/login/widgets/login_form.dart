@@ -9,11 +9,15 @@ class TLoginForm extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final VoidCallback onSubmit;
+  final bool rememberMe;
+  final Function(bool) onRememberMe;
   const TLoginForm({
     Key? key,
     required this.emailController,
     required this.passwordController,
     required this.onSubmit,
+    required this.rememberMe,
+    required this.onRememberMe,
   }) : super(key: key);
 
   @override
@@ -82,7 +86,13 @@ class _TLoginFormState extends State<TLoginForm> {
               children: [
                 Row(
                   children: [
-                    Checkbox(value: true, onChanged: (value) {}),
+                    Checkbox(
+                      value: widget.rememberMe,
+                      onChanged: (newValue) {
+                        print(newValue);
+                        widget.onRememberMe(newValue ?? false);
+                      },
+                    ),
                     const Text(
                       TTexts.rememberMe,
                     ),

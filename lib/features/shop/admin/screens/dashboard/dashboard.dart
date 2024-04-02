@@ -3,12 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
+import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../../../data/shop/blocs/categories/bloc/categories_bloc.dart';
 
-class Dashboard extends StatelessWidget {
-  Dashboard({super.key});
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
 
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   final List imgData = [
     'assets/images/dashboard_images/addproducts.png',
     'assets/images/dashboard_images/addproducts.png',
@@ -16,6 +22,7 @@ class Dashboard extends StatelessWidget {
     'assets/images/dashboard_images/vieworders.png',
     'assets/images/dashboard_images/vieworders.png',
   ];
+
   final List titles = [
     'Products',
     'Edit Products',
@@ -23,6 +30,20 @@ class Dashboard extends StatelessWidget {
     'View Orders',
     'View Orders',
   ];
+  String? userName;
+
+  Future<void> _loadSavedCredentials() async {
+    final storedUserName = await TLocalStorage.getString('user_name');
+    setState(() {
+      userName = storedUserName;
+    });
+  }
+
+  @override
+  void initState() {
+    _loadSavedCredentials();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,29 +74,30 @@ class Dashboard extends StatelessWidget {
                           left: 15,
                           right: 15,
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: () {},
-                              child: const Icon(
-                                Icons.sort,
-                                // color: TColors.white,
-                                size: 40,
-                              ),
-                            ),
-                            //?Use ClipReact instead
-                            Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                // color: TColors.white,
-                              ),
-                              child: Image.asset('assets/images/dashboard_images/profilePicture.png'),
-                            ),
-                          ],
-                        ),
+                        child: userName != null ? Text('Welcome,$userName') : Container(),
+                        // child: Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     InkWell(
+                        //       onTap: () {},
+                        //       child: const Icon(
+                        //         Icons.sort,
+                        //         // color: TColors.white,
+                        //         size: 40,
+                        //       ),
+                        //     ),
+                        //     //?Use ClipReact instead
+                        //     Container(
+                        //       height: 50,
+                        //       width: 50,
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(15),
+                        //         // color: TColors.white,
+                        //       ),
+                        //       child: Image.asset('assets/images/dashboard_images/profilePicture.png'),
+                        //     ),
+                        //   ],
+                        // ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(

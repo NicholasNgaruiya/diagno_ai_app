@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/common/styles/spacing_styles.dart';
 import 'package:restaurant_frontend/data/authentication/blocs/login/bloc/login_bloc.dart';
+import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../../utils/constants/colors.dart';
@@ -18,12 +19,58 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _rememberMe = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRememberMeValue(); //load rememberMe value  and saved credentials from local storage
+  }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _loadRememberMeValue() async {
+    bool? savedValue = await TLocalStorage.getBool('rememberMe');
+    print('new bool is $savedValue');
+    setState(() {
+      _rememberMe = savedValue ?? false;
+    });
+    if (_rememberMe) {
+      _loadSavedCredentials();
+    }
+  }
+
+  void _loadSavedCredentials() async {
+    //Load saved email and password
+    final savedEmail = await TLocalStorage.getString('email');
+    final savedPassword = await TLocalStorage.getString('password');
+
+    if (savedEmail != null && savedPassword != null) {
+      setState(() {
+        _emailController.text = savedEmail;
+        _passwordController.text = savedPassword;
+      });
+    }
+  }
+
+  void _toggleRememberMe(bool newValue) async {
+    setState(() {
+      _rememberMe = newValue;
+    });
+    if (newValue) {
+      //if the checkbox is checked ,save the value to local storage
+      await TLocalStorage.saveBool('rememberMe', newValue);
+    } else {
+      //Implement logic to clear saved,rememberMe email and password from local storage
+      await TLocalStorage.remove('rememberMe');
+      await TLocalStorage.remove('email');
+      await TLocalStorage.remove('password');
+    }
   }
 
   @override
@@ -90,17 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           emailController: _emailController,
                           passwordController: _passwordController,
                           onSubmit: _submitForm,
+                          rememberMe: _rememberMe,
+                          onRememberMe: _toggleRememberMe,
                         ),
-
-                        ///Divider
-                        // TFormDivider(dividerText: TTexts.orSignInWith),
-                        // SizedBox(
-                        //   height: TSizes.spaceBtwItems,
-                        // ),
-
-                        // ///Footer
-                        // ///Row
-                        // TSocialButtons(),
                       ],
                     ),
                   ),
