@@ -13,7 +13,7 @@ class SaveButtonClickedEvent extends CategoryDetailsEvent {
 }
 
 class DeleteButtonClickedEvent extends CategoryDetailsEvent {
-  final String categoryId;
+  // final String categoryId;
 
-  DeleteButtonClickedEvent(this.categoryId);
+  DeleteButtonClickedEvent();
 }

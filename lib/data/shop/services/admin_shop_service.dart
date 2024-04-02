@@ -152,7 +152,7 @@ class AdminShopService {
     }
   }
 
-  Future<void> deleteCategory(String newcategoryId) async {
+  Future<void> deleteCategory() async {
     try {
       // Retrieve the access token from local storage
       String? accessToken = await TLocalStorage.getString('access_token');

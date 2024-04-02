@@ -38,7 +38,7 @@ class CategoryDetailsBloc extends Bloc<CategoryDetailsEvent, CategoryDetailsStat
     //Handle deleting logic here
     emit(CategoryDetailsLoadingState());
     try {
-      await AdminRepository().deleteCategory(event.categoryId);
+      await AdminRepository().deleteCategory();
       emit(DeletedCategorySuccessState('Category deleted successfully'));
     } catch (e) {
       emit(DeletedCategoryFailureState('Failed to delete category'));

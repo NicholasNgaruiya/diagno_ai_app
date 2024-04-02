@@ -37,9 +37,9 @@ class AdminRepository {
     }
   }
 
-  Future<void> deleteCategory(String categoryId) async {
+  Future<void> deleteCategory() async {
     try {
-      await AdminShopService().deleteCategory(categoryId);
+      await AdminShopService().deleteCategory();
       print('Category deleted successfully');
     } catch (e) {
       print('Error deleting category: $e');

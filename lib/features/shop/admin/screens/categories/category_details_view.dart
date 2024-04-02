@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/common/widgets/errors/confirmation_dialogue.dart';
 import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/update_category_item.dart';
 
@@ -18,6 +19,7 @@ class CategoryDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categoryDetailsBloc = BlocProvider.of<CategoryDetailsBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Category Details'),
@@ -160,9 +162,13 @@ class CategoryDetailsView extends StatelessWidget {
                 SizedBox(
                   width: TDeviceUtils.getScreenWidth(context) * 0.4,
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Handle edit button clicked
-                      BlocProvider.of<CategoryDetailsBloc>(context).add(EditButtonClickedEvent());
+                    onPressed: () async {
+                      bool confirmEdit =
+                          (await showConfirmationDialog(context, 'Are you sure you want to Save your changes?')) ?? false;
+                      if (confirmEdit) {
+                        // Handle edit button clicked
+                        BlocProvider.of<CategoryDetailsBloc>(context).add(EditButtonClickedEvent());
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: TColors.success,
@@ -174,10 +180,15 @@ class CategoryDetailsView extends StatelessWidget {
                 SizedBox(
                   width: TDeviceUtils.getScreenWidth(context) * 0.4,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      bool confirmDelete =
+                          (await showConfirmationDialog(context, 'Are you sure you want to Delete this Category?')) ?? false;
+
                       print('Category id is ${state.categoryItem.id}');
-                      // Handle delete button clicked
-                      BlocProvider.of<CategoryDetailsBloc>(context).add(DeleteButtonClickedEvent(state.categoryItem.id));
+                      if (confirmDelete) {
+                        // Handle delete button clicked
+                        BlocProvider.of<CategoryDetailsBloc>(context).add(DeleteButtonClickedEvent());
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: TColors.error,
@@ -275,23 +286,25 @@ Widget _buildCategoryDetailsEditing(BuildContext context, CategoryDetailsEditing
             ),
           ),
           const SizedBox(height: TSizes.spaceBtwSections),
-          SizedBox(
-            width: TDeviceUtils.getScreenWidth(context) * 0.4,
+          Container(
+            color: Colors.transparent,
+            width: TDeviceUtils.getScreenWidth(context) * 0.8,
             child: ElevatedButton(
-              onPressed: () {
-                print(nameController.text);
-                print(descriptionController.text);
-                print(selectedImage);
-                // Handle save button clicked
-                BlocProvider.of<CategoryDetailsBloc>(context).add(
-                  SaveButtonClickedEvent(
-                    updateCategoryItem: UpdateCategoryItem(
-                      name: nameController.text,
-                      description: descriptionController.text,
-                      image: selectedImage,
+              onPressed: () async {
+                bool confirmSave =
+                    (await showConfirmationDialog(context, 'Are you sure you want to Save your changes?')) ?? false;
+                if (confirmSave) {
+                  // Handle save button clicked
+                  BlocProvider.of<CategoryDetailsBloc>(context).add(
+                    SaveButtonClickedEvent(
+                      updateCategoryItem: UpdateCategoryItem(
+                        name: nameController.text,
+                        description: descriptionController.text,
+                        image: selectedImage,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: TColors.success,
@@ -303,5 +316,14 @@ Widget _buildCategoryDetailsEditing(BuildContext context, CategoryDetailsEditing
         ],
       ),
     ),
+  );
+}
+
+Future<bool?> showConfirmationDialog(BuildContext context, String message) async {
+  return showDialog<bool>(
+    context: context,
+    builder: (BuildContext context) {
+      return ConfirmationDialog(message: message);
+    },
   );
 }

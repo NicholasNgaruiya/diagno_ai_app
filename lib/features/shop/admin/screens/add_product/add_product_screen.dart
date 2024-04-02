@@ -10,6 +10,7 @@ import 'package:restaurant_frontend/features/shop/admin/screens/add_product/widg
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
+import '../../../../../common/widgets/errors/confirmation_dialogue.dart';
 import '../../../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../../../utils/constants/sizes.dart';
 
@@ -177,20 +178,23 @@ class _AddProductsPageState extends State<AddProductsPage> {
                                     color: Colors.transparent,
                                     width: TDeviceUtils.getScreenWidth(context) * 0.8,
                                     child: ElevatedButton(
-                                      onPressed: () {
-                                        _uploadProduct();
-                                        print('Product Name: ${productNameController.text}');
-                                        print('Product Price: ${productPriceController.text}');
-                                        print('Product Description: ${productDescriptionController.text}');
-                                        print('Selected Category: $selectedCategoryId');
-                                        print('Selected Image: $selectedImage');
-                                        setState(() {
-                                          productNameController.clear();
-                                          productPriceController.clear();
-                                          productDescriptionController.clear();
-                                          selectedCategoryId = null;
-                                          selectedImage = null;
-                                        });
+                                      onPressed: () async {
+                                        bool confirmUpload = (await showConfirmationDialog(
+                                              context,
+                                              'Are you sure you want to Save your changes?',
+                                            )) ??
+                                            false;
+                                        if (confirmUpload) {
+                                          _uploadProduct();
+
+                                          setState(() {
+                                            productNameController.clear();
+                                            productPriceController.clear();
+                                            productDescriptionController.clear();
+                                            selectedCategoryId = null;
+                                            selectedImage = null;
+                                          });
+                                        }
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: TColors.success,
@@ -224,12 +228,6 @@ class _AddProductsPageState extends State<AddProductsPage> {
         selectedCategoryId != null &&
         selectedImage != null) {
       try {
-        //Read the file as bytes
-        // List<int> immageBytes = selectedImage!.readAsBytesSync();
-
-        //Convert the bytes to base64
-        // String base64Image = base64Encode(immageBytes);
-        //dispatch aaddproductbuttonclickedevent
         BlocProvider.of<ProductBloc>(context).add(
           CreateProductButtonClickedEvent(
             productItem: ProductItem(
@@ -260,4 +258,13 @@ class _AddProductsPageState extends State<AddProductsPage> {
       );
     }
   }
+}
+
+Future<bool?> showConfirmationDialog(BuildContext context, String message) async {
+  return showDialog<bool>(
+    context: context,
+    builder: (BuildContext context) {
+      return ConfirmationDialog(message: message);
+    },
+  );
 }
