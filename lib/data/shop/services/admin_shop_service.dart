@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:restaurant_frontend/features/shop/admin/models/category_item.dart';
+import 'package:restaurant_frontend/features/shop/admin/models/create_category_item.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
 import 'package:http/http.dart' as http;
 import 'package:restaurant_frontend/features/shop/admin/models/update_category_item.dart';
@@ -57,6 +58,48 @@ class AdminShopService {
     }
   }
 
+  Future<Map<String, dynamic>> createCategory(CreateCategoryItem createCategoryItem) async {
+    try {
+      //Retrieve the access token from the local storage
+      String? accessToken = await TLocalStorage.getString('access_token');
+      bool hasInternet = await TDeviceUtils.hasInternetConnection();
+      if (accessToken == null) {
+        throw Exception('Access token not found');
+      }
+      //check if has internet connection
+      if (!hasInternet) {
+        throw Exception('No Internet Connection');
+      }
+      var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/inventory/categories/create/'));
+
+      //Set authorization header with the access token
+      request.headers['Authorization'] = 'Bearer $accessToken';
+
+      //Add text fields
+      request.fields['name'] = createCategoryItem.name;
+      request.fields['description'] = createCategoryItem.description ?? '';
+
+      //Add image file
+      if (createCategoryItem.image != null) {
+        request.files.add(await http.MultipartFile.fromPath('image', createCategoryItem.image!.path));
+      }
+
+      var response = await request.send();
+      if (response.statusCode == 201) {
+        final responseData = await response.stream.bytesToString();
+        return json.decode(responseData);
+      } else if (response.statusCode == 401) {
+        throw Exception('Unauthorized');
+      } else if (response.statusCode == 500) {
+        throw Exception('Server error');
+      } else {
+        throw Exception('Failed to create category ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error creating category: $e');
+    }
+  }
+
   Future<Map<String, dynamic>> updateCategory(UpdateCategoryItem updateCategoryItem) async {
     try {
       // Retrieve the access token and category ID from local storage
@@ -105,6 +148,7 @@ class AdminShopService {
     }
   }
 
+  // Future<Map<String,dynamic>> deleteCategory()
   Future<List<CategoryItem>> getCategoryList() async {
     try {
       //Retrieve the access token from the local storage

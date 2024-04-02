@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:restaurant_frontend/data/authentication/repositories/auth_repository.dart';
 import 'package:restaurant_frontend/data/shop/repositories/admin_repository.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
 

@@ -5,6 +5,7 @@ import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../../../data/shop/repositories/admin_repository.dart';
 import '../../models/category_item.dart';
+import 'add_category_screeen.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
@@ -17,6 +18,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   final AdminRepository _adminRepository = AdminRepository();
   List<CategoryItem> categories = []; // List of CategoryItem objects
   bool isLoading = false;
+  final String defaultUrl = '';
 
   @override
   void initState() {
@@ -73,7 +75,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     child: ListTile(
                       leading: CircleAvatar(
                         radius: 32,
-                        backgroundImage: NetworkImage(categories[index].image ?? 'assets/images/dashboard_images/add-item.png'),
+                        backgroundImage: NetworkImage(
+                          categories[index].image ??
+                              'https://www.google.com/search?client=ubuntu-sn&hs=gJ2&sa=X&sca_esv=9a71a41fad6c3417&sca_upv=1&channel=fs&biw=1920&bih=995&sxsrf=ACQVn0-unZqiOTC2RMPCAuuj41URFJqRHQ:1711981283919&si=AKbGX_paaCugDdYkuX2heTJMr0_FGRox2AzKVmiTg2eQr2d-rnKq70LLmgXYOMzLtvEbExzSwMLcP28qgB2GyZcGLa_FPg7vJ_17grm_eQJMMb2rrkPpiRFzgqNHBp-47eWUDSMMGcNFdA6cliBc47QEJx_11QZWNKFtA1i15fM1pp85fPD8rB_OMuZ_OMFXiesxa1nKtiqJDtteEQ6Ev77RLrm3iOd_LYzSpAUPGjg5Vjdj2pRnikHhyZ4V9QU8ZwEqSJ9b3BAN7C2zjGXRPMJB5wwdyn5MnHgAazjlD6RMK62WDIuKAEvQ2QAhrGdnWLRN7NW-Sozx3E_jhLpbxXChLQdoSRx_fA%3D%3D&q=Pizza&lei=68IKZovBHvGAxc8PlbCEmAo#',
+                        ),
                       ),
                       contentPadding: const EdgeInsets.all(8),
                       title: Text(categories[index].name),
@@ -96,6 +101,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             print(categories.length);
+            print('floating action button clicked');
+            Navigator.pushNamed(context, '/addCategoryScreen');
           },
           child: const Icon(Icons.add),
         ),

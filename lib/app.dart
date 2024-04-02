@@ -5,6 +5,7 @@ import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.da
 import 'package:restaurant_frontend/features/authentication/screens/forgot_password/forgot_password.dart';
 import 'package:restaurant_frontend/features/authentication/screens/home/home.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/add_product/add_product_screen.dart';
+import 'package:restaurant_frontend/features/shop/admin/screens/categories/add_category_screeen.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/categories/categories_screen.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/dashboard/dashboard.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/edit_product.dart';
@@ -16,7 +17,6 @@ import 'package:restaurant_frontend/utils/theme/theme.dart';
 import 'data/authentication/blocs/login/bloc/login_bloc.dart';
 import 'data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import 'data/authentication/blocs/verify_email/bloc/verify_email_bloc.dart';
-import 'data/shop/blocs/categories/category_details/bloc/category_details_bloc.dart';
 import 'features/authentication/screens/login/login.dart';
 import 'features/authentication/screens/onboarding/onboarding.dart';
 import 'features/authentication/screens/otpscreen/otp_screen.dart';
@@ -38,6 +38,7 @@ class App extends StatelessWidget {
         ),
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => ProductBloc()),
+        BlocProvider(create: (context) => CategoriesBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -59,6 +60,7 @@ class App extends StatelessWidget {
           '/addProducts': (context) => const AddProductsPage(),
           '/editProducts': (context) => const EditProductPage(),
           '/categoriesScreen': (context) => const CategoriesScreen(),
+          '/addCategoryScreen': (context) => const AddCategoryPage(),
 
           // '/dashboard': (context) => const Dashboard(),
         },

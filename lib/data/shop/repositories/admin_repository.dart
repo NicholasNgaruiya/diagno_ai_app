@@ -1,5 +1,6 @@
 import 'package:restaurant_frontend/data/shop/services/admin_shop_service.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/category_item.dart';
+import 'package:restaurant_frontend/features/shop/admin/models/create_category_item.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
 
 import '../../../features/shop/admin/models/update_category_item.dart';
@@ -32,6 +33,16 @@ class AdminRepository {
       return response;
     } catch (e) {
       print('Error updating category: $e');
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> createCategory(CreateCategoryItem createCategoryItem) async {
+    try {
+      final response = await AdminShopService().createCategory(createCategoryItem);
+      return response;
+    } catch (e) {
+      print('Error creating category: $e');
       rethrow;
     }
   }

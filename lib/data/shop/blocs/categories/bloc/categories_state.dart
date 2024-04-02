@@ -7,20 +7,39 @@ sealed class CategoriesState extends Equatable {
   List<Object> get props => [];
 }
 
-final class CategoriesLoading extends CategoriesState {}
+final class CategoriesInitial extends CategoriesState {}
 
-final class CategoriesSuccess extends CategoriesState {
-  final List<CategoryItem> categories;
-  const CategoriesSuccess(this.categories);
+final class CategoryLoading extends CategoriesState {}
 
+final class CreateCategorySuccess extends CategoriesState {
+  final Map<String, dynamic> response;
+
+  const CreateCategorySuccess(this.response);
   @override
-  List<Object> get props => [categories];
+  List<Object> get props => [response];
 }
 
-final class CategoriesFailure extends CategoriesState {
+final class CreateCategoryFailure extends CategoriesState {
   final String error;
-  const CategoriesFailure(this.error);
 
+  const CreateCategoryFailure(this.error);
+  @override
+  List<Object> get props => [error];
+}
+
+final class DeleteCategorySuccess extends CategoriesState {
+  final Map<String, dynamic> response;
+
+  const DeleteCategorySuccess(this.response);
+
+  @override
+  List<Object> get props => [response];
+}
+
+final class DeleteCategoryFailure extends CategoriesState {
+  final String error;
+
+  const DeleteCategoryFailure(this.error);
   @override
   List<Object> get props => [error];
 }
