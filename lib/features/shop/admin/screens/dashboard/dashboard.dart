@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
+
+import '../../../../../data/shop/blocs/categories/bloc/categories_bloc.dart';
 
 class Dashboard extends StatelessWidget {
   Dashboard({super.key});
@@ -14,9 +17,9 @@ class Dashboard extends StatelessWidget {
     'assets/images/dashboard_images/vieworders.png',
   ];
   final List titles = [
-    'Add Products',
+    'Products',
     'Edit Products',
-    'Edit Categories',
+    'Categories',
     'View Orders',
     'View Orders',
   ];
@@ -127,6 +130,8 @@ class Dashboard extends StatelessWidget {
                               Navigator.pushNamed(context, '/editProducts');
                               break;
                             case 2:
+                              BlocProvider.of<CategoriesBloc>(context).add(FetchCategoriesEvent());
+
                               Navigator.pushNamed(context, '/categoriesScreen');
                               break;
                             case 3:

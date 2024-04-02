@@ -7,6 +7,8 @@ abstract class CategoriesEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class FetchCategoriesEvent extends CategoriesEvent {}
+
 class CreateCategoryButtonClickedEvent extends CategoriesEvent {
   final CreateCategoryItem createCategoryItem;
 

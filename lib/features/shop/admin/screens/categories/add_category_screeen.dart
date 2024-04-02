@@ -69,6 +69,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                   // content: Text(TTexts.getAccountCreatedTitle),
                 ),
               );
+              Navigator.pushNamed(context, '/categoriesScreen');
             }
           },
           child: BlocBuilder<CategoriesBloc, CategoriesState>(
@@ -138,9 +139,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                                       print('Category Description: ${categoryDescriptionController.text}');
                                       print('Selected Image: $selectedImage');
                                       setState(() {
-                                        categoryNamecontroller.clear();
-                                        categoryDescriptionController.clear();
-                                        selectedImage = null;
+                                        // categoryNamecontroller.clear();
+                                        // categoryDescriptionController.clear();
+                                        // selectedImage = null;
                                       });
                                     },
                                     style: ElevatedButton.styleFrom(

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/update_category_item.dart';
 
 import '../../../../../common/widgets/dashboard/image_selector.dart';
@@ -30,6 +31,9 @@ class CategoryDetailsView extends StatelessWidget {
                 backgroundColor: TColors.success,
               ),
             );
+            BlocProvider.of<CategoriesBloc>(context).add(FetchCategoriesEvent());
+            // Navigator.pushNamed(context, '/categoriesScreen');
+            // Navigator.popUntil(context, ModalRoute.withName('/categoriesScreen'));
             Navigator.of(context).pop();
           } else if (state is SaveFailedState) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -89,17 +93,31 @@ class CategoryDetailsView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: TSizes.spaceBtwItems),
+                    // Text(
+                    //   'Category ID : ${state.categoryItem.id}',
+                    // ),
                     Text(
-                      'Category ID : ${state.categoryItem.id}',
-                    ),
-                    Text(
-                      'Category Name : ${state.categoryItem.name}',
+                      'Category Name :',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: TSizes.spaceBtwItems),
+
+                    TextFormField(
+                      initialValue: state.categoryItem.name,
+                      readOnly: true,
+                    ),
+
+                    const SizedBox(height: TSizes.spaceBtwItems),
                     Text(
-                      'Category Description : ${state.categoryItem.description}',
+                      'Category Description :',
                       style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: TSizes.spaceBtwItems),
+
+                    TextFormField(
+                      initialValue: state.categoryItem.description,
+                      readOnly: true,
+                      maxLines: 3,
                     ),
                     const SizedBox(height: TSizes.spaceBtwItems),
                     Text(
@@ -197,9 +215,9 @@ Widget _buildCategoryDetailsEditing(BuildContext context, CategoryDetailsEditing
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: TSizes.spaceBtwItems),
-                  Text(
-                    'Category ID : ${categoryItem.id}',
-                  ),
+                  // Text(
+                  //   'Category ID : ${categoryItem.id}',
+                  // ),
                   Text(
                     'Category Name :',
                     style: Theme.of(context).textTheme.titleMedium,

@@ -50,6 +50,10 @@ class AdminShopService {
       if (response.statusCode == 201) {
         final responseData = await response.stream.bytesToString();
         return json.decode(responseData);
+      } else if (response.statusCode == 401) {
+        throw Exception('Unauthorized');
+      } else if (response.statusCode == 500) {
+        throw Exception('Server error');
       } else {
         throw Exception('Failed to create product ${response.statusCode}');
       }

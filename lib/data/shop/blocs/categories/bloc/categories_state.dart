@@ -11,6 +11,23 @@ final class CategoriesInitial extends CategoriesState {}
 
 final class CategoryLoading extends CategoriesState {}
 
+final class FetchCategoriesSuccess extends CategoriesState {
+  final List<CategoryItem> categories;
+
+  const FetchCategoriesSuccess(this.categories);
+
+  @override
+  List<Object> get props => [];
+}
+
+final class FetchCategoriesFailure extends CategoriesState {
+  final String error;
+
+  const FetchCategoriesFailure(this.error);
+  @override
+  List<Object> get props => [];
+}
+
 final class CreateCategorySuccess extends CategoriesState {
   final Map<String, dynamic> response;
 
