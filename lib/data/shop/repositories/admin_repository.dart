@@ -37,6 +37,16 @@ class AdminRepository {
     }
   }
 
+  Future<void> deleteCategory(String categoryId) async {
+    try {
+      await AdminShopService().deleteCategory(categoryId);
+      print('Category deleted successfully');
+    } catch (e) {
+      print('Error deleting category: $e');
+      rethrow;
+    }
+  }
+
   Future<Map<String, dynamic>> createCategory(CreateCategoryItem createCategoryItem) async {
     try {
       final response = await AdminShopService().createCategory(createCategoryItem);

@@ -34,7 +34,14 @@ class CategoryDetailsBloc extends Bloc<CategoryDetailsEvent, CategoryDetailsStat
     }
   }
 
-  FutureOr<void> deleteButtonClickedEvent(DeleteButtonClickedEvent event, Emitter<CategoryDetailsState> emit) {
+  FutureOr<void> deleteButtonClickedEvent(DeleteButtonClickedEvent event, Emitter<CategoryDetailsState> emit) async {
     //Handle deleting logic here
+    emit(CategoryDetailsLoadingState());
+    try {
+      await AdminRepository().deleteCategory(event.categoryId);
+      emit(DeletedCategorySuccessState('Category deleted successfully'));
+    } catch (e) {
+      emit(DeletedCategoryFailureState('Failed to delete category'));
+    }
   }
 }

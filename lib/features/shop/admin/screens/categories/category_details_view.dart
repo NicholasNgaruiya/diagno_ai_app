@@ -42,6 +42,7 @@ class CategoryDetailsView extends StatelessWidget {
                 backgroundColor: TColors.error,
               ),
             );
+
             Navigator.of(context).pop();
           } else if (state is ModelSwitchedState) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -50,6 +51,24 @@ class CategoryDetailsView extends StatelessWidget {
                 backgroundColor: TColors.success,
               ),
             );
+          } else if (state is DeletedCategorySuccessState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: TColors.success,
+              ),
+            );
+            BlocProvider.of<CategoriesBloc>(context).add(FetchCategoriesEvent());
+
+            Navigator.of(context).pop();
+          } else if (state is DeletedCategoryFailureState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: TColors.error,
+              ),
+            );
+            Navigator.of(context).pop();
           }
         },
         builder: (context, state) {
@@ -135,16 +154,6 @@ class CategoryDetailsView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     BlocProvider.of<CategoryDetailsBloc>(context).add(EditButtonClickedEvent());
-            //   },
-            //   style: ElevatedButton.styleFrom(
-            //     backgroundColor: TColors.success,
-            //     side: const BorderSide(color: TColors.success),
-            //   ),
-            //   child: const Text('Edit'),
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -166,7 +175,9 @@ class CategoryDetailsView extends StatelessWidget {
                   width: TDeviceUtils.getScreenWidth(context) * 0.4,
                   child: ElevatedButton(
                     onPressed: () {
+                      print('Category id is ${state.categoryItem.id}');
                       // Handle delete button clicked
+                      BlocProvider.of<CategoryDetailsBloc>(context).add(DeleteButtonClickedEvent(state.categoryItem.id));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: TColors.error,

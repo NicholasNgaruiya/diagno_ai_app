@@ -57,7 +57,7 @@ class App extends StatelessWidget {
           '/home': (context) => const HomeScreen(),
           '/forget_password': (context) => const ForgotPasswordScreen(),
           '/viewOrders': (context) => const ViewOrdersPage(),
-          '/dashboard': (context) => Dashboard(),
+          '/dashboard': (context) => const Dashboard(),
           '/addProducts': (context) => const AddProductsPage(),
           '/editProducts': (context) => const EditProductPage(),
           '/categoriesScreen': (context) => const CategoriesScreen(),

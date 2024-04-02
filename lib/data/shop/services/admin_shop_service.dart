@@ -152,7 +152,48 @@ class AdminShopService {
     }
   }
 
-  // Future<Map<String,dynamic>> deleteCategory()
+  Future<void> deleteCategory(String newcategoryId) async {
+    try {
+      // Retrieve the access token from local storage
+      String? accessToken = await TLocalStorage.getString('access_token');
+      String? categoryId = await TLocalStorage.getString('selectedCategoryId');
+      bool hasInternet = await TDeviceUtils.hasInternetConnection();
+      if (accessToken == null) {
+        throw Exception('Access token not found');
+      }
+      // Check for internet connection
+      if (!hasInternet) {
+        throw Exception('No Internet Connection');
+      }
+      if (categoryId == null) {
+        throw Exception('Category ID not found');
+      }
+
+      // Construct the request URL with the category ID
+      String url = '$baseUrl/inventory/categories/$categoryId/delete/';
+      print('Delete URL: $url');
+
+      final response = await http.delete(
+        Uri.parse(url),
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+        },
+      );
+      print('request sent');
+
+      if (response.statusCode == 200 || response.statusCode == 204) {
+        // Category deleted successfully
+        print('Category deleted successfully');
+      } else {
+        // Failed to delete category
+        throw Exception('Failed to delete category: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle errors
+      throw Exception('Error deleting category: $e');
+    }
+  }
+
   Future<List<CategoryItem>> getCategoryList() async {
     try {
       //Retrieve the access token from the local storage

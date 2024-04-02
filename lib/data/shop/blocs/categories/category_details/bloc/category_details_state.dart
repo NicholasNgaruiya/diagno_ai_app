@@ -29,3 +29,15 @@ class SaveFailedState extends CategoryDetailsState {
 
   SaveFailedState(this.message);
 }
+
+class DeletedCategorySuccessState extends CategoryDetailsState {
+  final String message;
+
+  DeletedCategorySuccessState(this.message);
+}
+
+class DeletedCategoryFailureState extends CategoryDetailsState {
+  final String message;
+
+  DeletedCategoryFailureState(this.message);
+}

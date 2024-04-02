@@ -12,4 +12,8 @@ class SaveButtonClickedEvent extends CategoryDetailsEvent {
   const SaveButtonClickedEvent({required this.updateCategoryItem});
 }
 
-class DeleteButtonClickedEvent extends CategoryDetailsEvent {}
+class DeleteButtonClickedEvent extends CategoryDetailsEvent {
+  final String categoryId;
+
+  DeleteButtonClickedEvent(this.categoryId);
+}

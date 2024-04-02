@@ -69,7 +69,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                   // content: Text(TTexts.getAccountCreatedTitle),
                 ),
               );
-              Navigator.pushNamed(context, '/categoriesScreen');
+              BlocProvider.of<CategoriesBloc>(context).add(FetchCategoriesEvent());
+
+              Navigator.of(context).pop();
             }
           },
           child: BlocBuilder<CategoriesBloc, CategoriesState>(

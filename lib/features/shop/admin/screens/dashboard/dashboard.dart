@@ -6,6 +6,7 @@ import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
 import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../../../data/shop/blocs/categories/bloc/categories_bloc.dart';
+import '../../../../../utils/constants/sizes.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -63,7 +64,7 @@ class _DashboardState extends State<Dashboard> {
                   decoration: const BoxDecoration(
                       // color: TColors.black,
                       ),
-                  height: TDeviceUtils.getScreenHeight(context) * 0.20,
+                  height: TDeviceUtils.getScreenHeight(context) * 0.15,
                   width: TDeviceUtils.getScreenWidth(context),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,48 +75,32 @@ class _DashboardState extends State<Dashboard> {
                           left: 15,
                           right: 15,
                         ),
-                        child: userName != null ? Text('Welcome,$userName') : Container(),
-                        // child: Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     InkWell(
-                        //       onTap: () {},
-                        //       child: const Icon(
-                        //         Icons.sort,
-                        //         // color: TColors.white,
-                        //         size: 40,
-                        //       ),
-                        //     ),
-                        //     //?Use ClipReact instead
-                        //     Container(
-                        //       height: 50,
-                        //       width: 50,
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(15),
-                        //         // color: TColors.white,
-                        //       ),
-                        //       child: Image.asset('assets/images/dashboard_images/profilePicture.png'),
-                        //     ),
-                        //   ],
-                        // ),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Hello',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            userName != null
+                                ? Text(
+                                    '$userName',
+                                    style: Theme.of(context).textTheme.titleLarge,
+                                  )
+                                : Container(),
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
                           top: 15,
                           left: 20,
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Dashboard',
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            ),
-                            Text(
-                              'Last Update: 7 Aug 2023',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ],
+                        child: Text(
+                          'Dashboard',
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ),
                     ],
@@ -129,7 +114,7 @@ class _DashboardState extends State<Dashboard> {
                       topRight: Radius.circular(30),
                     ),
                   ),
-                  height: TDeviceUtils.getScreenHeight(context) * 0.80,
+                  height: TDeviceUtils.getScreenHeight(context) * 0.85,
                   width: TDeviceUtils.getScreenWidth(context),
                   child: GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
