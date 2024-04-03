@@ -165,7 +165,7 @@ class CategoryDetailsView extends StatelessWidget {
                     onPressed: () async {
                       bool confirmEdit =
                           (await showConfirmationDialog(context, 'Are you sure you want to Save your changes?')) ?? false;
-                      if (confirmEdit) {
+                      if (confirmEdit && context.mounted) {
                         // Handle edit button clicked
                         BlocProvider.of<CategoryDetailsBloc>(context).add(EditButtonClickedEvent());
                       }
@@ -185,7 +185,7 @@ class CategoryDetailsView extends StatelessWidget {
                           (await showConfirmationDialog(context, 'Are you sure you want to Delete this Category?')) ?? false;
 
                       print('Category id is ${state.categoryItem.id}');
-                      if (confirmDelete) {
+                      if (confirmDelete && context.mounted) {
                         // Handle delete button clicked
                         BlocProvider.of<CategoryDetailsBloc>(context).add(DeleteButtonClickedEvent());
                       }
@@ -291,16 +291,19 @@ Widget _buildCategoryDetailsEditing(BuildContext context, CategoryDetailsEditing
             width: TDeviceUtils.getScreenWidth(context) * 0.8,
             child: ElevatedButton(
               onPressed: () async {
+                final name = nameController.text;
+                final description = descriptionController.text;
+                final image = selectedImage;
                 bool confirmSave =
                     (await showConfirmationDialog(context, 'Are you sure you want to Save your changes?')) ?? false;
-                if (confirmSave) {
+                if (confirmSave && context.mounted) {
                   // Handle save button clicked
                   BlocProvider.of<CategoryDetailsBloc>(context).add(
                     SaveButtonClickedEvent(
                       updateCategoryItem: UpdateCategoryItem(
-                        name: nameController.text,
-                        description: descriptionController.text,
-                        image: selectedImage,
+                        name: name,
+                        description: description,
+                        image: image,
                       ),
                     ),
                   );
