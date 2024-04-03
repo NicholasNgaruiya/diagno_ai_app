@@ -112,7 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               );
               //Handle success state by navigating to the next screen
-              Navigator.of(context).pushReplacementNamed('/dashboard');
+              // Navigator.of(context).pushReplacementNamed('/dashboard');
+              Navigator.of(context).pushReplacementNamed('/navigationBar');
             }
           },
           child: BlocBuilder<LoginBloc, LoginState>(

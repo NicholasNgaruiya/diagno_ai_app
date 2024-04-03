@@ -11,6 +11,7 @@ import 'package:restaurant_frontend/features/shop/admin/screens/dashboard/dashbo
 import 'package:restaurant_frontend/features/shop/admin/screens/edit_product.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/view_orders.dart';
 import 'package:restaurant_frontend/main.dart';
+import 'package:restaurant_frontend/navigation_menu.dart';
 import 'package:restaurant_frontend/utils/theme/theme.dart';
 
 // import 'common/widgets/errors/flash_message_error.dart';
@@ -50,6 +51,7 @@ class App extends StatelessWidget {
         // home: const OnBoardingScreen(),
         initialRoute: initScreen == 0 || initScreen == null ? '/onboarding' : '/login',
         routes: {
+          '/navigationBar': (context) => const NavigationMenu(),
           '/onboarding': (context) => const OnBoardingScreen(),
           '/signup': (context) => const SignupScreen(),
           '/login': (context) => const LoginScreen(),
