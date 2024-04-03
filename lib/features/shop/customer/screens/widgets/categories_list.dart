@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
+import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
@@ -31,6 +32,11 @@ class CategoriesListView extends StatelessWidget {
                 final category = categories[index];
                 return GestureDetector(
                   onTap: () {
+                    // TLocalStorage.saveString('shop_category_id', category.id);
+                    //Dispacth the event to get products for this category
+                    BlocProvider.of<CategoriesBloc>(context).add(FetchProductsForCategoryEvent(categoryId: category.id));
+                    print('Products for this category:${category.id}');
+
                     //Handle when you click a category
                     print('Clicked This category:${category.name}');
                   },
@@ -39,11 +45,14 @@ class CategoriesListView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CircleAvatar(
-                          radius: 32,
-                          backgroundImage: NetworkImage(
-                            category.image ??
-                                'https://www.google.com/search?client=ubuntu-sn&hs=gJ2&sa=X&sca_esv=9a71a41fad6c3417&sca_upv=1&channel=fs&biw=1920&bih=995&sxsrf=ACQVn0-unZqiOTC2RMPCAuuj41URFJqRHQ:1711981283919&si=AKbGX_paaCugDdYkuX2heTJMr0_FGRox2AzKVmiTg2eQr2d-rnKq70LLmgXYOMzLtvEbExzSwMLcP28qgB2GyZcGLa_FPg7vJ_17grm_eQJMMb2rrkPpiRFzgqNHBp-47eWUDSMMGcNFdA6cliBc47QEJx_11QZWNKFtA1i15fM1pp85fPD8rB_OMuZ_OMFXiesxa1nKtiqJDtteEQ6Ev77RLrm3iOd_LYzSpAUPGjg5Vjdj2pRnikHhyZ4V9QU8ZwEqSJ9b3BAN7C2zjGXRPMJB5wwdyn5MnHgAazjlD6RMK62WDIuKAEvQ2QAhrGdnWLRN7NW-Sozx3E_jhLpbxXChLQdoSRx_fA%3D%3D&q=Pizza&lei=68IKZovBHvGAxc8PlbCEmAo#',
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: NetworkImage(
+                              category.image ??
+                                  'https://www.google.com/search?client=ubuntu-sn&hs=gJ2&sa=X&sca_esv=9a71a41fad6c3417&sca_upv=1&channel=fs&biw=1920&bih=995&sxsrf=ACQVn0-unZqiOTC2RMPCAuuj41URFJqRHQ:1711981283919&si=AKbGX_paaCugDdYkuX2heTJMr0_FGRox2AzKVmiTg2eQr2d-rnKq70LLmgXYOMzLtvEbExzSwMLcP28qgB2GyZcGLa_FPg7vJ_17grm_eQJMMb2rrkPpiRFzgqNHBp-47eWUDSMMGcNFdA6cliBc47QEJx_11QZWNKFtA1i15fM1pp85fPD8rB_OMuZ_OMFXiesxa1nKtiqJDtteEQ6Ev77RLrm3iOd_LYzSpAUPGjg5Vjdj2pRnikHhyZ4V9QU8ZwEqSJ9b3BAN7C2zjGXRPMJB5wwdyn5MnHgAazjlD6RMK62WDIuKAEvQ2QAhrGdnWLRN7NW-Sozx3E_jhLpbxXChLQdoSRx_fA%3D%3D&q=Pizza&lei=68IKZovBHvGAxc8PlbCEmAo#',
+                            ),
                           ),
                         ),
 
@@ -53,10 +62,16 @@ class CategoriesListView extends StatelessWidget {
 
                         ///Text
                         SizedBox(
+                          // padding: const EdgeInsets.only(left: 7),
+                          // color: Colors.black,
                           width: 55,
                           child: Text(
                             category.name,
-                            style: Theme.of(context).textTheme.labelMedium!.apply(color: TColors.black),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
                             // maxLines: 1,
                             // overflow: TextOverflow.ellipsis,
                           ),
@@ -67,6 +82,18 @@ class CategoriesListView extends StatelessWidget {
                 );
               },
             ),
+          );
+        } else if (state is FetchProductsForCategorySuccess) {
+          // Navigator.pushNamed(context, '/demmmoPage');
+          return Text(
+            'Products for this category:${state.fetchedCategoryItem.products.length}',
+            style: const TextStyle(color: Colors.black),
+          );
+          //return a list of products for this category
+          // print('Products for this category:${state.fetchedCategoryItem.length}');
+        } else if (state is FetchProductsForCategoryFailure) {
+          return Center(
+            child: Text('Error: ${state.error}'),
           );
         } else if (state is FetchCategoriesFailure) {
           return Center(

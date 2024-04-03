@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:restaurant_frontend/data/shop/repositories/admin_repository.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/create_category_item.dart';
+import 'package:restaurant_frontend/features/shop/customer/models/fetched_category_item.dart';
 
 import '../../../../../features/shop/admin/models/category_item.dart';
 
@@ -14,6 +15,7 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
   CategoriesBloc() : super(CategoriesInitial()) {
     on<CreateCategoryButtonClickedEvent>(createCategoryButtonClickedEvent);
     on<FetchCategoriesEvent>(fetchCategoriesEvent);
+    on<FetchProductsForCategoryEvent>(fetchProductsForCategoryEvent);
   }
 
   FutureOr<void> createCategoryButtonClickedEvent(CreateCategoryButtonClickedEvent event, Emitter<CategoriesState> emit) async {
@@ -35,6 +37,17 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
     } catch (e) {
       print(e);
       emit(FetchCategoriesFailure('Failed to load categories: $e'));
+    }
+  }
+
+  FutureOr<void> fetchProductsForCategoryEvent(FetchProductsForCategoryEvent event, Emitter<CategoriesState> emit) async {
+    emit(CategoryLoading());
+    try {
+      final FetchedCategoryItem fetchedCategoryItems = await AdminRepository().getProductsForCategory(event.categoryId);
+      emit(FetchProductsForCategorySuccess(fetchedCategoryItems));
+    } catch (e) {
+      print(e);
+      emit(FetchProductsForCategoryFailure('Failed to load products for category: $e'));
     }
   }
 }

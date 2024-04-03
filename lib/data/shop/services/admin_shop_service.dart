@@ -5,6 +5,7 @@ import 'package:restaurant_frontend/features/shop/admin/models/create_category_i
 import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
 import 'package:http/http.dart' as http;
 import 'package:restaurant_frontend/features/shop/admin/models/update_category_item.dart';
+import 'package:restaurant_frontend/features/shop/customer/models/fetched_category_item.dart';
 import 'dart:io';
 
 import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
@@ -197,44 +198,85 @@ class AdminShopService {
   Future<List<CategoryItem>> getCategoryList() async {
     try {
       //Retrieve the access token from the local storage
-      String? accessToken = await TLocalStorage.getString('access_token');
+      // String? accessToken = await TLocalStorage.getString('access_token');
       bool hasInternet = await TDeviceUtils.hasInternetConnection();
-      print(accessToken);
-      if (accessToken != null) {
-        if (!hasInternet) {
-          throw Exception('No Internet Connection');
-        }
-        print('$baseUrl/inventory/categories/');
-        final response = await http.get(
-          Uri.parse('$baseUrl/inventory/categories/'),
-          headers: {
-            HttpHeaders.authorizationHeader: 'Bearer $accessToken',
-          },
-        );
-        print('request sent');
-        if (response.statusCode == 200) {
-          // final List<dynamic> responseData = json.decode(response.body);
-          // return responseData.map((e) => CategoryItem.fromJson(e)).toList();
-          print('request successful');
-          final List<dynamic> categoryList = json.decode(response.body);
-          print(categoryList);
-          return categoryList.map((categoryJson) => CategoryItem.fromJson(categoryJson)).toList();
-        } else if (response.statusCode == 400) {
-          throw Exception('Invalid request');
-        } else if (response.statusCode == 401) {
-          throw Exception('Unauthorized');
-        } else if (response.statusCode == 500) {
-          throw Exception('Server error');
-        } else {
-          print('Failed to get categories ${response.statusCode}');
-          throw Exception('Failed to get categories ${response.statusCode}');
-        }
-      } else {
-        throw Exception('Access token not found');
+      // print(accessToken);
+      // if (accessToken != null) {
+      if (!hasInternet) {
+        throw Exception('No Internet Connection');
       }
+      print('$baseUrl/inventory/categories/');
+      final response = await http.get(
+        Uri.parse('$baseUrl/inventory/categories/'),
+
+        // headers: {
+        //   HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+        // },
+      );
+      print('request sent');
+      if (response.statusCode == 200) {
+        // final List<dynamic> responseData = json.decode(response.body);
+        // return responseData.map((e) => CategoryItem.fromJson(e)).toList();
+        print('request successful');
+        print(response.body);
+        final List<dynamic> categoryList = json.decode(response.body);
+        print(categoryList);
+        return categoryList.map((categoryJson) => CategoryItem.fromJson(categoryJson)).toList();
+      } else if (response.statusCode == 400) {
+        throw Exception('Invalid request');
+      } else if (response.statusCode == 401) {
+        throw Exception('Unauthorized');
+      } else if (response.statusCode == 500) {
+        throw Exception('Server error');
+      } else {
+        print('Failed to get categories ${response.statusCode}');
+        throw Exception('Failed to get categories ${response.statusCode}');
+      }
+      // } else {
+      //   throw Exception('Access token not found');
+      // }
     } catch (e) {
       // throw Exception('Error getting categories: $e');
       throw Exception('Error getting categories: $e');
+    }
+  }
+
+  //Method to fetch products for a category
+  Future<FetchedCategoryItem> getProductsForCategory(String categoryId) async {
+    try {
+      //Retrieve the access token from the local storage
+      // String? accessToken = await TLocalStorage.getString('access_token');
+      bool hasInternet = await TDeviceUtils.hasInternetConnection();
+      // if (accessToken != null) {
+      if (!hasInternet) {
+        throw Exception('No Internet Connection');
+      }
+      final response = await http.get(
+        Uri.parse('$baseUrl/inventory/categories/$categoryId/'),
+        // headers: {
+        //   HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+        // },
+      );
+      if (response.statusCode == 200) {
+        print('Response for a category ${response}');
+
+        final responseData = json.decode(response.body);
+        return FetchedCategoryItem.fromJson(responseData);
+        // return responseData.map((e) => FetchedCategoryItem.fromJson(e)).toList();
+      } else if (response.statusCode == 400) {
+        throw Exception('Invalid request');
+      } else if (response.statusCode == 401) {
+        throw Exception('Unauthorized');
+      } else if (response.statusCode == 500) {
+        throw Exception('Server error');
+      } else {
+        throw Exception('Failed to get products for category ${response.statusCode}');
+      }
+      // } else {
+      //   throw Exception('Access token not found');
+      // }
+    } catch (e) {
+      throw Exception('Error getting products for category: $e');
     }
   }
 }

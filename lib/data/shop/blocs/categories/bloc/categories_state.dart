@@ -11,6 +11,18 @@ final class CategoriesInitial extends CategoriesState {}
 
 final class CategoryLoading extends CategoriesState {}
 
+final class FetchProductsForCategorySuccess extends CategoriesState {
+  final FetchedCategoryItem fetchedCategoryItem;
+
+  const FetchProductsForCategorySuccess(this.fetchedCategoryItem);
+}
+
+final class FetchProductsForCategoryFailure extends CategoriesState {
+  final String error;
+
+  const FetchProductsForCategoryFailure(this.error);
+}
+
 final class FetchCategoriesSuccess extends CategoriesState {
   final List<CategoryItem> categories;
 

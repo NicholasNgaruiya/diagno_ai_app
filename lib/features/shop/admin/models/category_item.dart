@@ -1,3 +1,5 @@
+import '../../customer/models/new_product_item.dart';
+
 class CategoryItem {
   final String id;
   final String name;

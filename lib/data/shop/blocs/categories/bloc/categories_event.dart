@@ -17,3 +17,12 @@ class CreateCategoryButtonClickedEvent extends CategoriesEvent {
   @override
   List<Object> get props => [createCategoryItem];
 }
+
+class FetchProductsForCategoryEvent extends CategoriesEvent {
+  final String categoryId;
+
+  const FetchProductsForCategoryEvent({required this.categoryId});
+
+  @override
+  List<Object> get props => [categoryId];
+}

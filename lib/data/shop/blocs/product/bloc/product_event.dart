@@ -16,6 +16,8 @@ class CreateProductButtonClickedEvent extends ProductEvent {
   List<Object> get props => [productItem];
 }
 
+
+
 // final class CategorySelectedEvent extends ProductEvent {
 //   final String category;
 //   const CategorySelectedEvent(this.category);

@@ -2,6 +2,7 @@ import 'package:restaurant_frontend/data/shop/services/admin_shop_service.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/category_item.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/create_category_item.dart';
 import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
+import 'package:restaurant_frontend/features/shop/customer/models/fetched_category_item.dart';
 
 import '../../../features/shop/admin/models/update_category_item.dart';
 
@@ -53,6 +54,17 @@ class AdminRepository {
       return response;
     } catch (e) {
       print('Error creating category: $e');
+      rethrow;
+    }
+  }
+
+  //repository for getting product for category
+  Future<FetchedCategoryItem> getProductsForCategory(String categoryId) async {
+    try {
+      final response = await AdminShopService().getProductsForCategory(categoryId);
+      return response;
+    } catch (e) {
+      print('Error fetching products for category: $e');
       rethrow;
     }
   }

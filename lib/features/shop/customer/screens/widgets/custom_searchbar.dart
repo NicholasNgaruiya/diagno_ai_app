@@ -32,7 +32,10 @@ class TSearchBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(icon),
+          Icon(
+            icon,
+            color: textColor,
+          ),
           const SizedBox(
             width: TSizes.spaceBtwItems,
           ),

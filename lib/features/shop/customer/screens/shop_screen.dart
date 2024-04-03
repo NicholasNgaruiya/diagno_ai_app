@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:restaurant_frontend/features/shop/customer/screens/widgets/item_widget.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
 import '../../../../data/shop/blocs/categories/bloc/categories_bloc.dart';
@@ -62,10 +63,10 @@ class _ShopScreenState extends State<ShopScreen> {
                         const Center(
                           child: TSearchBar(
                             icon: Iconsax.search_normal,
-                            backgroundColor: Colors.transparent,
+                            backgroundColor: Colors.white,
                             borderColor: Colors.white,
                             text: 'Search',
-                            textColor: Colors.white,
+                            textColor: Colors.black,
                           ),
                         ),
                       ],
@@ -82,7 +83,7 @@ class _ShopScreenState extends State<ShopScreen> {
                       topRight: Radius.circular(30),
                     ),
                   ),
-                  height: TDeviceUtils.getScreenHeight(context) * 0.80,
+                  height: TDeviceUtils.getScreenHeight(context) * 80,
                   width: TDeviceUtils.getScreenWidth(context),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 5, right: 5),
@@ -99,6 +100,17 @@ class _ShopScreenState extends State<ShopScreen> {
 
                         ///Categories
                         const CategoriesListView(),
+
+                        ///Products
+                        TSectionHeading(
+                          headingTitle: 'Recommendations',
+                          buttonTitle: 'View All',
+                          textColor: TColors.black,
+                          onPressed: () {},
+                          showActionButton: true,
+                        ),
+                        const ItemsWidget(),
+
                         const Text(
                           'Recommendations',
                           style: TextStyle(color: Colors.black),
