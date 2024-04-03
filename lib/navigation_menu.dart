@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/dashboard/dashboard.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
+
+import 'features/shop/admin/screens/dashboard/dashboard.dart';
+import 'features/shop/customer/screens/shop_screen.dart';
 
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});
@@ -14,13 +16,8 @@ class NavigationMenu extends StatefulWidget {
 class _NavigationMenuState extends State<NavigationMenu> {
   int selectedIndex = 0;
   final screens = [
-    // Container(
-    //   color: Colors.green,
-    // ),
     const Dashboard(),
-    Container(
-      color: Colors.red,
-    ),
+    const ShopScreen(),
     Container(
       color: Colors.purple,
     ),

@@ -22,7 +22,7 @@ class CategoriesScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Edit Categories'),
+          title: const Text('Categories'),
         ),
         body: BlocBuilder<CategoriesBloc, CategoriesState>(
           builder: (context, state) {

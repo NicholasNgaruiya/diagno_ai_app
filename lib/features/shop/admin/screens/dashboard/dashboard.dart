@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/features/shop/customer/screens/widgets/get_username_widget.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
@@ -72,30 +73,6 @@ class _DashboardState extends State<Dashboard> {
                       Padding(
                         padding: const EdgeInsets.only(
                           top: 15,
-                          left: 15,
-                          right: 15,
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Hello',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            userName != null
-                                ? Text(
-                                    '$userName',
-                                    style: Theme.of(context).textTheme.titleLarge,
-                                  )
-                                : Container(),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 15,
                           left: 20,
                         ),
                         child: Text(
@@ -103,6 +80,7 @@ class _DashboardState extends State<Dashboard> {
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ),
+                      const GetUsernameWidget(),
                     ],
                   ),
                 ),
