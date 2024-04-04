@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
-import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
+import 'package:restaurant_frontend/utils/device/device_utility.dart';
+// import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 
-class CategoriesListView extends StatelessWidget {
-  const CategoriesListView({
-    super.key,
-  });
+class CategoriesGridView extends StatelessWidget {
+  const CategoriesGridView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,76 +22,71 @@ class CategoriesListView extends StatelessWidget {
           );
         } else if (state is FetchCategoriesSuccess) {
           final categories = state.categories;
-          return SizedBox(
-            height: 120,
-            width: double.infinity,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: categories.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                final category = categories[index];
-                return GestureDetector(
-                  onTap: () {
-                    // TLocalStorage.saveString('shop_category_id', category.id);
-                    //Dispacth the event to get products for this category
-                    BlocProvider.of<CategoriesBloc>(context).add(FetchProductsForCategoryEvent(categoryId: category.id));
-                    print('Products for this category:${category.id}');
-
-                    //Handle when you click a category
-                    print('Clicked This category:${category.name}');
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: CircleAvatar(
-                            radius: 30,
-                            backgroundImage: NetworkImage(
-                              category.image ??
-                                  'https://www.google.com/search?client=ubuntu-sn&hs=gJ2&sa=X&sca_esv=9a71a41fad6c3417&sca_upv=1&channel=fs&biw=1920&bih=995&sxsrf=ACQVn0-unZqiOTC2RMPCAuuj41URFJqRHQ:1711981283919&si=AKbGX_paaCugDdYkuX2heTJMr0_FGRox2AzKVmiTg2eQr2d-rnKq70LLmgXYOMzLtvEbExzSwMLcP28qgB2GyZcGLa_FPg7vJ_17grm_eQJMMb2rrkPpiRFzgqNHBp-47eWUDSMMGcNFdA6cliBc47QEJx_11QZWNKFtA1i15fM1pp85fPD8rB_OMuZ_OMFXiesxa1nKtiqJDtteEQ6Ev77RLrm3iOd_LYzSpAUPGjg5Vjdj2pRnikHhyZ4V9QU8ZwEqSJ9b3BAN7C2zjGXRPMJB5wwdyn5MnHgAazjlD6RMK62WDIuKAEvQ2QAhrGdnWLRN7NW-Sozx3E_jhLpbxXChLQdoSRx_fA%3D%3D&q=Pizza&lei=68IKZovBHvGAxc8PlbCEmAo#',
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(
-                          height: TSizes.spaceBtwItems / 2,
-                        ),
-
-                        ///Text
-                        SizedBox(
-                          // padding: const EdgeInsets.only(left: 7),
-                          // color: Colors.black,
-                          width: 55,
-                          child: Text(
-                            category.name,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            // maxLines: 1,
-                            // overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
+          return GridView.builder(
+            itemCount: categories.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 10,
+              childAspectRatio: 1.3, // Width/Height ratio
             ),
+            // physics: const AlwaysScrollableScrollPhysics(),
+            // shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(), // Disable GridView's built-in scrolling
+            itemBuilder: (context, index) {
+              final category = categories[index];
+              return InkWell(
+                onTap: () {
+                  BlocProvider.of<CategoriesBloc>(context).add(
+                    FetchProductsForCategoryEvent(categoryId: category.id),
+                  );
+                  print('Products for this category:${category.id}');
+                  print('Clicked This category:${category.name}');
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        category.image ?? 'https://via.placeholder.com/150',
+                        fit: BoxFit.cover,
+                        height: 100,
+                        width: TDeviceUtils.getScreenWidth(context) * 0.45,
+                      ),
+                    ),
+
+                    // ),
+                    const SizedBox(height: TSizes.spaceBtwItems / 2),
+                    SizedBox(
+                      width: double.infinity,
+                      // color: Colors.red,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: 8,
+                        ),
+                        child: Text(
+                          category.name.capitalize(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          textAlign: TextAlign.left,
+                          //Capitalize the first letter of each word
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           );
         } else if (state is FetchProductsForCategorySuccess) {
-          // Navigator.pushNamed(context, '/demmmoPage');
           return Text(
             'Products for this category:${state.fetchedCategoryItem.products.length}',
             style: const TextStyle(color: Colors.black),
           );
-          //return a list of products for this category
-          // print('Products for this category:${state.fetchedCategoryItem.length}');
         } else if (state is FetchProductsForCategoryFailure) {
           return Center(
             child: Text('Error: ${state.error}'),
@@ -109,5 +105,17 @@ class CategoriesListView extends StatelessWidget {
         }
       },
     );
+  }
+
+// extension StringExtensions on String {
+//   String capitalize() {
+//     return "${this[0].toUpperCase()}${this.substring(1)}";
+//   }
+// }
+}
+
+extension StringExtensions on String {
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1)}';
   }
 }

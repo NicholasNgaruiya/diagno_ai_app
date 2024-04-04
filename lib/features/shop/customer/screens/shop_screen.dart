@@ -30,102 +30,62 @@ class _ShopScreenState extends State<ShopScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            color: TColors.primaryColor,
-            height: TDeviceUtils.getScreenHeight(context),
-            width: TDeviceUtils.getScreenWidth(context),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: TDeviceUtils.getScreenHeight(context) * 0.20,
-                  width: TDeviceUtils.getScreenWidth(context),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const GetUsernameWidget(),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 15,
-                          ),
-                          child: Text(
-                            'Welcome to FlavorQuest!',
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: TSizes.spaceBtwItems,
-                        ),
-                        const Center(
-                          child: TSearchBar(
-                            icon: Iconsax.search_normal,
-                            backgroundColor: Colors.white,
-                            borderColor: Colors.white,
-                            text: 'Search',
-                            textColor: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: TColors.primaryColor,
+        elevation: 0,
+        title: const GetUsernameWidget(),
+        actions: [
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Iconsax.shopping_cart,
+                  color: TColors.white,
                 ),
-                //?Beginning of the rounded container
-                Container(
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Iconsax.user,
+                  color: TColors.white,
+                ),
+              ),
+            ],
+          ),
+        ],
+        toolbarHeight: TDeviceUtils.getScreenHeight(context) * 0.080,
+      ),
+      // backgroundColor: TColors.primaryColor,
+      body: Column(
+        children: [
+          /// ---Categories Section
+          Expanded(
+            child: SafeArea(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).padding.bottom,
+                ),
+                child: Container(
+                  // height: TDeviceUtils.getScreenHeight(context) * 0.8,
+                  height: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.bottom - kBottomNavigationBarHeight,
                   decoration: const BoxDecoration(
                     color: TColors.white,
-                    // color: dark ? TColors.grey : TColors.grey,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
+                    // borderRadius: BorderRadius.only(
+                    //   topLeft: Radius.circular(30),
+                    //   topRight: Radius.circular(30),
+                    // ),
                   ),
-                  height: TDeviceUtils.getScreenHeight(context) * 80,
-                  width: TDeviceUtils.getScreenWidth(context),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 5),
-                    child: Column(
-                      children: [
-                        ///---Categories Heading
-                        TSectionHeading(
-                          headingTitle: 'Categories',
-                          buttonTitle: 'View All',
-                          textColor: TColors.black,
-                          onPressed: () {},
-                          showActionButton: true,
-                        ),
-
-                        ///Categories
-                        const CategoriesListView(),
-
-                        ///Products
-                        TSectionHeading(
-                          headingTitle: 'Recommendations',
-                          buttonTitle: 'View All',
-                          textColor: TColors.black,
-                          onPressed: () {},
-                          showActionButton: true,
-                        ),
-                        const ItemsWidget(),
-
-                        const Text(
-                          'Recommendations',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    ),
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8, right: 8),
+                    child: CategoriesGridView(),
                   ),
-                  //Text
-                  //SearchBar
-                  //Categories List
-                ), //Products List
-              ],
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

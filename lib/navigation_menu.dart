@@ -16,13 +16,16 @@ class NavigationMenu extends StatefulWidget {
 class _NavigationMenuState extends State<NavigationMenu> {
   int selectedIndex = 0;
   final screens = [
-    const Dashboard(),
+    // const Dashboard(),
     const ShopScreen(),
     Container(
       color: Colors.purple,
     ),
     Container(
       color: Colors.orange,
+    ),
+    Container(
+      color: Colors.green,
     ),
   ];
   @override
@@ -33,8 +36,8 @@ class _NavigationMenuState extends State<NavigationMenu> {
         data: NavigationBarThemeData(
           labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
             (Set<MaterialState> states) => states.contains(MaterialState.selected)
-                ? const TextStyle(color: TColors.primaryColor, fontWeight: FontWeight.w500)
-                : TextStyle(color: darkMode ? TColors.white : TColors.black, fontWeight: FontWeight.w400),
+                ? const TextStyle(color: TColors.primaryColor, fontWeight: FontWeight.w500, fontSize: 10)
+                : TextStyle(color: darkMode ? TColors.white : TColors.black, fontWeight: FontWeight.w400, fontSize: 10),
           ),
         ),
         child: Container(
@@ -53,34 +56,38 @@ class _NavigationMenuState extends State<NavigationMenu> {
               },
               backgroundColor: darkMode ? TColors.black : TColors.white,
               // indicatorColor: darkMode ? TColors.primaryColor.withOpacity(0.1) : TColors.primaryColor.withOpacity(0.1),
-              indicatorColor: darkMode ? TColors.primaryColor : TColors.primaryColor,
+              indicatorColor: darkMode ? Colors.transparent : Colors.transparent,
               // indicatorShape: StadiumBorder(),
-              destinations: const [
+              destinations: [
                 NavigationDestination(
                   icon: Icon(
                     Iconsax.home,
-                    // color: selectedIndex == 0 ? TColors.primaryColor : null,
+                    size: 20,
+                    color: selectedIndex == 0 ? TColors.primaryColor : null,
                   ),
                   label: 'Home',
                 ),
                 NavigationDestination(
                   icon: Icon(
-                    Iconsax.shop,
-                    // color: selectedIndex == 1 ? TColors.primaryColor : null,
-                  ),
-                  label: 'Shop',
-                ),
-                NavigationDestination(
-                  icon: Icon(
+                    size: 20,
                     Iconsax.shopping_cart,
-                    // color: selectedIndex == 2 ? TColors.primaryColor : null,
+                    color: selectedIndex == 1 ? TColors.primaryColor : null,
                   ),
                   label: 'Cart',
                 ),
                 NavigationDestination(
                   icon: Icon(
+                    size: 20,
+                    Iconsax.receipt,
+                    color: selectedIndex == 2 ? TColors.primaryColor : null,
+                  ),
+                  label: 'Orders',
+                ),
+                NavigationDestination(
+                  icon: Icon(
+                    size: 20,
                     Iconsax.user,
-                    // color: selectedIndex == 3 ? TColors.primaryColor : null,
+                    color: selectedIndex == 3 ? TColors.primaryColor : null,
                   ),
                   label: 'Profile',
                 ),
