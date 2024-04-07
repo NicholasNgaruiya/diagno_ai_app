@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
+import 'package:restaurant_frontend/features/shop/customer/screens/category_products_screen.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 // import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
@@ -48,12 +49,22 @@ class CategoriesGridView extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Image.network(
-                        category.image ?? 'https://via.placeholder.com/150',
+                      child: FadeInImage.assetNetwork(
+                        placeholder: 'assets/images/products_images/noImageBackground.png',
+                        image: category.image ?? 'https://via.placeholder.com/150',
                         fit: BoxFit.cover,
                         height: 100,
                         width: TDeviceUtils.getScreenWidth(context) * 0.45,
+                        placeholderErrorBuilder: (context, error, stackTrace) => Container(
+                          color: Colors.grey,
+                        ),
                       ),
+                      // child: Image.network(
+                      //   category.image ?? 'https://via.placeholder.com/150',
+                      // fit: BoxFit.cover,
+                      // height: 100,
+                      // width: TDeviceUtils.getScreenWidth(context) * 0.45,
+                      // ),
                     ),
 
                     // ),
@@ -83,10 +94,32 @@ class CategoriesGridView extends StatelessWidget {
             },
           );
         } else if (state is FetchProductsForCategorySuccess) {
-          return Text(
-            'Products for this category:${state.fetchedCategoryItem.products.length}',
-            style: const TextStyle(color: Colors.black),
-          );
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => CategoryProductsScreen(categoryImageUrl: state.fetchedCategoryItem.image),
+          //     ));
+          Future.delayed(Duration.zero, () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CategoryProductsScreen(
+                  categoryImageUrl: state.fetchedCategoryItem.image,
+                  categoryTitle: state.fetchedCategoryItem.name,
+                  categoryDescription: state.fetchedCategoryItem.description,
+                  products: state.fetchedCategoryItem.products,
+                ),
+              ),
+            );
+          });
+
+          return Container();
+          // return CategoryProductsScreen(
+          //   categoryImageUrl: state.fetchedCategoryItem.image,
+          // );
+          // return Text(
+          //   'Products for this category:${state.fetchedCategoryItem.products.length}',
+          //   style: const TextStyle(color: Colors.black),
+          // );
         } else if (state is FetchProductsForCategoryFailure) {
           return Center(
             child: Text('Error: ${state.error}'),

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
 class THttHelper {
-  static const String _baseUrl = 'https://smart-restaurant-api.onrender.com/api/v1';
+  static const String _baseUrl = 'https://smart-restaurant-api-79d9.onrender.com/api/v1';
 
   // Helper method to make a GET request
   static Future<Map<String, dynamic>> get(
@@ -62,6 +62,10 @@ class THttHelper {
       //Handle 401 Unauthorized Error
       // return json.decode(response.body);
       throw Exception('${response.statusCode} Unauthorized Error');
+    } else if (response.statusCode == 403) {
+      //Handle 403 Forbidden Error
+      // return json.decode(response.body);
+      throw Exception('${response.statusCode} Forbidden Error');
     } else if (response.statusCode == 404) {
       //Handle 404 Not found Error
       // return json.decode(response.body);

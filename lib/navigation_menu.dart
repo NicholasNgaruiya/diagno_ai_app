@@ -4,6 +4,7 @@ import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
 
 import 'features/shop/admin/screens/dashboard/dashboard.dart';
+import 'features/shop/customer/screens/profile_screen.dart';
 import 'features/shop/customer/screens/shop_screen.dart';
 
 class NavigationMenu extends StatefulWidget {
@@ -18,15 +19,11 @@ class _NavigationMenuState extends State<NavigationMenu> {
   final screens = [
     // const Dashboard(),
     const ShopScreen(),
-    Container(
-      color: Colors.purple,
-    ),
+    const Dashboard(),
     Container(
       color: Colors.orange,
     ),
-    Container(
-      color: Colors.green,
-    ),
+    const ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

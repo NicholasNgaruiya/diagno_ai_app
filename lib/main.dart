@@ -9,7 +9,7 @@ Future<void> main() async {
   //TODO: Init Local Storage
   initScreen = await TLocalStorage.getInt('initScreen') ?? 0;
   await TLocalStorage.saveInt('initScreen', 1);
-  print('initScreen ${initScreen}');
+  print('initScreen $initScreen');
   //TODO: Await Native Splash Screen
   //TODO: Initialize Firebase
   //TODO: Initiliaze Authentication

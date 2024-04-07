@@ -46,7 +46,9 @@ class _ShopScreenState extends State<ShopScreen> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/profileScreen');
+                },
                 icon: const Icon(
                   Iconsax.user,
                   color: TColors.white,

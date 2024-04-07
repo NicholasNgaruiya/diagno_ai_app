@@ -23,6 +23,8 @@ import 'features/authentication/screens/onboarding/onboarding.dart';
 import 'features/authentication/screens/otpscreen/otp_screen.dart';
 import 'features/authentication/screens/signup/signup.dart';
 import 'features/shop/admin/screens/categories/new_categories_screen.dart';
+import 'features/shop/customer/screens/category_products_screen.dart';
+import 'features/shop/customer/screens/profile_screen.dart';
 import 'features/shop/customer/screens/widgets/demmo_screen.dart';
 
 /// ---Class to setup themes,initial Bindings ,animations
@@ -66,6 +68,7 @@ class App extends StatelessWidget {
           '/categoriesScreen': (context) => const CategoriesScreen(),
           '/addCategoryScreen': (context) => const AddCategoryPage(),
           '/demmmoPage': (context) => const DemmoWidget(),
+          '/profileScreen': (context) => const ProfileScreen(),
 
           // '/dashboard': (context) => const Dashboard(),
         },
