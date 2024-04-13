@@ -29,23 +29,30 @@ class _GetUsernameWidgetState extends State<GetUsernameWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Hi,',
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-        const SizedBox(
-          width: 5,
-        ),
-        userName != null
-            ? Text(
-                '$userName',
-                style: Theme.of(context).textTheme.titleLarge,
-              )
-            : Container(),
-      ],
-    );
+    return userName != null
+        ? Text(
+            '$userName',
+            style: Theme.of(context).textTheme.titleLarge,
+          )
+        : Container();
+
+    // return Row(
+    //   crossAxisAlignment: CrossAxisAlignment.start,
+    //   children: [
+    //     Text(
+    //       'Hi,',
+    //       style: Theme.of(context).textTheme.bodyLarge,
+    //     ),
+    //     const SizedBox(
+    //       width: 5,
+    //     ),
+    //     userName != null
+    //         ? Text(
+    //             '$userName',
+    //             style: Theme.of(context).textTheme.titleLarge,
+    //           )
+    //         : Container(),
+    //   ],
+    // );
   }
 }

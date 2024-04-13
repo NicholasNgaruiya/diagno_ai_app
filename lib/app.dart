@@ -26,6 +26,8 @@ import 'features/shop/admin/screens/categories/new_categories_screen.dart';
 import 'features/shop/customer/screens/category_products_screen.dart';
 import 'features/shop/customer/screens/profile_screen.dart';
 import 'features/shop/customer/screens/widgets/demmo_screen.dart';
+import 'utils/constants/colors.dart';
+import 'utils/local_storage/storage_utility.dart';
 
 /// ---Class to setup themes,initial Bindings ,animations
 class App extends StatelessWidget {
@@ -45,34 +47,68 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => ProductBloc()),
         BlocProvider(create: (context) => CategoriesBloc()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.system,
-        theme: TAppTheme.lightTheme,
-        darkTheme: TAppTheme.darkTheme,
-        // home: Dashboard(),
-        // home: const OnBoardingScreen(),
-        initialRoute: initScreen == 0 || initScreen == null ? '/onboarding' : '/login',
-        routes: {
-          '/navigationBar': (context) => const NavigationMenu(),
-          '/onboarding': (context) => const OnBoardingScreen(),
-          '/signup': (context) => const SignupScreen(),
-          '/login': (context) => const LoginScreen(),
-          '/otp': (context) => const OtpScreen(),
-          '/home': (context) => const HomeScreen(),
-          '/forget_password': (context) => const ForgotPasswordScreen(),
-          '/viewOrders': (context) => const ViewOrdersPage(),
-          '/dashboard': (context) => const Dashboard(),
-          '/addProducts': (context) => const AddProductsPage(),
-          '/editProducts': (context) => const EditProductPage(),
-          '/categoriesScreen': (context) => const CategoriesScreen(),
-          '/addCategoryScreen': (context) => const AddCategoryPage(),
-          '/demmmoPage': (context) => const DemmoWidget(),
-          '/profileScreen': (context) => const ProfileScreen(),
+      // child: getInitialScreen(),
+      child: FutureBuilder<String>(
+        future: _getInitialRoute(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: TColors.primaryColor,
+              ),
+            );
+          }
+          final initialRoute = snapshot.data;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            themeMode: ThemeMode.system,
+            theme: TAppTheme.lightTheme,
+            darkTheme: TAppTheme.darkTheme,
+            // home: Dashboard(),
+            // home: const OnBoardingScreen(),
+            // initialRoute: initScreen == 0 || initScreen == null ? '/onboarding' : '/login',
+            initialRoute: initialRoute,
+            routes: {
+              '/navigationBar': (context) => const NavigationMenu(),
+              '/onboarding': (context) => const OnBoardingScreen(),
+              '/signup': (context) => const SignupScreen(),
+              '/login': (context) => const LoginScreen(),
+              '/otp': (context) => const OtpScreen(),
+              '/home': (context) => const HomeScreen(),
+              '/forget_password': (context) => const ForgotPasswordScreen(),
+              '/viewOrders': (context) => const ViewOrdersPage(),
+              '/dashboard': (context) => const Dashboard(),
+              '/addProducts': (context) => const AddProductsPage(),
+              '/editProducts': (context) => const EditProductPage(),
+              '/categoriesScreen': (context) => const CategoriesScreen(),
+              '/addCategoryScreen': (context) => const AddCategoryPage(),
+              '/demmmoPage': (context) => const DemmoWidget(),
+              '/profileScreen': (context) => const ProfileScreen(),
 
-          // '/dashboard': (context) => const Dashboard(),
+              // '/dashboard': (context) => const Dashboard(),
+            },
+          );
         },
       ),
     );
   }
+}
+
+Future<String> _getInitialRoute() async {
+  int? initScreen = await TLocalStorage.getInt('initScreen') ?? 0;
+  bool rememberMe = await _getRememberMeValue();
+  await TLocalStorage.saveInt('initScreen', 1);
+  print('initScreen $initScreen');
+  if (initScreen == 0) {
+    return '/onboarding';
+  } else if (rememberMe == true) {
+    return '/navigationBar';
+  } else {
+    return '/login';
+  }
+}
+
+Future<bool> _getRememberMeValue() async {
+  bool rememberMe = await TLocalStorage.getBool('rememberMe') ?? false;
+  return rememberMe;
 }

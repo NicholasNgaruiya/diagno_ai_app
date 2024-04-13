@@ -7,9 +7,10 @@ Future<void> main() async {
   //TODO: Add Widgets
   WidgetsFlutterBinding.ensureInitialized();
   //TODO: Init Local Storage
-  initScreen = await TLocalStorage.getInt('initScreen') ?? 0;
-  await TLocalStorage.saveInt('initScreen', 1);
-  print('initScreen $initScreen');
+  // initScreen = await TLocalStorage.getInt('initScreen') ?? 0;
+  // bool rememberMe = await TLocalStorage.getBool('rememberMe') ?? false;
+  // await TLocalStorage.saveInt('initScreen', 1);
+  // print('initScreen $initScreen');
   //TODO: Await Native Splash Screen
   //TODO: Initialize Firebase
   //TODO: Initiliaze Authentication
