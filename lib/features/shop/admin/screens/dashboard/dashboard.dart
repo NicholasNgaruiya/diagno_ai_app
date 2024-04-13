@@ -80,7 +80,12 @@ class _DashboardState extends State<Dashboard> {
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ),
-                      const GetUsernameWidget(),
+                      const Row(
+                        children: [
+                          Text('Hi'),
+                          GetUsernameWidget(),
+                        ],
+                      ),
                     ],
                   ),
                 ),

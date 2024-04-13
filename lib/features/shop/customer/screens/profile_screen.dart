@@ -4,12 +4,40 @@ import 'package:restaurant_frontend/features/authentication/screens/login/login.
 import 'package:restaurant_frontend/features/shop/customer/screens/widgets/get_username_widget.dart';
 import 'package:restaurant_frontend/utils/constants/sizes.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
+import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  bool rememberMe = false;
+
+  @override
+  void initState() {
+    _loadRememberMe();
+    super.initState();
+  }
+
+  Future<void> _loadRememberMe() async {
+    final rememberMeValue = await TLocalStorage.getBool('rememberMe') ?? false;
+    setState(() {
+      rememberMe = rememberMeValue;
+    });
+  }
+
+  Future<void> _toggleRememberMe(bool newValue) async {
+    setState(() {
+      rememberMe = newValue;
+    });
+    await TLocalStorage.saveBool('rememberMe', newValue);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +144,19 @@ class ProfileScreen extends StatelessWidget {
                   title: const Text('Settings'),
                   trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
                 ),
+                const SizedBox(
+                  height: TSizes.spaceBtwItems,
+                ),
+                ListTile(
+                  leading: const Icon(Iconsax.setting, size: 20, color: TColors.primaryColor),
+                  title: const Text('Remember Me'),
+                  trailing: Switch(
+                    value: rememberMe,
+                    onChanged: _toggleRememberMe,
+                    activeColor: TColors.primaryColor,
+                    // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
                 const Divider(),
                 ListTile(
                   leading: const Icon(Iconsax.logout, size: 20, color: TColors.error),
@@ -141,54 +182,5 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
     );
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     // toolbarHeight: TSizes.appBarHeight,
-    //     flexibleSpace: Container(
-    //       decoration: const BoxDecoration(
-    //         gradient: LinearGradient(
-    //           colors: [TColors.primaryColor, Colors.white],
-    //         ),
-    //       ),
-    //     ),
-    //     title: const Padding(
-    //       padding: EdgeInsets.only(left: 20.0),
-    //       child: Text('Profile'),
-    //     ),
-    //   ),
-    //   body: Center(
-    //     child: Container(
-    //       height: 150,
-    //       width: 150,
-    //       color: Colors.blue,
-    //       child: Stack(
-    //         children: [
-    //           Positioned(
-    //             left: 0,
-    //             child: Container(
-    //               width: 75,
-    //               height: 150,
-    //               color: Colors.white,
-    //             ),
-    //           ),
-    //           Positioned(
-    //             right: 0,
-    //             child: Container(
-    //               width: 75,
-    //               height: 150,
-    //               color: Colors.white,
-    //             ),
-    //           ),
-    //           const Center(
-    //             child: CircleAvatar(
-    //               radius: 50,
-    //               backgroundImage: AssetImage('assets/avatar.jpg'), // Replace 'assets/avatar.jpg' with your image path
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }
