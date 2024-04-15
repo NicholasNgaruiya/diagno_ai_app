@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
 
+import 'features/diagnosis/screens/symptoms_page.dart';
 import 'features/shop/admin/screens/dashboard/dashboard.dart';
 import 'features/shop/customer/screens/profile_screen.dart';
 import 'features/shop/customer/screens/shop_screen.dart';
@@ -18,8 +19,14 @@ class _NavigationMenuState extends State<NavigationMenu> {
   int selectedIndex = 0;
   final screens = [
     // const Dashboard(),
-    const ShopScreen(),
-    const Dashboard(),
+    // Container(
+    //   color: Colors.orange,
+    // ),
+    const SymptomsEntryPage(),
+
+    const SymptomsEntryPage(),
+    // const ShopScreen(),
+    // const Dashboard(),
     Container(
       color: Colors.orange,
     ),
@@ -67,18 +74,19 @@ class _NavigationMenuState extends State<NavigationMenu> {
                 NavigationDestination(
                   icon: Icon(
                     size: 20,
-                    Iconsax.shopping_cart,
+                    Iconsax.search_favorite,
                     color: selectedIndex == 1 ? TColors.primaryColor : null,
                   ),
-                  label: 'Cart',
+                  label: 'diagnose',
                 ),
                 NavigationDestination(
                   icon: Icon(
                     size: 20,
-                    Iconsax.receipt,
+                    // Iconsax.receipt,
+                    Iconsax.book,
                     color: selectedIndex == 2 ? TColors.primaryColor : null,
                   ),
-                  label: 'Orders',
+                  label: 'History',
                 ),
                 NavigationDestination(
                   icon: Icon(

@@ -46,7 +46,7 @@ dependencies:
   equatable: ^2.0.5
   image_picker: ^1.0.7
   shared_preferences: ^2.2.2
-  dropdown_search: ^2.0.0
+  dropdown_search: ^5.0.6
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +76,7 @@ flutter:
     - assets/images/on_boarding_images/
     - assets/images/dashboard_images/
     - assets/images/products_images/
+    - assets/json/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
