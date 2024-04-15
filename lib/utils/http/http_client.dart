@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
 class THttHelper {
-  static const String _baseUrl = 'https://smart-restaurant-api-79d9.onrender.com/api/v1';
+  static const String _baseUrl = 'https://smart-doctor.onrender.com/api/v1';
 
   // Helper method to make a GET request
   static Future<Map<String, dynamic>> get(

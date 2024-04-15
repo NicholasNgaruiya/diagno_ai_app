@@ -13,7 +13,7 @@ import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 import '../../../utils/device/device_utility.dart';
 
 class AdminShopService {
-  final String baseUrl = 'https://smart-restaurant-api-79d9.onrender.com/api/v1';
+  final String baseUrl = 'https://smart-doctor.onrender.com/api/v1';
 
   // AdminShopService(this.baseUrl);
 
