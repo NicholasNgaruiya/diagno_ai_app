@@ -2,7 +2,13 @@ import 'dart:convert';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:restaurant_frontend/features/diagnosis/screens/diagonis_results_page.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
+import 'package:restaurant_frontend/utils/device/device_utility.dart';
+import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
+
+import '../../../utils/constants/sizes.dart';
 
 class SymptomsEntryPage extends StatefulWidget {
   const SymptomsEntryPage({super.key});
@@ -165,22 +171,64 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
+      backgroundColor: dark ? TColors.dark : TColors.white,
       appBar: AppBar(
-        title: const Text('Symptoms'),
+        backgroundColor: dark ? TColors.black : TColors.white,
+        toolbarHeight: TDeviceUtils.getScreenHeight(context) * 0.25,
+        title: const Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'What are your',
+                style: TextStyle(
+                  color: TColors.black,
+                  fontSize: 40,
+                ),
+              ),
+              Text(
+                'Symptoms?',
+                style: TextStyle(
+                  color: TColors.black,
+                  fontSize: 40,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 16.0, right: 16),
         child: Column(
           children: <Widget>[
             DropdownSearch<String>(
               popupProps: PopupProps.menu(
+                scrollbarProps: ScrollbarProps(
+                  thickness: 10,
+                  // interactive: true,
+                  thumbColor: TColors.black.withOpacity(0.5),
+                  fadeDuration: const Duration(milliseconds: 500),
+                ),
                 isFilterOnline: true,
                 showSearchBox: true,
                 showSelectedItems: true,
-                searchFieldProps: const TextFieldProps(
+                searchFieldProps: TextFieldProps(
                   decoration: InputDecoration(
-                    hintText: 'Enter symptom',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    suffixIcon: const Icon(
+                      Icons.search,
+                      color: TColors.darkGrey,
+                      size: 30,
+                    ),
+                    hintText: 'Search for symptom',
+                    hintStyle: const TextStyle(
+                      color: TColors.darkGrey,
+                    ),
                   ),
                 ),
                 loadingBuilder: (context, searchEntry) {
@@ -191,6 +239,7 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                   );
                 },
               ),
+
               onChanged: (String? symptom) {
                 if (symptom != null && !selectedSymptoms.contains(symptom)) {
                   setState(() {
@@ -198,10 +247,19 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                   });
                 }
               },
-              dropdownDecoratorProps: const DropDownDecoratorProps(),
-
-              // mode: Mode.MENU,
-              // showSelectedItem: true,
+              dropdownDecoratorProps: const DropDownDecoratorProps(
+                dropdownSearchDecoration: InputDecoration(
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: TColors.black,
+                  ),
+                  // hintStyle: TextStyle(
+                  //   color: Colors.black,
+                  //   fontSize: 16,
+                  // ),
+                  // hintText: 'Search for symptoms',
+                ),
+              ),
 
               // asyncItems: (String text) async {
               //   await Future.delayed(const Duration(seconds: 2));
@@ -211,15 +269,19 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
               //   print(symptomsArray);
               //   return symptomsArray.map((symptom) => _formatSymptom(symptom)).toList();
               // },
-
+              ///
               dropdownBuilder: (context, selectedItem) {
                 return Text(
                   selectedItem ?? 'Search',
                   style: const TextStyle(
                     fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
                   ),
                 );
               },
+
+              ///
               // filterFn: (item, filterItems) {
               //   return true;
               //   // final String itemLowerCase = item.toString().toLowerCase();
@@ -229,24 +291,79 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
               items: symptomsArray.map((symptom) => _formatSymptom(symptom)).toList(),
             ),
             const SizedBox(
-              height: 10,
+              height: TSizes.spaceBtwSections,
             ),
-            Wrap(
-              spacing: 8.0,
-              runSpacing: 4.0,
-              children: selectedSymptoms.map((String symptom) {
-                return Chip(
-                  backgroundColor: TColors.grey,
-                  label: Text(symptom),
-                  onDeleted: () {
-                    setState(() {
-                      selectedSymptoms.remove(symptom);
-                    });
-                  },
-                );
-              }).toList(),
+            Column(
+              children: [
+                selectedSymptoms.isEmpty
+                    ? const Text(
+                        'No symptoms selected',
+                        style: TextStyle(
+                          color: TColors.darkGrey,
+                          fontSize: 16,
+                        ),
+                      )
+                    : const Text(
+                        'Selected Symptoms',
+                        style: TextStyle(
+                          color: TColors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                const SizedBox(
+                  height: TSizes.spaceBtwItems,
+                ),
+                Wrap(
+                  spacing: 8.0,
+                  runSpacing: 4.0,
+                  children: selectedSymptoms.map((String symptom) {
+                    return Chip(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      deleteIcon: const Icon(
+                        Icons.close,
+                        size: 20,
+                      ),
+                      deleteIconColor: Colors.grey[600],
+                      labelStyle: const TextStyle(
+                        color: TColors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      backgroundColor: TColors.grey,
+                      label: Text(symptom),
+                      onDeleted: () {
+                        setState(() {
+                          selectedSymptoms.remove(symptom);
+                        });
+                      },
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwSections,
             ),
             ElevatedButton(
+              // style: ElevatedButton.styleFrom(
+              //   // backgroundColor: TColors.success,
+              //   padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+              //   shape: RoundedRectangleBorder(
+              //     side: const BorderSide(color: TColors.success),
+              //     borderRadius: BorderRadius.circular(16),
+              //   ),
+              //   backgroundColor: TColors.success,
+              // ),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                backgroundColor: TColors.success,
+                side: const BorderSide(color: TColors.success),
+              ),
               onPressed: () {
                 //Formaet selected symptoms
                 List<String> formattedSymptoms = selectedSymptoms.map((symptom) => _unformatSymptom(symptom)).toList();
@@ -254,7 +371,7 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                 Map<String, String> symptomsMap = {
                   'symptoms': symptoms,
                 };
-                print(symptomsMap);
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DiagnosisResultsPage()));
                 // print(formattedSymptoms);
                 //Convert the list of symtoms to a map of String,
 
@@ -263,7 +380,12 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                 // };
                 // print(symptomsMap);
               },
-              child: const Text('Print Symptoms'),
+              child: const Text(
+                'Predict Disease',
+                style: TextStyle(
+                  color: TColors.white,
+                ),
+              ),
             ),
           ],
         ),

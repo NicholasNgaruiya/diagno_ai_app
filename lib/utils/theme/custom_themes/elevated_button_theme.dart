@@ -12,7 +12,7 @@ class TElevatedButtonTheme {
       backgroundColor: TColors.buttonPrimary,
       disabledForegroundColor: TColors.buttonDisabled,
       disabledBackgroundColor: TColors.buttonDisabled,
-      side: const BorderSide(color: TColors.primaryColor),
+      side: const BorderSide(color: TColors.success),
       padding: const EdgeInsets.symmetric(vertical: 18),
       textStyle: const TextStyle(fontSize: 16, color: TColors.textWhite, fontWeight: FontWeight.w600),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

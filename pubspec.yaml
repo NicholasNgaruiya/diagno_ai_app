@@ -76,6 +76,7 @@ flutter:
     - assets/images/on_boarding_images/
     - assets/images/dashboard_images/
     - assets/images/products_images/
+    - assets/images/diagnosis/
     - assets/json/
 
   # An image asset can refer to one or more resolution-specific "variants", see
