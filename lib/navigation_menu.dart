@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
 
+import 'features/diagnosis/screens/diagonis_results_page.dart';
 import 'features/diagnosis/screens/symptoms_page.dart';
 import 'features/shop/admin/screens/dashboard/dashboard.dart';
 import 'features/shop/customer/screens/profile_screen.dart';
@@ -22,7 +23,8 @@ class _NavigationMenuState extends State<NavigationMenu> {
     // Container(
     //   color: Colors.orange,
     // ),
-    const SymptomsEntryPage(),
+    // const SymptomsEntryPage(),
+    const DiagnosisResultsPage(),
 
     const SymptomsEntryPage(),
     // const ShopScreen(),

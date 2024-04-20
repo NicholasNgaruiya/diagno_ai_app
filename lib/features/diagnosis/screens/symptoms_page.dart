@@ -177,22 +177,22 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
       appBar: AppBar(
         backgroundColor: dark ? TColors.black : TColors.white,
         toolbarHeight: TDeviceUtils.getScreenHeight(context) * 0.25,
-        title: const Padding(
-          padding: EdgeInsets.all(10.0),
+        title: Padding(
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 'What are your',
                 style: TextStyle(
-                  color: TColors.black,
+                  color: dark ? TColors.white : TColors.black,
                   fontSize: 40,
                 ),
               ),
               Text(
                 'Symptoms?',
                 style: TextStyle(
-                  color: TColors.black,
+                  color: dark ? TColors.white : TColors.black,
                   fontSize: 40,
                 ),
               ),
