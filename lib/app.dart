@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/data/home/bloc/home_bloc.dart';
 import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
 import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.dart';
 import 'package:restaurant_frontend/features/authentication/screens/forgot_password/forgot_password.dart';
@@ -46,6 +47,9 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => ProductBloc()),
         BlocProvider(create: (context) => CategoriesBloc()),
+        BlocProvider(
+          create: (context) => HomeBloc()..add(FetchQuotesEvent()),
+        ),
       ],
       // child: getInitialScreen(),
       child: FutureBuilder<String>(

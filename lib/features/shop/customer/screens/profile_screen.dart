@@ -18,11 +18,19 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool rememberMe = false;
+  // bool _isLoading = true;
 
   @override
   void initState() {
-    _loadRememberMe();
     super.initState();
+
+    _loadRememberMe();
+
+    // Future.delayed(const Duration(seconds: 10), () {
+    //   setState(() {
+    //     _isLoading = false;
+    //   });
+    // });
   }
 
   Future<void> _loadRememberMe() async {
@@ -45,6 +53,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       backgroundColor: dark ? TColors.black : TColors.white,
+      // body: _isLoading
+      //     ? const Center(
+      //         child: CircularProgressIndicator(
+      //           color: TColors.primaryColor,
+      //         ),
+      //       )
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
