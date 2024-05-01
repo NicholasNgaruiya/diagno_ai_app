@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/data/home/bloc/home_bloc.dart';
+import 'package:restaurant_frontend/features/home/app_details.dart';
 import 'package:restaurant_frontend/features/home/quotes_widget.dart';
+import 'package:restaurant_frontend/utils/constants/sizes.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
 import '../../utils/constants/colors.dart';
+import '../profile/widgets/get_username_widget.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({super.key});
@@ -12,68 +15,42 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: TColors.white,
       appBar: AppBar(
-        title: const Text('HomePage'),
+        backgroundColor: TColors.white,
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Hello,',
+              style: TextStyle(
+                fontSize: 15,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w300,
+                // color: ,
+              ),
+            ),
+            Row(
+              children: [
+                GetUsernameWidget(),
+                SizedBox(
+                  width: 2,
+                ),
+                Text('!'),
+                // Icon(Icons.search),
+              ],
+            ),
+          ],
+        ),
       ),
-      body: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          if (state is LoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: TColors.primaryColor,
-              ),
-            );
-          } else if (state is QuotesLoadedState) {
-            return Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 3,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                width: TDeviceUtils.getScreenWidth(context),
-                // height: 100,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      '"${state.text}"',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        // fontStyle: FontStyle.italic,
-                        // fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Container(
-                      margin: const EdgeInsetsDirectional.only(end: 10),
-                      width: double.infinity,
-                      child: Text(
-                        '- ${state.author}',
-                        textAlign: TextAlign.end,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          } else {
-            return Container();
-          }
-        },
+      body: const Column(
+        children: [
+          QuotesWidget(),
+          SizedBox(
+            height: TSizes.spaceBtwSections,
+          ),
+          AppDetailsList(),
+        ],
       ),
     );
   }

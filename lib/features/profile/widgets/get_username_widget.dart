@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/local_storage/storage_utility.dart';
+import '../../../utils/local_storage/storage_utility.dart';
 
 class GetUsernameWidget extends StatefulWidget {
   const GetUsernameWidget({

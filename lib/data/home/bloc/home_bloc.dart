@@ -14,7 +14,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   late Timer _timer;
   HomeBloc() : super(HomeInitial()) {
     _timer = Timer.periodic(
-      const Duration(seconds: 5),
+      const Duration(minutes: 1),
       (timer) {
         add(FetchQuotesEvent());
       },

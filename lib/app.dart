@@ -12,7 +12,7 @@ import 'package:restaurant_frontend/features/shop/admin/screens/dashboard/dashbo
 import 'package:restaurant_frontend/features/shop/admin/screens/edit_product.dart';
 import 'package:restaurant_frontend/features/shop/admin/screens/view_orders.dart';
 import 'package:restaurant_frontend/main.dart';
-import 'package:restaurant_frontend/navigation_menu.dart';
+import 'package:restaurant_frontend/features/bottom_navigation/navigation_menu.dart';
 import 'package:restaurant_frontend/utils/theme/theme.dart';
 
 // import 'common/widgets/errors/flash_message_error.dart';
@@ -25,7 +25,7 @@ import 'features/authentication/screens/otpscreen/otp_screen.dart';
 import 'features/authentication/screens/signup/signup.dart';
 import 'features/shop/admin/screens/categories/new_categories_screen.dart';
 import 'features/shop/customer/screens/category_products_screen.dart';
-import 'features/shop/customer/screens/profile_screen.dart';
+import 'features/profile/profile_screen.dart';
 import 'features/shop/customer/screens/widgets/demmo_screen.dart';
 import 'utils/constants/colors.dart';
 import 'utils/local_storage/storage_utility.dart';

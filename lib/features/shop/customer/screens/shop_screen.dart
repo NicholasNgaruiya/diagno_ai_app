@@ -9,7 +9,7 @@ import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import 'widgets/categories_list.dart';
 import 'widgets/custom_searchbar.dart';
-import 'widgets/get_username_widget.dart';
+import '../../../profile/widgets/get_username_widget.dart';
 import 'widgets/section_heading.dart';
 
 class ShopScreen extends StatefulWidget {

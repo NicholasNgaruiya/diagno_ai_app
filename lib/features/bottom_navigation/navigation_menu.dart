@@ -3,12 +3,12 @@ import 'package:iconsax/iconsax.dart';
 import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
 
-import 'features/diagnosis/screens/diagonis_results_page.dart';
-import 'features/diagnosis/screens/symptoms_page.dart';
-import 'features/home/home_page.dart';
-import 'features/shop/admin/screens/dashboard/dashboard.dart';
-import 'features/shop/customer/screens/profile_screen.dart';
-import 'features/shop/customer/screens/shop_screen.dart';
+import '../diagnosis/screens/diagonis_results_page.dart';
+import '../diagnosis/screens/symptoms_page.dart';
+import '../home/home_page.dart';
+import '../shop/admin/screens/dashboard/dashboard.dart';
+import '../profile/profile_screen.dart';
+import '../shop/customer/screens/shop_screen.dart';
 
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});

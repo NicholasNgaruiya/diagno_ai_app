@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:restaurant_frontend/features/authentication/screens/login/login.dart';
-import 'package:restaurant_frontend/features/shop/customer/screens/widgets/get_username_widget.dart';
+import 'package:restaurant_frontend/features/profile/widgets/get_username_widget.dart';
 import 'package:restaurant_frontend/utils/constants/sizes.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
-import '../../../../utils/constants/colors.dart';
-import '../../../../utils/helpers/helper_functions.dart';
+import '../../utils/constants/colors.dart';
+import '../../utils/helpers/helper_functions.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

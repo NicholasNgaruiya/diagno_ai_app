@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Half In, Half Out Avatar'),
+          title: const Text('Half In, Half Out Avatar'),
         ),
         body: Center(
           child: Container(
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                Center(
+                const Center(
                   child: CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage('assets/avatar.jpg'), // Replace 'assets/avatar.jpg' with your image path
