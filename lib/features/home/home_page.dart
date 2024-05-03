@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/data/home/bloc/home_bloc.dart';
 import 'package:restaurant_frontend/features/home/app_details.dart';
+import 'package:restaurant_frontend/features/home/horizontal_list_view.dart';
 import 'package:restaurant_frontend/features/home/quotes_widget.dart';
 import 'package:restaurant_frontend/utils/constants/sizes.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
@@ -49,7 +50,9 @@ class HomePageScreen extends StatelessWidget {
           SizedBox(
             height: TSizes.spaceBtwSections,
           ),
-          AppDetailsList(),
+          // AppDetailsList(),
+          // const HorizontalListView(),
+          HorizontalScrollableList(),
         ],
       ),
     );
