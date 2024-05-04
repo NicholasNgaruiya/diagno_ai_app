@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:restaurant_frontend/data/home/bloc/home_bloc.dart';
 import 'package:restaurant_frontend/features/home/app_details.dart';
+import 'package:restaurant_frontend/features/home/health_tips_list.dart';
 import 'package:restaurant_frontend/features/home/horizontal_list_view.dart';
 import 'package:restaurant_frontend/features/home/quotes_widget.dart';
 import 'package:restaurant_frontend/utils/constants/sizes.dart';
@@ -57,8 +58,8 @@ class HomePageScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: const Column(
-        children: [
+      body: ListView(
+        children: const [
           QuotesWidget(),
           SizedBox(
             height: TSizes.spaceBtwSections,
@@ -66,6 +67,35 @@ class HomePageScreen extends StatelessWidget {
           // AppDetailsList(),
           // const HorizontalListView(),
           HorizontalScrollableList(),
+          SizedBox(height: 20),
+          // const Divider(
+          //   indent: 10,
+          //   endIndent: 10,
+          // ),
+
+          // Health Tips Section
+          Center(
+            child: Text(
+              'Health Tips',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          // Flexible(
+          //   child: ListView(
+          //     shrinkWrap: true,
+          //     children: const [
+          //       HealthTipsList(), // Display a list of health tips
+          //     ],
+          //   ),
+          // ),
+
+          HealthTipsList(), // Display a list of health tips
+
+          // const SizedBox(height: 20),
         ],
       ),
     );

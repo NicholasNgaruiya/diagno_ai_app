@@ -171,7 +171,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                 ),
-                const Divider(),
+                const Divider(
+                  indent: 15,
+                  endIndent: 15,
+                ),
                 ListTile(
                   leading: const Icon(Iconsax.logout, size: 20, color: TColors.error),
                   title: const Text(

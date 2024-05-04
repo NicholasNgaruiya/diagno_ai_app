@@ -38,16 +38,15 @@ class _HorizontalScrollableListState extends State<HorizontalScrollableList> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const Padding(
           padding: EdgeInsets.only(left: 14, bottom: 5),
           child: Text(
-            'About Us',
+            'What we do',
             style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
             maxLines: 4,
           ),

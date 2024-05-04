@@ -25,12 +25,8 @@ class _NavigationMenuState extends State<NavigationMenu> {
     //   color: Colors.orange,
     // ),
     const HomePageScreen(),
-    // const SymptomsEntryPage(),
-    // const DiagnosisResultsPage(),
 
     const SymptomsEntryPage(),
-    // const ShopScreen(),
-    // const Dashboard(),
     Container(
       color: Colors.orange,
     ),
@@ -49,7 +45,11 @@ class _NavigationMenuState extends State<NavigationMenu> {
           ),
         ),
         child: Container(
-          color: darkMode ? TColors.black : TColors.white,
+          decoration: BoxDecoration(
+            // color: darkMode ? TColors.black : Colors.grey[300],
+            color: darkMode ? TColors.black : TColors.white,
+            border: const Border(top: BorderSide(color: Colors.grey)),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: NavigationBar(
