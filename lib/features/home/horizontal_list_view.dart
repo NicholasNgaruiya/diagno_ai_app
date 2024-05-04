@@ -15,9 +15,24 @@ class _HorizontalScrollableListState extends State<HorizontalScrollableList> {
   int _currentPage = 0;
 
   final List<String> _bannerImages = [
-    'assets/images/banners/banner_image1.jpg',
-    'assets/images/banners/banner_image1.jpg',
-    'assets/images/banners/banner_image1.jpg',
+    'assets/images/banners/symptoms_image.png',
+    // 'assets/images/banners/diagnosis_image2.png',
+    // 'assets/images/banners/bot_ai.avif',
+    'assets/images/banners/robot_image.avif',
+
+    'assets/images/banners/diagnosis_image1.avif',
+    // 'assets/images/banners/ai_image.png',
+  ];
+  final List<String> _featureTitles = [
+    'Symptom Entry',
+    'Accurate Diagnosis',
+    'Personalized Treatment',
+  ];
+
+  final List<String> _featureDescriptions = [
+    'Easily enter symptoms and receive tailored recommendations quickly and efficiently using our intuitive interface.',
+    'Get accurate diagnosis by entering symptoms. Our AI-powered system ensures precise results.',
+    'Receive personalized treatment recommendations based on diagnosis, powered by advanced AI algorithms.',
   ];
 
   @override
@@ -42,8 +57,8 @@ class _HorizontalScrollableListState extends State<HorizontalScrollableList> {
           itemBuilder: (context, index, realIndex) {
             return TRoundedImage(
               imagePath: _bannerImages[index],
-              description: 'Get the most accurate medical information',
-              title: 'Levaraging AI',
+              description: _featureDescriptions[index],
+              title: _featureTitles[index],
             );
           },
           options: CarouselOptions(
@@ -85,7 +100,7 @@ class _HorizontalScrollableListState extends State<HorizontalScrollableList> {
         width: index == _currentPage ? 25 : 10,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: index == _currentPage ? TColors.primaryColor : Colors.grey,
+          color: index == _currentPage ? TColors.primaryColor.withOpacity(0.6) : Colors.grey,
         ),
       ),
     );
@@ -113,9 +128,12 @@ class TRoundedImage extends StatelessWidget {
       child: Stack(
         children: [
           Container(
+            width: TDeviceUtils.getScreenWidth(context) * 0.8,
+            height: 200,
             decoration: BoxDecoration(
               color: Colors.blue[200],
               borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.blue.withOpacity(0.1)),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
@@ -134,8 +152,8 @@ class TRoundedImage extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: Text(
                 title,
-                style: const TextStyle(
-                  color: Colors.black,
+                style: TextStyle(
+                  color: TColors.primaryColor.withOpacity(0.7),
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -147,14 +165,18 @@ class TRoundedImage extends StatelessWidget {
             top: 60,
             left: 10,
             child: Container(
-              // color: Colors.green,
+              decoration: BoxDecoration(
+                color: TColors.primaryColor.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(2),
+              ),
               width: TDeviceUtils.getScreenWidth(context) * 0.7,
+              margin: const EdgeInsets.only(top: 4),
               padding: const EdgeInsets.all(8),
               child: Text(
                 description,
                 style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
+                  color: Colors.white,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
                 maxLines: 4,

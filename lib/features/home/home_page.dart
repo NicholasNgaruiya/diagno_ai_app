@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:restaurant_frontend/data/home/bloc/home_bloc.dart';
 import 'package:restaurant_frontend/features/home/app_details.dart';
 import 'package:restaurant_frontend/features/home/horizontal_list_view.dart';
@@ -19,10 +20,10 @@ class HomePageScreen extends StatelessWidget {
       backgroundColor: TColors.white,
       appBar: AppBar(
         backgroundColor: TColors.white,
-        title: const Column(
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Hello,',
               style: TextStyle(
                 fontSize: 15,
@@ -32,13 +33,25 @@ class HomePageScreen extends StatelessWidget {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GetUsernameWidget(),
-                SizedBox(
-                  width: 2,
+                const Row(
+                  children: [
+                    GetUsernameWidget(),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Text('!'),
+                    // Icon(Icons.search),
+                  ],
                 ),
-                Text('!'),
-                // Icon(Icons.search),
+                Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  child: const Icon(
+                    Iconsax.user,
+                    color: TColors.primaryColor,
+                  ),
+                ),
               ],
             ),
           ],

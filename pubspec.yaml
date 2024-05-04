@@ -80,6 +80,7 @@ flutter:
     - assets/images/banners/
     - assets/images/dashboard_images/
     - assets/images/products_images/
+    - assets/images/profile/
     - assets/images/diagnosis/
     - assets/json/
 

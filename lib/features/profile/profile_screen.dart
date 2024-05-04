@@ -71,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       // color: Colors.blue, // Background color of the app bar
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/products_images/felipe-vieira-PI3Jbv1hBlA-unsplash.jpg'),
+                          image: AssetImage('assets/images/profile/sky_profile.avif'),
                           fit: BoxFit.cover,
                         ),
                         // gradient: LinearGradient(
