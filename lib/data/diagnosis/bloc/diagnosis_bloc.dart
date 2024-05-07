@@ -19,7 +19,7 @@ class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
       emit(GetDiagnosisSuccess(response));
     } catch (e) {
       print(e);
-      emit(GetDiagnosisFailure('Failed to get diagnosis: $e'));
+      emit(const GetDiagnosisFailure('Failed to get diagnosis. Please try again.'));
     }
   }
 }

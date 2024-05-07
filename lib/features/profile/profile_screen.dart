@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:restaurant_frontend/features/authentication/screens/login/login.dart';
@@ -67,19 +68,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
               background: Stack(
                 children: [
                   Positioned.fill(
-                    child: Container(
-                      // color: Colors.blue, // Background color of the app bar
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/profile/sky_profile.avif'),
-                          fit: BoxFit.cover,
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          'https://images.unsplash.com/photo-1488866022504-f2584929ca5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fHNreXxlbnwwfHwwfHx8MA%3D%3D',
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(
+                          color: TColors.primaryColor,
                         ),
-                        // gradient: LinearGradient(
-                        //   colors: [TColors.primaryColor, Colors.white],
-                        // ),
                       ),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
                     ),
                   ),
+                  // Positioned.fill(
+                  //   child: Container(
+                  //     // color: Colors.blue, // Background color of the app bar
+                  //     decoration: const BoxDecoration(
+                  //       image: DecorationImage(
+                  //         image: AssetImage('assets/images/profile/sky_profile.avif'),
+                  //         fit: BoxFit.cover,
+                  //       ),
+                  //       // gradient: LinearGradient(
+                  //       //   colors: [TColors.primaryColor, Colors.white],
+                  //       // ),
+                  //     ),
+                  //   ),
+                  // ),
                   Positioned(
                     bottom: 0,
                     left: 0,

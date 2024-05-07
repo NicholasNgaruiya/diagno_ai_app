@@ -1,6 +1,10 @@
+import 'dart:math';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_frontend/common/widgets/errors/custom_snackbar_content.dart';
+import 'package:restaurant_frontend/features/diagnosis/screens/symptoms_page.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
 import '../../../data/diagnosis/bloc/diagnosis_bloc.dart';
@@ -23,13 +27,6 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-
-    //Simulate loading
-    // Future.delayed(const Duration(seconds: 2), () {
-    //   setState(() {
-    //     _isLoading = false;
-    //   });
-    // });
   }
 
   @override
@@ -65,19 +62,22 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                 ),
                 behavior: SnackBarBehavior.floating,
                 elevation: 0,
+                backgroundColor: Colors.transparent,
               ),
             );
+
+            Navigator.of(context).pop();
           } else if (state is GetDiagnosisSuccess) {
-            //create a CustomSnackBarContent to display the diagnosis
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
+              const SnackBar(
                 content: CustomSnackBarContent(
-                  snackBarTitle: 'Diagnosis',
-                  snackBarSubtitle: state.diagnosis['predicted_disease'],
+                  snackBarTitle: 'Oops!',
+                  snackBarSubtitle: 'Predicted Successfully.',
                   backgroundColor: TColors.success,
                 ),
                 behavior: SnackBarBehavior.floating,
                 elevation: 0,
+                backgroundColor: Colors.transparent,
               ),
             );
           }
@@ -98,31 +98,46 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                     iconTheme: const IconThemeData(color: Colors.white),
                     expandedHeight: 150.0,
                     flexibleSpace: FlexibleSpaceBar(
-                      background: Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.red,
-                          image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/diagnosis/pexels-cottonbro-studio-6203473(1).jpg',
-                            ),
+                      background: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          CachedNetworkImage(
+                            imageUrl:
+                                'https://images.pexels.com/photos/6203473/pexels-photo-6203473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
                             fit: BoxFit.cover,
+                            placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator(
+                                color: TColors.primaryColor,
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => const Icon(Icons.error),
                           ),
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
+                          Positioned(
+                            top: 50,
+                            left: 50,
+                            // right: 50,
+                            child: Column(
+                              children: [
+                                const Text(
+                                  'Disease:',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  state.diagnosis['predicted_disease'],
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          state.diagnosis['predicted_disease'],
-
-                          // 'Common cold',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        ],
                       ),
                     ),
                   ),
@@ -149,7 +164,7 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                                   ),
                                   child: Tab(
                                     child: Text(
-                                      'Diagnosis',
+                                      'Information',
                                       style: TextStyle(
                                         color: _selectedIndex == 0 ? Colors.white : Colors.black,
                                         fontWeight: FontWeight.w500,
@@ -169,7 +184,7 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                                   ),
                                   child: Tab(
                                     child: Text(
-                                      'Treatment',
+                                      'Lifestyle',
                                       style: TextStyle(
                                         color: _selectedIndex == 1 ? Colors.white : Colors.black,
                                         fontWeight: FontWeight.w500,
@@ -185,12 +200,21 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                     ),
                   ),
                   SliverFillRemaining(
-                    child: _selectedIndex == 0 ? const DetailsTab() : const TreatmentTab(),
+                    child: _selectedIndex == 0
+                        ? InformationTab(
+                            description: state.diagnosis['description'],
+                            precautions: [state.diagnosis['precautions']],
+                            medications: [state.diagnosis['medications']],
+                          )
+                        : LifestyleTab(
+                            diets: [state.diagnosis['workout']],
+                            workouts: [state.diagnosis['diets']],
+                          ),
                   ),
                 ],
               );
             } else {
-              return Container();
+              return const SizedBox();
             }
           },
         ),
@@ -200,8 +224,17 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
   }
 }
 
-class DetailsTab extends StatelessWidget {
-  const DetailsTab({super.key});
+class InformationTab extends StatelessWidget {
+  final String description;
+  final List<dynamic> precautions;
+  final List<dynamic> medications;
+
+  const InformationTab({
+    super.key,
+    required this.description,
+    required this.precautions,
+    required this.medications,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +257,7 @@ class DetailsTab extends StatelessWidget {
             height: 10,
           ),
           Text(
-            'The common cold is a viral infection primarily affecting the upper respiratory tract, caused by various strains of viruses, most commonly rhinoviruses.',
+            description,
             style: TextStyle(
               fontWeight: FontWeight.w400,
               color: Colors.grey[700],
@@ -242,29 +275,34 @@ class DetailsTab extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Text(
-            'The common cold is a viral infection primarily affecting the upper respiratory tract, caused by various strains of viruses, most commonly rhinoviruses.',
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              color: Colors.grey[700],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: precautions.map((precaution) {
+              final List<String> precautionList = precaution
+                  .toString()
+                  .replaceAll('[', '') // Remove leading [
+                  .replaceAll(']', '') // Remove trailing ]
+                  .split(',') // Split by comma
+                  .map((e) => e.trim()) // Trim any extra spaces
+                  .toList(); // Convert back to list
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: precautionList.map((precautionItem) {
+                  return Text(
+                    '• ${precautionItem[0].toUpperCase()}${precautionItem.substring(1)}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey[700],
+                    ),
+                  );
+                }).toList(),
+              );
+            }).toList(),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class TreatmentTab extends StatelessWidget {
-  const TreatmentTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+          const SizedBox(
+            height: 20,
+          ),
           const Text(
             'Medications',
             style: TextStyle(
@@ -274,18 +312,51 @@ class TreatmentTab extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Text(
-            'The common cold is a viral infection primarily affecting the upper respiratory tract, caused by various strains of viruses, most commonly rhinoviruses.',
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              color: Colors.grey[700],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: medications[0].map<Widget>((medication) {
+              final List<String> medicationList = medication
+                  .toString()
+                  .replaceAll('[', '') // Remove leading [
+                  .replaceAll(']', '') // Remove trailing ]
+                  .replaceAll("'", ' ')
+                  .split(','); // Split by comma
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: medicationList.map((medicationItem) {
+                  return Text(
+                    '• $medicationItem',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey[700],
+                    ),
+                  );
+                }).toList(),
+              );
+            }).toList(),
           ),
-          const SizedBox(
-            height: TSizes.spaceBtwSections,
-          ),
+        ],
+      ),
+    );
+  }
+}
+
+class LifestyleTab extends StatelessWidget {
+  final List<dynamic> workouts;
+  final List<dynamic> diets;
+
+  const LifestyleTab({Key? key, required this.workouts, required this.diets}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           const Text(
-            'Precautions',
+            'Workouts',
             style: TextStyle(
               fontWeight: FontWeight.w700,
             ),
@@ -293,12 +364,59 @@ class TreatmentTab extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Text(
-            'The common cold is a viral infection primarily affecting the upper respiratory tract, caused by various strains of viruses, most commonly rhinoviruses.',
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: workouts[0].map<Widget>((workout) {
+              final String workoutItem = workout
+                  .toString()
+                  .replaceAll('[', '') // Remove leading [
+                  .replaceAll(']', '') // Remove trailing ]
+                  .replaceAll("'", ''); // Remove single quotes
+
+              return Text(
+                '• $workoutItem',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey[700],
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Text(
+            'Diets',
             style: TextStyle(
-              fontWeight: FontWeight.w400,
-              color: Colors.grey[700],
+              fontWeight: FontWeight.w700,
             ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: diets[0].map<Widget>((diet) {
+              final List<String> dietList = diet
+                  .toString()
+                  .replaceAll('[', '') // Remove leading [
+                  .replaceAll(']', '') // Remove trailing ]
+                  .replaceAll("'", '') // Remove single quotes
+                  .split(','); // Split by comma
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: dietList.map((dietItem) {
+                  return Text(
+                    '• $dietItem',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey[700],
+                    ),
+                  );
+                }).toList(),
+              );
+            }).toList(),
           ),
         ],
       ),

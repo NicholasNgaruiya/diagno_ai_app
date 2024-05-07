@@ -10,6 +10,7 @@ import 'package:restaurant_frontend/utils/constants/colors.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
 
+import '../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../utils/constants/sizes.dart';
 
 class SymptomsEntryPage extends StatefulWidget {
@@ -236,15 +237,21 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                   BlocProvider.of<DiagnosisBloc>(context).add(PredictButtonClickedEvent(symptoms: symptoms));
                 } catch (e) {
                   print(e);
+                  // Show snackbar in case of error
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: CustomSnackBarContent(
+                        snackBarTitle: 'Oops!',
+                        snackBarSubtitle: e.toString(),
+                        backgroundColor: TColors.error,
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                      elevation: 0,
+                      backgroundColor: Colors.transparent,
+                    ),
+                  );
                 }
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DiagnosisResultsPage()));
-                // print(formattedSymptoms);
-                //Convert the list of symtoms to a map of String,
-
-                // Map<String, dynamic> symptomsMap = {
-                //   "symptoms": selectedSymptoms.map((symptom) => _unformatSymptom(symptom)).toList(),
-                // };
-                // print(symptomsMap);
               },
               child: const Text(
                 'Predict Disease',
