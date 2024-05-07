@@ -80,20 +80,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       errorWidget: (context, url, error) => const Icon(Icons.error),
                     ),
                   ),
-                  // Positioned.fill(
-                  //   child: Container(
-                  //     // color: Colors.blue, // Background color of the app bar
-                  //     decoration: const BoxDecoration(
-                  //       image: DecorationImage(
-                  //         image: AssetImage('assets/images/profile/sky_profile.avif'),
-                  //         fit: BoxFit.cover,
-                  //       ),
-                  //       // gradient: LinearGradient(
-                  //       //   colors: [TColors.primaryColor, Colors.white],
-                  //       // ),
-                  //     ),
-                  //   ),
-                  // ),
                   Positioned(
                     bottom: 0,
                     left: 0,
@@ -135,10 +121,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: TSizes.spaceBtwSections,
                 ),
 
-                ListTile(
-                  leading: const Icon(Iconsax.user, size: 20, color: TColors.primaryColor),
-                  title: const Text('My Profile'),
-                  trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
+                GestureDetector(
+                  onTap: () {
+                    //Navigate to user details screen
+                    Navigator.of(context).pushNamed('/profileDetailsScreen');
+                  },
+                  child: ListTile(
+                    leading: const Icon(Iconsax.user, size: 20, color: TColors.primaryColor),
+                    title: const Text('My Profile'),
+                    trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
+                  ),
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtwItems,

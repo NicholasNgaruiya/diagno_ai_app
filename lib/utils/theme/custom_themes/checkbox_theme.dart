@@ -23,7 +23,7 @@ class TCheckboxTheme {
     }),
   );
 
-  ///Customizable Dark Checkbox theme
+  ///Customizable Light Checkbox theme
   static CheckboxThemeData darkCheckboxTheme = CheckboxThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     checkColor: MaterialStateProperty.resolveWith((states) {
@@ -41,4 +41,23 @@ class TCheckboxTheme {
       }
     }),
   );
+
+  // ///Customizable Dark Checkbox theme
+  // static CheckboxThemeData darkCheckboxTheme = CheckboxThemeData(
+  //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+  //   checkColor: MaterialStateProperty.resolveWith((states) {
+  //     if (states.contains(MaterialState.selected)) {
+  //       return Colors.white;
+  //     } else {
+  //       return Colors.black;
+  //     }
+  //   }),
+  //   fillColor: MaterialStateProperty.resolveWith((states) {
+  //     if (states.contains(MaterialState.selected)) {
+  //       return TColors.primaryColor;
+  //     } else {
+  //       return Colors.transparent;
+  //     }
+  //   }),
+  // );
 }

@@ -10,10 +10,15 @@ class TTextSelectionTheme {
     selectionColor: TColors.primaryColor.withOpacity(0.3),
     selectionHandleColor: TColors.primaryColor,
   );
-
   static TextSelectionThemeData darkTextSelectionTheme = TextSelectionThemeData(
     cursorColor: TColors.primaryColor, // Set cursor color for light mode
     selectionColor: TColors.primaryColor.withOpacity(0.3),
     selectionHandleColor: TColors.primaryColor,
   );
+
+  // static TextSelectionThemeData darkTextSelectionTheme = TextSelectionThemeData(
+  //   cursorColor: TColors.primaryColor, // Set cursor color for light mode
+  //   selectionColor: TColors.primaryColor.withOpacity(0.3),
+  //   selectionHandleColor: TColors.primaryColor,
+  // );
 }
