@@ -71,7 +71,7 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: CustomSnackBarContent(
-                  snackBarTitle: 'Oops!',
+                  snackBarTitle: 'Wohoo!',
                   snackBarSubtitle: 'Predicted Successfully.',
                   backgroundColor: TColors.success,
                 ),
@@ -92,6 +92,7 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
               );
             } else if (state is GetDiagnosisSuccess) {
               return CustomScrollView(
+                physics: const BouncingScrollPhysics(),
                 slivers: <Widget>[
                   SliverAppBar(
                     pinned: true,
@@ -115,7 +116,7 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                           Positioned(
                             top: 50,
                             left: 50,
-                            // right: 50,
+                            right: 40,
                             child: Column(
                               children: [
                                 const Text(
@@ -130,9 +131,10 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                                   state.diagnosis['predicted_disease'],
                                   style: const TextStyle(
                                     color: Colors.white,
-                                    fontSize: 24,
+                                    fontSize: 25,
                                     fontWeight: FontWeight.bold,
                                   ),
+                                  maxLines: 3,
                                 ),
                               ],
                             ),
@@ -207,8 +209,8 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                             medications: [state.diagnosis['medications']],
                           )
                         : LifestyleTab(
-                            diets: [state.diagnosis['workout']],
-                            workouts: [state.diagnosis['diets']],
+                            diets: [state.diagnosis['diets']],
+                            workouts: [state.diagnosis['workout']],
                           ),
                   ),
                 ],
@@ -343,8 +345,9 @@ class InformationTab extends StatelessWidget {
 }
 
 class LifestyleTab extends StatelessWidget {
-  final List<dynamic> workouts;
   final List<dynamic> diets;
+
+  final List<dynamic> workouts;
 
   const LifestyleTab({Key? key, required this.workouts, required this.diets}) : super(key: key);
 
