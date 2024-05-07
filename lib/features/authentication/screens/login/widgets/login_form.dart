@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 import '../../../../../utils/validators/validation.dart';
@@ -122,7 +123,10 @@ class _TLoginFormState extends State<TLoginForm> {
                     print(widget.passwordController.text);
                   }
                 },
-                child: const Text(TTexts.signIn),
+                child: const Text(
+                  TTexts.signIn,
+                  style: TextStyle(color: TColors.white),
+                ),
               ),
             ),
             const SizedBox(

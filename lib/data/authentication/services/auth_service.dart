@@ -8,6 +8,7 @@ class AuthService {
   //Method to signup
   static Future<Map<String, dynamic>> signUp(UserModel user) async {
     final data = user.toJson();
+
     return await THttHelper.post('$_baseUrl/register/', data);
   }
 

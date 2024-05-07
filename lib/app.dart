@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_frontend/data/diagnosis/bloc/diagnosis_bloc.dart';
 import 'package:restaurant_frontend/data/home/bloc/home_bloc.dart';
 import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
 import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.dart';
@@ -49,6 +50,9 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => CategoriesBloc()),
         BlocProvider(
           create: (context) => HomeBloc()..add(FetchQuotesEvent()),
+        ),
+        BlocProvider(
+          create: (context) => DiagnosisBloc(),
         ),
       ],
       // child: getInitialScreen(),
