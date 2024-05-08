@@ -1,7 +1,9 @@
 import 'package:restaurant_frontend/data/authentication/services/auth_service.dart';
+import 'package:restaurant_frontend/features/profile/models/update_profile_model.dart';
 import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../features/authentication/models/user_model.dart';
+import '../../../features/profile/models/user_profile_model.dart';
 
 class AuthRepository {
   //Method to sign up a user
@@ -51,6 +53,30 @@ class AuthRepository {
       return response;
     } catch (error) {
       print('Error logging in: $error');
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> getUserProfile() async {
+    try {
+      final response = await AuthService().getUserProfile();
+      //Handle the response here if necessary
+      return response;
+    } catch (error) {
+      //Handle errors if any
+      print('Error getting user profile: $error');
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> updateUserProfile(UpdateProfileModel updateProfileModel) async {
+    try {
+      final response = await AuthService().updateUserProfile(updateProfileModel);
+      //Handle the response here if necessary
+      return response;
+    } catch (error) {
+      //Handle errors if any
+      print('Error updating user profile: $error');
       rethrow;
     }
   }
