@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:restaurant_frontend/data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
 import 'package:restaurant_frontend/features/authentication/screens/login/login.dart';
 import 'package:restaurant_frontend/features/profile/widgets/get_username_widget.dart';
 import 'package:restaurant_frontend/utils/constants/sizes.dart';
@@ -9,6 +11,7 @@ import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../utils/constants/colors.dart';
 import '../../utils/helpers/helper_functions.dart';
+import 'update_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -121,16 +124,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: TSizes.spaceBtwSections,
                 ),
 
-                GestureDetector(
+                ListTile(
+                  leading: const Icon(Iconsax.user, size: 20, color: TColors.primaryColor),
+                  title: const Text('My Profile'),
+                  trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
                   onTap: () {
-                    //Navigate to user details screen
-                    Navigator.of(context).pushNamed('/profileDetailsScreen');
+                    //Navigate to update profile screen
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const UpdateProfileScreen(),
+                      ),
+                    );
+                    //Add fetch user profile event
+                    BlocProvider.of<UserProfileBloc>(context).add(FetchUserProfile());
                   },
-                  child: ListTile(
-                    leading: const Icon(Iconsax.user, size: 20, color: TColors.primaryColor),
-                    title: const Text('My Profile'),
-                    trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
-                  ),
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtwItems,

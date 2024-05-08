@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import 'package:restaurant_frontend/features/profile/models/fetch_profile_model.dart';
 import 'package:restaurant_frontend/features/profile/models/update_profile_model.dart';
 
-import '../../../../../features/profile/models/user_profile_model.dart';
 import '../../../repositories/auth_repository.dart';
 
 part 'user_profile_event.dart';
@@ -37,7 +36,8 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
       emit(UserProfileUpdated(updateProfileModel: updateProfile));
     } catch (e) {
       print(e);
-      emit(UserProfileError('Failed to update user profile: $e'));
+      emit(UserProfileError('Failed to update user profile'));
+      // emit(UserProfileError('$e')); //? use this to see the error message
     }
   }
 }

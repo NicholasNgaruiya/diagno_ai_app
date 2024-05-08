@@ -3,7 +3,6 @@ import 'package:restaurant_frontend/features/profile/models/update_profile_model
 import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
 import '../../../features/authentication/models/user_model.dart';
-import '../../../features/profile/models/user_profile_model.dart';
 
 class AuthRepository {
   //Method to sign up a user

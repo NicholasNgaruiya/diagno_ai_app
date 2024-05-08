@@ -18,13 +18,14 @@ import 'package:restaurant_frontend/utils/theme/theme.dart';
 
 // import 'common/widgets/errors/flash_message_error.dart';
 import 'data/authentication/blocs/login/bloc/login_bloc.dart';
+import 'data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
 import 'data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import 'data/authentication/blocs/verify_email/bloc/verify_email_bloc.dart';
 import 'features/authentication/screens/login/login.dart';
 import 'features/authentication/screens/onboarding/onboarding.dart';
 import 'features/authentication/screens/otpscreen/otp_screen.dart';
 import 'features/authentication/screens/signup/signup.dart';
-import 'features/profile/profile_details_screen.dart';
+import 'features/profile/update_profile_screen.dart';
 import 'features/shop/admin/screens/categories/new_categories_screen.dart';
 import 'features/shop/customer/screens/category_products_screen.dart';
 import 'features/profile/profile_screen.dart';
@@ -40,21 +41,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => SignUpBloc(),
-        ),
-        BlocProvider(
-          create: (context) => VerifyEmailBloc(),
-        ),
+        BlocProvider(create: (context) => SignUpBloc()),
+        BlocProvider(create: (context) => VerifyEmailBloc()),
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => ProductBloc()),
         BlocProvider(create: (context) => CategoriesBloc()),
-        BlocProvider(
-          create: (context) => HomeBloc()..add(FetchQuotesEvent()),
-        ),
-        BlocProvider(
-          create: (context) => DiagnosisBloc(),
-        ),
+        BlocProvider(create: (context) => HomeBloc()..add(FetchQuotesEvent())),
+        BlocProvider(create: (context) => DiagnosisBloc()),
+        BlocProvider(create: (context) => UserProfileBloc()),
       ],
       // child: getInitialScreen(),
       child: FutureBuilder<String>(

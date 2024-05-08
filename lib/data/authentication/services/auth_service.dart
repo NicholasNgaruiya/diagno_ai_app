@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:restaurant_frontend/features/authentication/models/user_model.dart';
 import 'package:restaurant_frontend/features/profile/models/update_profile_model.dart';
-import 'package:restaurant_frontend/features/profile/models/user_profile_model.dart';
 import 'package:restaurant_frontend/utils/device/device_utility.dart';
 import 'package:restaurant_frontend/utils/http/http_client.dart';
 import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
@@ -49,7 +48,7 @@ class AuthService {
         throw Exception('No internet connection');
       }
       final response = await http.get(
-        Uri.parse('_profileUrl/$userId'),
+        Uri.parse('$_profileUrl/$userId'),
         headers: {
           'Authorization': 'Bearer $accessToken',
         },
@@ -80,19 +79,23 @@ class AuthService {
         throw Exception('Access token not found');
       }
       if (userId == null) {
-        throw Exception('Category ID not found');
+        throw Exception('User ID not found');
       }
       // Check for internet connection
       if (!hasInternet) {
         throw Exception('No Internet Connection');
       }
-      var request = http.MultipartRequest('PUT', Uri.parse('$_profileUrl/$userId'));
+      var request = http.MultipartRequest('PUT', Uri.parse('$_profileUrl/$userId/update/'));
       request.headers['Authorization'] = 'Bearer $accessToken';
       request.fields['first_name'] = updateProfileModel.firstName;
       request.fields['last_name'] = updateProfileModel.lastName;
+      print('sent firstname: ${updateProfileModel.firstName}');
+      print('sent lastname: ${updateProfileModel.lastName}');
       //add image if available
       if (updateProfileModel.image != null) {
         request.files.add(await http.MultipartFile.fromPath('image', updateProfileModel.image!.path));
+      } else {
+        throw Exception('Image not found');
       }
       var response = await request.send();
       if (response.statusCode == 200) {
