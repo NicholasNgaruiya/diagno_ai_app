@@ -13,7 +13,7 @@ class UpdateProfileModel {
     return UpdateProfileModel(
       id: json['id'],
       email: json['email'],
-      image: json['image'],
+      image: json['image'] != null ? File(json['image']) : null,
       firstName: json['first_name'],
       lastName: json['last_name'],
     );

@@ -141,9 +141,11 @@ class _OtpScreenState extends State<OtpScreen> {
                               String otp = getOtp();
                               BlocProvider.of<VerifyEmailBloc>(context).add(VerifyEmailButtonClickedEvent(otp));
                               // Now you can use the otp
-                              print('OTP Entered: $otp');
                             },
-                            child: const Text('Verify'),
+                            child: const Text(
+                              'Verify',
+                              style: TextStyle(color: TColors.white),
+                            ),
                           ),
                         ),
                       ],

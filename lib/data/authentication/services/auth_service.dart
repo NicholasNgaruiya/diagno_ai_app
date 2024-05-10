@@ -53,6 +53,9 @@ class AuthService {
           'Authorization': 'Bearer $accessToken',
         },
       );
+      //print url sent and the url
+      print('url sent: ${'$_profileUrl/$userId'}');
+
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         return data;
@@ -94,13 +97,16 @@ class AuthService {
       //add image if available
       if (updateProfileModel.image != null) {
         request.files.add(await http.MultipartFile.fromPath('image', updateProfileModel.image!.path));
-      } else {
-        throw Exception('Image not found');
       }
       var response = await request.send();
       if (response.statusCode == 200) {
         final responseData = await response.stream.bytesToString();
-        return json.decode(responseData);
+        final updatedProfileData = json.decode(responseData);
+        await TLocalStorage.saveString('first_name', updatedProfileData['first_name']);
+        await TLocalStorage.saveString('last_name', updatedProfileData['last_name']);
+        await TLocalStorage.saveString('image_path', updatedProfileData['image']);
+        return updatedProfileData;
+        // return json.decode(responseData);
       } else if (response.statusCode == 400) {
         throw Exception('Bad Request Error');
       } else if (response.statusCode == 401) {

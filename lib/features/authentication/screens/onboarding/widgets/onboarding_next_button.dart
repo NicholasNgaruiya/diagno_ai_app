@@ -44,7 +44,7 @@ class OnBoardingNextButton extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
-                foregroundColor: dark ? Colors.white : Colors.black,
+                foregroundColor: dark ? Colors.white : Colors.white,
               ),
               child: const Icon(Icons.arrow_forward_ios),
             ),

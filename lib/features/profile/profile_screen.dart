@@ -22,6 +22,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool rememberMe = false;
+  String? _avatarImagePath; // Added variable to hold the image path
   // bool _isLoading = true;
 
   @override
@@ -29,6 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
 
     _loadRememberMe();
+    _loadAvatarImage();
 
     // Future.delayed(const Duration(seconds: 10), () {
     //   setState(() {
@@ -49,6 +51,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
       rememberMe = newValue;
     });
     await TLocalStorage.saveBool('rememberMe', newValue);
+  }
+
+  Future<void> _loadAvatarImage() async {
+    final avatarImagePath = await TLocalStorage.getString('image_path');
+    setState(() {
+      _avatarImagePath = avatarImagePath;
+    });
+  }
+
+  // Function to get the image widget, with a default image if _avatarImagePath is null
+  Widget _getAvatarImageWidget() {
+    if (_avatarImagePath != null) {
+      return CircleAvatar(
+        radius: 50,
+        backgroundImage: CachedNetworkImageProvider(_avatarImagePath!),
+      );
+    } else {
+      return const CircleAvatar(
+        radius: 50,
+        backgroundImage: AssetImage(
+          'assets/images/products_images/christopher-campbell-rDEOVtE7vOs-unsplash.jpg',
+        ),
+      );
+    }
   }
 
   @override
@@ -96,20 +122,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     top: 60, // Half the height of the app bar
                     left: MediaQuery.of(context).size.width / 2 - 80,
                     // right: MediaQuery.of(context).size.width / 2,
-                    child: const Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CircleAvatar(
-                          radius: 50,
-                          // backgroundImage: AssetImage('assets/avatar.jpg'), // Replace 'assets/avatar.jpg' with your image path
-                          backgroundImage: AssetImage(
-                            'assets/images/products_images/christopher-campbell-rDEOVtE7vOs-unsplash.jpg',
-                          ), // Replace 'assets/avatar.jpg' with your image path
-                        ),
-                        SizedBox(
+                        // CircleAvatar(
+                        //   radius: 50,
+                        //   // backgroundImage: AssetImage('assets/avatar.jpg'), // Replace 'assets/avatar.jpg' with your image path
+                        //   backgroundImage: AssetImage(
+                        //     'assets/images/products_images/christopher-campbell-rDEOVtE7vOs-unsplash.jpg',
+                        //   ), // Replace 'assets/avatar.jpg' with your image path
+                        // ),
+                        _getAvatarImageWidget(),
+                        const SizedBox(
                           height: 5,
                         ),
-                        GetUsernameWidget(),
+                        const GetUsernameWidget(),
                       ],
                     ),
                   ),

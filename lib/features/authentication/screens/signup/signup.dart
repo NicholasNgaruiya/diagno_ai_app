@@ -77,55 +77,25 @@ class _SignupScreenState extends State<SignupScreen> {
               Navigator.of(context).pushNamedAndRemoveUntil('/otp', (route) => false);
             }
           },
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ///Title
-                  Text(
-                    TTexts.signUpTitle,
-                    style: Theme.of(context).textTheme.headlineMedium,
+          child: BlocBuilder<SignUpBloc, SignUpState>(
+            builder: (context, state) {
+              if (state is SignUpLoadingState) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: TColors.primaryColor,
                   ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwSections,
-                  ),
-
-                  ///Form
-                  BlocBuilder<SignUpBloc, SignUpState>(
-                    builder: (context, state) {
-                      if (state is SignUpLoadingState) {
-                        return const Center(
-                          child: CircularProgressIndicator(
-                            color: TColors.primaryColor,
-                          ),
-                        );
-                      } else {
-                        return TSignupForm(
-                          firstNameController: _firstNameController,
-                          lastNameController: _lastNameController,
-                          emailController: _emailController,
-                          passwordController: _passwordController,
-                          confirmPasswordController: _confirmPasswordController,
-                          onSubmit: _submitForm,
-                        );
-                      }
-                    },
-                  ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwItems,
-                  ),
-
-                  ///Divider
-                  // const TFormDivider(dividerText: TTexts.orSignUpWith),
-                  // const SizedBox(
-                  //   height: TSizes.spaceBtwItems,
-                  // ),
-                  // const TSocialButtons(),
-                ],
-              ),
-            ),
+                );
+              } else {
+                return TSignupForm(
+                  firstNameController: _firstNameController,
+                  lastNameController: _lastNameController,
+                  emailController: _emailController,
+                  passwordController: _passwordController,
+                  confirmPasswordController: _confirmPasswordController,
+                  onSubmit: _submitForm,
+                );
+              }
+            },
           ),
         ),
       ),

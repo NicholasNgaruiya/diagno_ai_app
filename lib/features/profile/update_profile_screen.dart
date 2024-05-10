@@ -26,6 +26,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   File? selectedImage;
   String? imageUrl;
+
   @override
   void dispose() {
     super.dispose();
@@ -47,12 +48,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           if (state is UserProfileError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                // content: Text(state.error.toString()),
                 content: CustomSnackBarContent(
                   snackBarTitle: 'Oops!',
-                  // snackBarSubtitle: state.error.toString(),
                   snackBarSubtitle: state.message,
-                  // snackBarSubtitle: TTexts.emailAlreadyExistsError,
                   backgroundColor: TColors.error,
                 ),
                 behavior: SnackBarBehavior.floating,
@@ -62,11 +60,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             );
             Navigator.of(context).pop();
           } else if (state is UserProfileUpdated) {
-            //TODO: Use these stored variables to update the app
-            //Combine the first name and last name to form the full name
-            TLocalStorage.saveString('user_name', '${state.updateProfileModel.firstName} ${state.updateProfileModel.lastName}');
-            // TLocalStorage.saveString('firstName', state.updateProfileModel.firstName);
-            // TLocalStorage.saveString('lastName', state.updateProfileModel.lastName);
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: CustomSnackBarContent(
@@ -81,18 +74,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             );
             Navigator.of(context).pop();
           } else if (state is UserProfileLoaded) {
-            print(state.fetchProfileModel.firstName);
-            print(state.fetchProfileModel.lastName);
-            _firstNameController.text = state.fetchProfileModel.firstName;
-            _lastNameController.text = state.fetchProfileModel.lastName;
-            _emailController.text = state.fetchProfileModel.email;
-            final fetchedImageUrl = state.fetchProfileModel.image;
-            int httpIndex = fetchedImageUrl!.indexOf('http');
-            final imageUrl = fetchedImageUrl.substring(httpIndex);
-            print('Image URL: $imageUrl');
-            setState(() {
-              this.imageUrl = imageUrl; // Update the imageUrl
-            });
+            // _firstNameController.text = state.fetchProfileModel.firstName;
+            // _lastNameController.text = state.fetchProfileModel.lastName;
+            // _emailController.text = state.fetchProfileModel.email;
+            // print('first name: ${_firstNameController.text}');
+            // print('last name: ${_lastNameController.text}');
+            // print('email: ${_emailController.text}');
+            // setState(() {
+            //   imageUrl = state.fetchProfileModel.image;
+            // });
           }
         },
         builder: (context, state) {
@@ -103,15 +93,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               ),
             );
           } else if (state is UserProfileLoaded) {
-            // _firstNameController.text = state.fetchProfileModel.firstName;
-            // _lastNameController.text = state.fetchProfileModel.lastName;
-            // _emailController.text = state.fetchProfileModel.email;
-            // final fetchedImageUrl = state.fetchProfileModel.image;
-            // //Find the index of http
-            // int httpIndex = fetchedImageUrl!.indexOf('http');
-            // //Extract the subsstring starting from 'http'
-            // final imageUrl = fetchedImageUrl.substring(httpIndex);
-            // print('Image URL: $imageUrl');
+            _firstNameController.text = state.fetchProfileModel.firstName;
+            _lastNameController.text = state.fetchProfileModel.lastName;
+            _emailController.text = state.fetchProfileModel.email;
+            // imageUrl = state.fetchProfileModel.image;
 
             return SingleChildScrollView(
               child: Container(
@@ -125,7 +110,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     ),
                     const SizedBox(height: 10),
                     ImageSelectorWidget(
-                      imageUrl: imageUrl,
+                      imageUrl: state.fetchProfileModel.image,
                       onImageSelected: (File image) {
                         setState(() {
                           selectedImage = image;
@@ -180,12 +165,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               width: TDeviceUtils.getScreenWidth(context) * 0.8,
                               child: ElevatedButton(
                                 onPressed: () async {
-                                  //print the firstname,lastname and image url
                                   print('First Name: ${_firstNameController.text}');
                                   print('Last Name: ${_lastNameController.text}');
                                   print('Imagepath: $selectedImage');
 
-                                  var userId = await TLocalStorage.getString('id');
+                                  // var userId = await TLocalStorage.getString('id');
+                                  var userId = state.fetchProfileModel.id;
+                                  // ignore: unnecessary_null_comparison
                                   if (userId != null) {
                                     BlocProvider.of<UserProfileBloc>(context).add(
                                       UpdateUserProfile(

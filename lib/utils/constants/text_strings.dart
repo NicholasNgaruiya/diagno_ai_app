@@ -49,7 +49,7 @@ class TTexts {
       "Your Account Security is Our Priority! We've Sent You a Secure Link to Safely change Your Password and keep your Account Protected. ";
   static const String verifyEmailTitle = 'Verify Your email address!';
   static const String confirmEmailSubTitle =
-      'We have sent a verification code to your email address. Please enter the code below to verify your email address.';
+      'We have sent a verification code to your email address. Please enter the code below to verify your email.';
   static const String emailNotReceivedMessage = "Didn't get the email? Check your junk/spam or resend it.";
   static const String getAccountCreatedTitle = 'Your account successfully created!';
   static const String getAccountVerifiedSuccessfully = 'Your email has been verified successfully!';

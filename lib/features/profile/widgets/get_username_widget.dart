@@ -12,12 +12,15 @@ class GetUsernameWidget extends StatefulWidget {
 }
 
 class _GetUsernameWidgetState extends State<GetUsernameWidget> {
-  String? userName;
+  String? firstName;
+  String? lastName;
 
   Future<void> loadSavedCredentials() async {
-    final storedUserName = await TLocalStorage.getString('user_name');
+    final storedFirstName = await TLocalStorage.getString('first_name');
+    final storedLastName = await TLocalStorage.getString('last_name');
     setState(() {
-      userName = storedUserName;
+      firstName = storedFirstName;
+      lastName = storedLastName;
     });
   }
 
@@ -29,9 +32,10 @@ class _GetUsernameWidgetState extends State<GetUsernameWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return userName != null
+    final fullName = '$firstName $lastName';
+    return fullName.isNotEmpty
         ? Text(
-            '$userName',
+            fullName,
             style: Theme.of(context).textTheme.titleLarge,
           )
         : Container();
