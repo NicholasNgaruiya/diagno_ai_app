@@ -65,10 +65,7 @@ class App extends StatelessWidget {
             // home: Dashboard(),
             // home: const OnBoardingScreen(),
             // initialRoute: initScreen == 0 || initScreen == null ? '/onboarding' : '/login',
-            //?Commented out for testing the code below
-            // initialRoute: initialRoute,
-            //?Commented out for testing the code above
-            initialRoute: '/onboarding',
+            initialRoute: initialRoute,
             routes: {
               '/navigationBar': (context) => const NavigationMenu(),
               '/onboarding': (context) => const OnBoardingScreen(),
