@@ -1,7 +1,8 @@
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
-import 'package:restaurant_frontend/app.dart';
-import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
+
+import 'app.dart';
+import 'utils/constants/colors.dart';
 
 int? initScreen;
 Future<void> main() async {
@@ -15,5 +16,20 @@ Future<void> main() async {
   //TODO: Await Native Splash Screen
   //TODO: Initialize Firebase
   //TODO: Initiliaze Authentication
-  runApp(const BetterFeedback(child: App()));
+  runApp(
+    BetterFeedback(
+      //change theme
+      theme: FeedbackThemeData(
+        background: Colors.grey,
+        feedbackSheetColor: Colors.grey[50]!,
+        drawColors: [Colors.red, Colors.green, Colors.blue, Colors.yellow],
+        bottomSheetTextInputStyle: const TextStyle(
+          color: Colors.black,
+        ),
+        activeFeedbackModeColor: TColors.primaryColor,
+        //change the decora
+      ),
+      child: const App(),
+    ),
+  );
 }

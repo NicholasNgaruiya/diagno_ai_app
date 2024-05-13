@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
+
+import '../device/device_utility.dart';
 
 class THttHelper {
   static const String _baseUrl = 'https://smart-doctor.onrender.com/api/v1';

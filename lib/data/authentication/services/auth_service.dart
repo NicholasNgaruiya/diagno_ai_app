@@ -1,11 +1,11 @@
 import 'dart:convert';
-
-import 'package:restaurant_frontend/features/authentication/models/user_model.dart';
-import 'package:restaurant_frontend/features/profile/models/update_profile_model.dart';
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
-import 'package:restaurant_frontend/utils/http/http_client.dart';
-import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 import 'package:http/http.dart' as http;
+
+import '../../../features/authentication/models/user_model.dart';
+import '../../../features/profile/models/update_profile_model.dart';
+import '../../../utils/device/device_utility.dart';
+import '../../../utils/http/http_client.dart';
+import '../../../utils/local_storage/storage_utility.dart';
 
 class AuthService {
   //register user using http_client

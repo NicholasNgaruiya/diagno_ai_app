@@ -8,15 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:restaurant_frontend/data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
-import 'package:restaurant_frontend/features/authentication/screens/login/login.dart';
-import 'package:restaurant_frontend/features/profile/widgets/get_username_widget.dart';
-import 'package:restaurant_frontend/utils/constants/sizes.dart';
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
-import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
+import '../../data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
 import '../../utils/constants/colors.dart';
+import '../../utils/constants/sizes.dart';
 import '../../utils/helpers/helper_functions.dart';
+import '../../utils/local_storage/storage_utility.dart';
+import '../authentication/screens/login/login.dart';
 import 'update_profile_screen.dart';
 import 'widgets/get_email_widget.dart';
 

@@ -2,14 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/common/widgets/dashboard/image_selector.dart';
-import 'package:restaurant_frontend/utils/constants/sizes.dart';
 
+import '../../common/widgets/dashboard/image_selector.dart';
 import '../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
 import '../../utils/constants/colors.dart';
+import '../../utils/constants/sizes.dart';
 import '../../utils/device/device_utility.dart';
-import '../../utils/local_storage/storage_utility.dart';
 import 'models/update_profile_model.dart';
 
 class UpdateProfileScreen extends StatefulWidget {

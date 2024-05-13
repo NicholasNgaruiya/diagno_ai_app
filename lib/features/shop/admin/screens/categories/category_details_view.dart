@@ -2,16 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/common/widgets/errors/confirmation_dialogue.dart';
-import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/update_category_item.dart';
 
 import '../../../../../common/widgets/dashboard/image_selector.dart';
+import '../../../../../common/widgets/errors/confirmation_dialogue.dart';
+import '../../../../../data/shop/blocs/categories/bloc/categories_bloc.dart';
 import '../../../../../data/shop/blocs/categories/category_details/bloc/category_details_bloc.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/device/device_utility.dart';
 import '../../models/category_item.dart';
+import '../../models/update_category_item.dart';
 
 class CategoryDetailsView extends StatelessWidget {
   final CategoryItem categoryItem;

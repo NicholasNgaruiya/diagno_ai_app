@@ -1,10 +1,9 @@
-import 'package:restaurant_frontend/data/shop/services/admin_shop_service.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/category_item.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/create_category_item.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
-import 'package:restaurant_frontend/features/shop/customer/models/fetched_category_item.dart';
-
+import '../../../features/shop/admin/models/category_item.dart';
+import '../../../features/shop/admin/models/create_category_item.dart';
+import '../../../features/shop/admin/models/product_item.dart';
 import '../../../features/shop/admin/models/update_category_item.dart';
+import '../../../features/shop/customer/models/fetched_category_item.dart';
+import '../services/admin_shop_service.dart';
 
 class AdminRepository {
   AdminRepository();

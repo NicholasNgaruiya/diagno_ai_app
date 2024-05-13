@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:restaurant_frontend/features/authentication/models/user_model.dart';
-
 import '../../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../../data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import '../../../../utils/constants/colors.dart';
-import '../../../../utils/constants/sizes.dart';
-import '../../../../utils/constants/text_strings.dart';
+import '../../models/user_model.dart';
 import 'widgets/signup_form.dart';
 
 class SignupScreen extends StatefulWidget {

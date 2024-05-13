@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/data/shop/blocs/categories/category_details/bloc/category_details_bloc.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/category_item.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/categories/category_details_view.dart';
+
+import '../../../../../data/shop/blocs/categories/category_details/bloc/category_details_bloc.dart';
+import '../../models/category_item.dart';
+import 'category_details_view.dart';
 
 class CategoryDetailsScreen extends StatelessWidget {
   final CategoryItem categories;
@@ -24,10 +25,10 @@ class CategoryDetailsScreen extends StatelessWidget {
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:restaurant_frontend/common/widgets/dashboard/image_selector.dart';
+// import 'package:diagno_ai/common/widgets/dashboard/image_selector.dart';
 
-// import 'package:restaurant_frontend/utils/constants/colors.dart';
-// import 'package:restaurant_frontend/utils/device/device_utility.dart';
+// import 'package:diagno_ai/utils/constants/colors.dart';
+// import 'package:diagno_ai/utils/device/device_utility.dart';
 
 // import '../../../../../data/shop/blocs/categories/category_details/bloc/category_details_bloc.dart';
 // import '../../../../../utils/constants/sizes.dart';

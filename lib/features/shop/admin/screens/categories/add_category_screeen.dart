@@ -2,14 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/create_category_item.dart';
 
 import '../../../../../common/widgets/dashboard/image_selector.dart';
 import '../../../../../common/widgets/errors/custom_snackbar_content.dart';
+import '../../../../../data/shop/blocs/categories/bloc/categories_bloc.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/device/device_utility.dart';
+import '../../models/create_category_item.dart';
 
 class AddCategoryPage extends StatefulWidget {
   const AddCategoryPage({super.key});

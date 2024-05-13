@@ -2,17 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/common/widgets/dashboard/image_selector.dart';
-import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
 
-import 'package:restaurant_frontend/features/shop/admin/screens/add_product/widgets/select_category.dart';
-import 'package:restaurant_frontend/utils/constants/colors.dart';
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
-
+import '../../../../../common/widgets/dashboard/image_selector.dart';
 import '../../../../../common/widgets/errors/confirmation_dialogue.dart';
 import '../../../../../common/widgets/errors/custom_snackbar_content.dart';
+import '../../../../../data/shop/blocs/product/bloc/product_bloc.dart';
+import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
+import '../../../../../utils/device/device_utility.dart';
+import '../../models/product_item.dart';
+import 'widgets/select_category.dart';
 
 class AddProductsPage extends StatefulWidget {
   const AddProductsPage({super.key});
@@ -102,13 +101,6 @@ class _AddProductsPageState extends State<AddProductsPage> {
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           const SizedBox(height: 10),
-                          // AddProductImage(
-                          //   onImageSelected: (File image) {
-                          //     setState(() {
-                          //       selectedImage = image; //store the selected image
-                          //     });
-                          //   },
-                          // ),
                           ImageSelectorWidget(
                             onImageSelected: (File image) {
                               setState(() {

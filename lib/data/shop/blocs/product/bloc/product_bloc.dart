@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:restaurant_frontend/data/shop/repositories/admin_repository.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
+
+import '../../../../../features/shop/admin/models/product_item.dart';
+import '../../../repositories/admin_repository.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';

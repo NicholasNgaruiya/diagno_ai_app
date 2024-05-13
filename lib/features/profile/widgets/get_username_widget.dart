@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
 import '../../../utils/local_storage/storage_utility.dart';
 
 class GetUsernameWidget extends StatefulWidget {

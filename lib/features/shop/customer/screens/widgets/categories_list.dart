@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
-import 'package:restaurant_frontend/features/shop/customer/screens/category_products_screen.dart';
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
-// import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 
+import '../../../../../data/shop/blocs/categories/bloc/categories_bloc.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
+import '../../../../../utils/device/device_utility.dart';
+import '../category_products_screen.dart';
 
 class CategoriesGridView extends StatelessWidget {
   const CategoriesGridView({

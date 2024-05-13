@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_frontend/utils/constants/colors.dart';
+
+import '../../constants/colors.dart';
 
 class TTextButtonTheme {
   TTextButtonTheme._();

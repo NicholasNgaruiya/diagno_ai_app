@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/common/widgets/errors/custom_snackbar_content.dart';
-import 'package:restaurant_frontend/utils/constants/sizes.dart';
 
+import '../../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../../data/authentication/blocs/verify_email/bloc/verify_email_bloc.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 
 class OtpScreen extends StatefulWidget {

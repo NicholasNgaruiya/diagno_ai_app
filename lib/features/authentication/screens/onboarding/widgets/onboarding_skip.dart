@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_frontend/utils/constants/sizes.dart';
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
+import '../../../../../utils/constants/sizes.dart';
+import '../../../../../utils/device/device_utility.dart';
 import 'onboarding_page.dart';
 
 class OnBoardingSkip extends StatelessWidget {

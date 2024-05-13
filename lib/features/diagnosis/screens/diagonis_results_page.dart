@@ -1,12 +1,8 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/common/widgets/errors/custom_snackbar_content.dart';
-import 'package:restaurant_frontend/features/diagnosis/screens/symptoms_page.dart';
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
+import '../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../data/diagnosis/bloc/diagnosis_bloc.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';

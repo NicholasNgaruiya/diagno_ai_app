@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class FetchProfileModel {
   final String id;
   final String email;

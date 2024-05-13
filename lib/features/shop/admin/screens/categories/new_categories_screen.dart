@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/categories/category_details_screen.dart';
-import 'package:restaurant_frontend/utils/constants/colors.dart';
-import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
+
 import '../../../../../data/shop/blocs/categories/bloc/categories_bloc.dart';
+import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/local_storage/storage_utility.dart';
+import 'category_details_screen.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);

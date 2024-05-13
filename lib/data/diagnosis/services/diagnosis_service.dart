@@ -1,8 +1,7 @@
 import 'dart:convert';
-
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
-import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 import 'package:http/http.dart' as http;
+import '../../../utils/device/device_utility.dart';
+import '../../../utils/local_storage/storage_utility.dart';
 
 class DiagnosisService {
   final String baseUrl = 'https://smart-doctor.onrender.com/api/v1';

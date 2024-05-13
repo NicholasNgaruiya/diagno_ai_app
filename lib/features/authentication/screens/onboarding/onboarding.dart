@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:restaurant_frontend/utils/constants/image_strings.dart';
-import 'package:restaurant_frontend/utils/constants/text_strings.dart';
-
+import '../../../../utils/constants/image_strings.dart';
+import '../../../../utils/constants/text_strings.dart';
 import 'widgets/onboarding_dot_navigation.dart';
 import 'widgets/onboarding_next_button.dart';
 import 'widgets/onboarding_page.dart';

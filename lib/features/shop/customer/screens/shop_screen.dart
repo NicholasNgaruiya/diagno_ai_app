@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:restaurant_frontend/features/shop/customer/screens/widgets/item_widget.dart';
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
 import '../../../../data/shop/blocs/categories/bloc/categories_bloc.dart';
 import '../../../../utils/constants/colors.dart';
-import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/device/device_utility.dart';
 import 'widgets/categories_list.dart';
-import 'widgets/custom_searchbar.dart';
 import '../../../profile/widgets/get_username_widget.dart';
-import 'widgets/section_heading.dart';
 
 class ShopScreen extends StatefulWidget {
   const ShopScreen({super.key});

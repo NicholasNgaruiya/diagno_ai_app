@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:restaurant_frontend/features/profile/models/fetch_profile_model.dart';
-import 'package:restaurant_frontend/features/profile/models/update_profile_model.dart';
 
+import '../../../../../features/profile/models/fetch_profile_model.dart';
+import '../../../../../features/profile/models/update_profile_model.dart';
 import '../../../../../utils/local_storage/storage_utility.dart';
 import '../../../repositories/auth_repository.dart';
 

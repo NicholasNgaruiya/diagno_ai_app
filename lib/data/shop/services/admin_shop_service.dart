@@ -1,16 +1,14 @@
 import 'dart:convert';
-
-import 'package:restaurant_frontend/features/shop/admin/models/category_item.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/create_category_item.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/product_item.dart';
 import 'package:http/http.dart' as http;
-import 'package:restaurant_frontend/features/shop/admin/models/update_category_item.dart';
-import 'package:restaurant_frontend/features/shop/customer/models/fetched_category_item.dart';
 import 'dart:io';
 
-import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
-
+import '../../../features/shop/admin/models/category_item.dart';
+import '../../../features/shop/admin/models/create_category_item.dart';
+import '../../../features/shop/admin/models/product_item.dart';
+import '../../../features/shop/admin/models/update_category_item.dart';
+import '../../../features/shop/customer/models/fetched_category_item.dart';
 import '../../../utils/device/device_utility.dart';
+import '../../../utils/local_storage/storage_utility.dart';
 
 class AdminShopService {
   final String baseUrl = 'https://smart-doctor.onrender.com/api/v1';

@@ -1,4 +1,4 @@
-import 'package:restaurant_frontend/data/diagnosis/services/diagnosis_service.dart';
+import '../services/diagnosis_service.dart';
 
 class DiagnosisRepository {
   DiagnosisRepository();

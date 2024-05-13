@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_frontend/utils/constants/sizes.dart';
-import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
+
+import '../../../../../utils/constants/sizes.dart';
+import '../../../../../utils/helpers/helper_functions.dart';
 
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({

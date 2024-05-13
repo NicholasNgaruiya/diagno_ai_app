@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_frontend/common/widgets/errors/custom_snackbar_content.dart';
+
+import 'custom_snackbar_content.dart';
 
 class FlashMessageScreen extends StatelessWidget {
   const FlashMessageScreen({super.key});

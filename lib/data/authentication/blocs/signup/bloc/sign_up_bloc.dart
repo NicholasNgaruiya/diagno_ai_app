@@ -1,11 +1,10 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:restaurant_frontend/data/authentication/repositories/auth_repository.dart';
 
 import '../../../../../../features/authentication/models/user_model.dart';
+import '../../../repositories/auth_repository.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';

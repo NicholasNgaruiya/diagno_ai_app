@@ -1,37 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_frontend/data/diagnosis/bloc/diagnosis_bloc.dart';
-import 'package:restaurant_frontend/data/home/bloc/home_bloc.dart';
-import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
-import 'package:restaurant_frontend/data/shop/blocs/product/bloc/product_bloc.dart';
-import 'package:restaurant_frontend/features/authentication/screens/forgot_password/forgot_password.dart';
-import 'package:restaurant_frontend/features/authentication/screens/home/home.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/add_product/add_product_screen.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/categories/add_category_screeen.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/categories/categories_screen.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/dashboard/dashboard.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/edit_product.dart';
-import 'package:restaurant_frontend/features/shop/admin/screens/view_orders.dart';
-import 'package:restaurant_frontend/main.dart';
-import 'package:restaurant_frontend/features/bottom_navigation/navigation_menu.dart';
-import 'package:restaurant_frontend/utils/theme/theme.dart';
 
-// import 'common/widgets/errors/flash_message_error.dart';
 import 'data/authentication/blocs/login/bloc/login_bloc.dart';
 import 'data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
 import 'data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import 'data/authentication/blocs/verify_email/bloc/verify_email_bloc.dart';
+import 'data/diagnosis/bloc/diagnosis_bloc.dart';
+import 'data/home/bloc/home_bloc.dart';
+import 'data/shop/blocs/categories/bloc/categories_bloc.dart';
+import 'data/shop/blocs/product/bloc/product_bloc.dart';
+import 'features/authentication/screens/forgot_password/forgot_password.dart';
+import 'features/authentication/screens/home/home.dart';
 import 'features/authentication/screens/login/login.dart';
 import 'features/authentication/screens/onboarding/onboarding.dart';
 import 'features/authentication/screens/otpscreen/otp_screen.dart';
 import 'features/authentication/screens/signup/signup.dart';
-import 'features/profile/update_profile_screen.dart';
+import 'features/bottom_navigation/navigation_menu.dart';
+import 'features/shop/admin/screens/add_product/add_product_screen.dart';
+import 'features/shop/admin/screens/categories/add_category_screeen.dart';
 import 'features/shop/admin/screens/categories/new_categories_screen.dart';
-import 'features/shop/customer/screens/category_products_screen.dart';
 import 'features/profile/profile_screen.dart';
+import 'features/shop/admin/screens/dashboard/dashboard.dart';
+import 'features/shop/admin/screens/edit_product.dart';
+import 'features/shop/admin/screens/view_orders.dart';
 import 'features/shop/customer/screens/widgets/demmo_screen.dart';
 import 'utils/constants/colors.dart';
 import 'utils/local_storage/storage_utility.dart';
+import 'utils/theme/theme.dart';
 
 /// ---Class to setup themes,initial Bindings ,animations
 class App extends StatelessWidget {

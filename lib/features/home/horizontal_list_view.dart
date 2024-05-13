@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
 import '../../utils/constants/colors.dart';
+import '../../utils/device/device_utility.dart';
 
 class HorizontalScrollableList extends StatefulWidget {
   const HorizontalScrollableList({Key? key}) : super(key: key);

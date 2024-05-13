@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:restaurant_frontend/data/diagnosis/repositories/diagnosis_repository.dart';
+
+import '../repositories/diagnosis_repository.dart';
 
 part 'diagnosis_event.dart';
 part 'diagnosis_state.dart';

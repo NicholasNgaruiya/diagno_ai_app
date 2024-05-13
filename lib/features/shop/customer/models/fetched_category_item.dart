@@ -2,13 +2,11 @@
 //
 //     final fetchedCategoryItem = fetchedCategoryItemFromJson(jsonString);
 
-import 'dart:convert';
-
-import 'package:restaurant_frontend/features/shop/customer/models/new_product_item.dart';
-
 // FetchedCategoryItem fetchedCategoryItemFromJson(String str) => FetchedCategoryItem.fromJson(json.decode(str));
 
 // String fetchedCategoryItemToJson(FetchedCategoryItem data) => json.encode(data.toJson());
+
+import 'new_product_item.dart';
 
 class FetchedCategoryItem {
   String id;

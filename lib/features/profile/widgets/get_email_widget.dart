@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
+
+import '../../../utils/local_storage/storage_utility.dart';
 
 class GetEmailWidget extends StatefulWidget {
   const GetEmailWidget({super.key});

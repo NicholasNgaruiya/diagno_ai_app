@@ -3,15 +3,14 @@ import 'dart:convert';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:restaurant_frontend/data/diagnosis/bloc/diagnosis_bloc.dart';
-import 'package:restaurant_frontend/features/diagnosis/screens/diagonis_results_page.dart';
-import 'package:restaurant_frontend/utils/constants/colors.dart';
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
-import 'package:restaurant_frontend/utils/helpers/helper_functions.dart';
 
 import '../../../common/widgets/errors/custom_snackbar_content.dart';
+import '../../../data/diagnosis/bloc/diagnosis_bloc.dart';
+import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
+import '../../../utils/device/device_utility.dart';
+import '../../../utils/helpers/helper_functions.dart';
+import 'diagonis_results_page.dart';
 
 class SymptomsEntryPage extends StatefulWidget {
   const SymptomsEntryPage({super.key});

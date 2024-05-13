@@ -5,7 +5,8 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
-import 'package:restaurant_frontend/features/home/models/quotes_model.dart';
+
+import '../../../features/home/models/quotes_model.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';

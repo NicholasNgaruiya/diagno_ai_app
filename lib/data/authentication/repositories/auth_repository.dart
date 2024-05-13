@@ -1,8 +1,7 @@
-import 'package:restaurant_frontend/data/authentication/services/auth_service.dart';
-import 'package:restaurant_frontend/features/profile/models/update_profile_model.dart';
-import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
-
 import '../../../features/authentication/models/user_model.dart';
+import '../../../features/profile/models/update_profile_model.dart';
+import '../../../utils/local_storage/storage_utility.dart';
+import '../services/auth_service.dart';
 
 class AuthRepository {
   //Method to sign up a user

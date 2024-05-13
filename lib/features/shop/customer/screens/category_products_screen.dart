@@ -1,11 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:restaurant_frontend/data/shop/blocs/categories/bloc/categories_bloc.dart';
-import 'package:restaurant_frontend/features/shop/customer/models/new_product_item.dart';
 
-import '../../../../utils/constants/colors.dart';
+import '../../../../data/shop/blocs/categories/bloc/categories_bloc.dart';
+import '../models/new_product_item.dart';
 
 class CategoryProductsScreen extends StatefulWidget {
   const CategoryProductsScreen({

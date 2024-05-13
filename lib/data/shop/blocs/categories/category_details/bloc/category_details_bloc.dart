@@ -1,9 +1,8 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/category_item.dart';
-import 'package:restaurant_frontend/features/shop/admin/models/update_category_item.dart';
 
+import '../../../../../../features/shop/admin/models/category_item.dart';
+import '../../../../../../features/shop/admin/models/update_category_item.dart';
 import '../../../../repositories/admin_repository.dart';
 
 part 'category_details_event.dart';

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:restaurant_frontend/data/home/bloc/home_bloc.dart';
-import 'package:restaurant_frontend/features/home/app_details.dart';
-import 'package:restaurant_frontend/features/home/health_tips_list.dart';
-import 'package:restaurant_frontend/features/home/horizontal_list_view.dart';
-import 'package:restaurant_frontend/features/home/quotes_widget.dart';
-import 'package:restaurant_frontend/utils/constants/sizes.dart';
-import 'package:restaurant_frontend/utils/device/device_utility.dart';
 
 import '../../utils/constants/colors.dart';
+import '../../utils/constants/sizes.dart';
 import '../profile/widgets/get_username_widget.dart';
+import 'health_tips_list.dart';
+import 'horizontal_list_view.dart';
+import 'quotes_widget.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({super.key});
