@@ -1,3 +1,4 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_frontend/app.dart';
 import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
@@ -14,5 +15,5 @@ Future<void> main() async {
   //TODO: Await Native Splash Screen
   //TODO: Initialize Firebase
   //TODO: Initiliaze Authentication
-  runApp(const App());
+  runApp(const BetterFeedback(child: App()));
 }

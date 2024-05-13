@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:restaurant_frontend/data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
 import 'package:restaurant_frontend/features/authentication/screens/login/login.dart';
 import 'package:restaurant_frontend/features/profile/widgets/get_username_widget.dart';
@@ -76,6 +82,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       );
     }
+  }
+
+  Future<String> _writeScreenshotToStorage(Uint8List screenshot) async {
+    final directory = await getTemporaryDirectory();
+    final filePath = '${directory.path}/feedback.png';
+    final file = File(filePath);
+
+    await file.writeAsBytes(screenshot);
+    return filePath;
   }
 
   @override
@@ -174,28 +189,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 ListTile(
                   leading: const Icon(Iconsax.message, size: 20, color: TColors.primaryColor),
-                  title: const Text('FeedBack and Support'),
+                  title: const Text('Give Feedback'),
                   trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
+                  onTap: () => BetterFeedback.of(context).show(
+                    (UserFeedback feedback) async => FlutterEmailSender.send(
+                      Email(
+                        attachmentPaths: [
+                          await _writeScreenshotToStorage(feedback.screenshot),
+                        ],
+                        body: feedback.text,
+                        recipients: ['nicholas.ngaruiya.dev@gmail.com'],
+                        subject: feedback.text.split(' ').take(7).toList().join(''),
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtwInputFields,
                 ),
                 ListTile(
                   leading: const Icon(Iconsax.key, size: 20, color: TColors.primaryColor),
-                  title: const Text('Privacy and Security'),
+                  title: const Text('Privacy Policy'),
                   trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtwItems,
                 ),
-                ListTile(
-                  leading: const Icon(Iconsax.setting, size: 20, color: TColors.primaryColor),
-                  title: const Text('Settings'),
-                  trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwItems,
-                ),
+                // ListTile(
+                //   leading: const Icon(Iconsax.setting, size: 20, color: TColors.primaryColor),
+                //   title: const Text('Settings'),
+                //   trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
+                // ),
+                // const SizedBox(
+                //   height: TSizes.spaceBtwItems,
+                // ),
                 ListTile(
                   leading: const Icon(Iconsax.setting, size: 20, color: TColors.primaryColor),
                   title: const Text('Remember Me'),
@@ -235,4 +262,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
+  // void _feedback(BuildContext context) {
+  //   BetterFeedback.of(context).show((UserFeedback feedback) {
+  //     showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) => SimpleDialog(
+  //         title: Column(
+  //           children: [
+  //             Text(
+  //               feedback.text,
+  //               style: const TextStyle(
+  //                 fontSize: 24,
+  //               ),
+  //             ),
+  //             const SizedBox(height: 10),
+  //             Image.memory(feedback.screenshot, width: 250, height: 500),
+  //           ],
+  //         ),
+  //       ),
+  //     );
+  //   });
+  // }
 }

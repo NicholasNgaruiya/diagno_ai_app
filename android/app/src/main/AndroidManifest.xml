@@ -2,6 +2,12 @@
 
     <!-- Declaring the internet permission -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
+        </intent>
+    </queries>
     <application
         android:label="restaurant_frontend"
         android:name="${applicationName}"
@@ -32,5 +38,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+       
+        
     </application>
 </manifest>
