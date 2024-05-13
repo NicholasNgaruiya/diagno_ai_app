@@ -74,8 +74,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       return ClipOval(
         child: Image.asset(
           'assets/images/profile/default_profile_photo-removebg-preview.png',
-          width: 100, // Adjust width and height as needed
-          height: 100,
+          width: 90, // Adjust width and height as needed
+          height: 90,
           fit: BoxFit.cover, // Specify the fit property
         ),
       );
@@ -97,16 +97,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       backgroundColor: dark ? TColors.black : TColors.white,
-      // body: _isLoading
-      //     ? const Center(
-      //         child: CircularProgressIndicator(
-      //           color: TColors.primaryColor,
-      //         ),
-      //       )
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            expandedHeight: 150.0,
+            expandedHeight: 132.0,
             flexibleSpace: FlexibleSpaceBar(
               background: Stack(
                 children: [
@@ -128,25 +122,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     left: 0,
                     right: 0,
                     child: Container(
-                      height: 70, // Half the height of the app bar
-                      color: dark ? TColors.black : TColors.white, // Color for the lower half of the avatar
+                      height: 50, // Half the height of the app bar
+                      color: dark ? Colors.white : Colors.white, // Color for the lower half of the avatar
                     ),
                   ),
                   Positioned(
-                    top: 60, // Half the height of the app bar
-                    left: MediaQuery.of(context).size.width / 2 - 100,
+                    top: 65, // Half the height of the app bar
+                    left: MediaQuery.of(context).size.width / 2 - 50,
                     // right: MediaQuery.of(context).size.width / 2,
-                    child: Column(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        _getAvatarImageWidget(),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        // const GetUsernameWidget(),
-                        const GetEmailWidget(),
-                      ],
-                    ),
+                    child: _getAvatarImageWidget(),
+
+                    // const GetUsernameWidget(),
                   ),
                 ],
               ),
@@ -156,7 +142,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             delegate: SliverChildListDelegate(
               [
                 const SizedBox(
-                  height: TSizes.spaceBtwSections,
+                  height: 8,
+                ),
+                const Center(child: GetEmailWidget()),
+
+                const SizedBox(
+                  height: TSizes.spaceBtwSections - 10,
                 ),
 
                 ListTile(

@@ -153,8 +153,8 @@ class _TSignupFormState extends State<TSignupForm> {
                     height: TSizes.spaceBtwSections,
                   ),
 
-                  ///Terms&Conditions Checkbox
-                  const TTermsAndConditionsCheckbox(),
+                  //TODO:Terms&Conditions Checkbox
+                  // const TTermsAndConditionsCheckbox(),
                   const SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
