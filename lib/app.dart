@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'data/authentication/blocs/login/bloc/login_bloc.dart';
 import 'data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
+import 'data/authentication/blocs/reset_password/bloc/reset_password_bloc.dart';
 import 'data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import 'data/authentication/blocs/verify_email/bloc/verify_email_bloc.dart';
 import 'data/diagnosis/bloc/diagnosis_bloc.dart';
@@ -44,6 +45,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => HomeBloc()..add(FetchQuotesEvent())),
         BlocProvider(create: (context) => DiagnosisBloc()),
         BlocProvider(create: (context) => UserProfileBloc()),
+        BlocProvider(create: (context) => ResetPasswordBloc()),
       ],
       // child: getInitialScreen(),
       child: FutureBuilder<String>(

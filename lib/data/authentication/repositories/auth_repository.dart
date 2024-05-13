@@ -31,6 +31,19 @@ class AuthRepository {
     }
   }
 
+  //Method to reset password
+  static Future<Map<String, dynamic>> resetPassword(String email) async {
+    try {
+      final response = await AuthService.resetPassword(email);
+      //Handle the response here if necessary
+      return response;
+    } catch (error) {
+      //Handle errors if any
+      print('Error resetting password: $error');
+      rethrow;
+    }
+  }
+
   //Method to login in with email and password
   static Future<Map<String, dynamic>> login(String email, String password) async {
     try {

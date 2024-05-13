@@ -19,6 +19,12 @@ class AuthService {
     return await THttHelper.post('$_baseUrl/register/', data);
   }
 
+  //Method to send resetPassword
+  static Future<Map<String, dynamic>> resetPassword(String email) async {
+    final data = {'email': email};
+    return await THttHelper.post('$_baseUrl/password-reset/', data);
+  }
+
   //Method to signin
   static Future<Map<String, dynamic>> signIn(String email, String password) async {
     final data = {'email': email, 'password': password};
