@@ -91,7 +91,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
             return SingleChildScrollView(
               child: Container(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 14.0, right: 12.0, top: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -141,7 +141,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           TextFormField(
                             controller: _emailController,
                             decoration: const InputDecoration(
-                              labelText: 'Email',
+                              labelText: 'Email read-only',
                             ),
                             maxLines: 1,
                             readOnly: true,

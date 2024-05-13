@@ -127,14 +127,15 @@ class _ImageSelectorWidgetState extends State<ImageSelectorWidget> {
                   // width: TDeviceUtils.getScreenWidth(context) * 0.9,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.grey,
+                      color: Colors.blue.withOpacity(0.2),
                     ),
+                    borderRadius: BorderRadius.circular(5),
                     // color: Colors.grey[200],
                     image: DecorationImage(
                       image: widget.imageUrl != null && widget.imageUrl!.isNotEmpty
                           ? NetworkImage(widget.imageUrl!)
                           : const AssetImage('assets/images/products_images/noImageBackground.png') as ImageProvider<Object>,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   child: Center(

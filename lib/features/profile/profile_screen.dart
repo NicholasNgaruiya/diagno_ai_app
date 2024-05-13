@@ -12,6 +12,7 @@ import 'package:restaurant_frontend/utils/local_storage/storage_utility.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/helpers/helper_functions.dart';
 import 'update_profile_screen.dart';
+import 'widgets/get_email_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -120,16 +121,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Positioned(
                     top: 60, // Half the height of the app bar
-                    left: MediaQuery.of(context).size.width / 2 - 80,
+                    left: MediaQuery.of(context).size.width / 2 - 100,
                     // right: MediaQuery.of(context).size.width / 2,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         _getAvatarImageWidget(),
                         const SizedBox(
                           height: 5,
                         ),
-                        const GetUsernameWidget(),
+                        // const GetUsernameWidget(),
+                        const GetEmailWidget(),
                       ],
                     ),
                   ),
