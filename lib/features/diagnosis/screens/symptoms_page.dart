@@ -108,7 +108,6 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                   );
                 },
               ),
-
               onChanged: (String? symptom) {
                 if (symptom != null && !selectedSymptoms.contains(symptom)) {
                   setState(() {
@@ -129,16 +128,6 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                   // hintText: 'Search for symptoms',
                 ),
               ),
-
-              // asyncItems: (String text) async {
-              //   await Future.delayed(const Duration(seconds: 2));
-              //   String data = await DefaultAssetBundle.of(context).loadString('assets/json/symptoms.json');
-              //   List<dynamic> symptomsArray = jsonDecode(data);
-              //   // return symptoms.cast<String>();
-              //   print(symptomsArray);
-              //   return symptomsArray.map((symptom) => _formatSymptom(symptom)).toList();
-              // },
-              ///
               dropdownBuilder: (context, selectedItem) {
                 return Text(
                   selectedItem ?? 'Search',
@@ -149,14 +138,6 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                   ),
                 );
               },
-
-              ///
-              // filterFn: (item, filterItems) {
-              //   return true;
-              //   // final String itemLowerCase = item.toString().toLowerCase();
-              //   // final String filterTermLowerCase = filterItems.toLowerCase();
-              //   // return itemLowerCase.contains(filterTermLowerCase);
-              // },
               items: symptomsArray.map((symptom) => _formatSymptom(symptom)).toList(),
             ),
             const SizedBox(
@@ -229,10 +210,8 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                 List<String> formattedSymptoms = selectedSymptoms.map((symptom) => _unformatSymptom(symptom)).toList();
                 String symptoms = formattedSymptoms.join(',');
 
-                // Map<String, String> symptomsMap = {
-                //   'symptoms': symptoms,
-                // };
                 print('symptoms are : $symptoms');
+                //?commented out to remove functionality for easy testing
                 try {
                   BlocProvider.of<DiagnosisBloc>(context).add(PredictButtonClickedEvent(symptoms: symptoms));
                 } catch (e) {
@@ -251,6 +230,8 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                     ),
                   );
                 }
+                //?commented out to remove functionality for easy testing
+
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DiagnosisResultsPage()));
               },
               child: const Text(

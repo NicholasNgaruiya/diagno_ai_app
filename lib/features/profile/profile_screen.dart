@@ -31,12 +31,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     _loadRememberMe();
     _loadAvatarImage();
-
-    // Future.delayed(const Duration(seconds: 10), () {
-    //   setState(() {
-    //     _isLoading = false;
-    //   });
-    // });
   }
 
   Future<void> _loadRememberMe() async {
@@ -63,15 +57,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // Function to get the image widget, with a default image if _avatarImagePath is null
   Widget _getAvatarImageWidget() {
     if (_avatarImagePath != null) {
-      return CircleAvatar(
-        radius: 50,
-        backgroundImage: CachedNetworkImageProvider(_avatarImagePath!),
+      return ClipOval(
+        child: CachedNetworkImage(
+          imageUrl: _avatarImagePath!,
+          width: 100, // Adjust width and height as needed
+          height: 100,
+          fit: BoxFit.cover, // Specify the fit property
+        ),
       );
     } else {
-      return const CircleAvatar(
-        radius: 50,
-        backgroundImage: AssetImage(
-          'assets/images/products_images/christopher-campbell-rDEOVtE7vOs-unsplash.jpg',
+      return ClipOval(
+        child: Image.asset(
+          'assets/images/profile/default_profile_photo-removebg-preview.png',
+          width: 100, // Adjust width and height as needed
+          height: 100,
+          fit: BoxFit.cover, // Specify the fit property
         ),
       );
     }
@@ -125,13 +125,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // CircleAvatar(
-                        //   radius: 50,
-                        //   // backgroundImage: AssetImage('assets/avatar.jpg'), // Replace 'assets/avatar.jpg' with your image path
-                        //   backgroundImage: AssetImage(
-                        //     'assets/images/products_images/christopher-campbell-rDEOVtE7vOs-unsplash.jpg',
-                        //   ), // Replace 'assets/avatar.jpg' with your image path
-                        // ),
                         _getAvatarImageWidget(),
                         const SizedBox(
                           height: 5,

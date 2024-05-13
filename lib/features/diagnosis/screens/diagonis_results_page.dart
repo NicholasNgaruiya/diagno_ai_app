@@ -27,6 +27,11 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(() {
+      setState(() {
+        _selectedIndex = _tabController.index;
+      });
+    });
   }
 
   @override
@@ -35,16 +40,16 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
     super.dispose();
   }
 
-  void _onTabSelected(int index) {
-    setState(() {
-      _selectedIndex = index;
-      _tabController.animateTo(
-        index,
-        curve: Curves.easeInOut,
-        // duration: const Duration(milliseconds: 900),
-      );
-    });
-  }
+  // void _onTabSelected(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //     _tabController.animateTo(
+  //       index,
+  //       curve: Curves.easeInOut,
+  //       // duration: const Duration(milliseconds: 900),
+  //     );
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -146,73 +151,88 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                   //?Two switchable tabs to display either details or Treatment results
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Container(
-                        // width: TDeviceUtils.getScreenWidth(context) * 6,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        // margin: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () => _onTabSelected(0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: _selectedIndex == 0 ? Colors.green : Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Tab(
-                                    child: Text(
-                                      'Information',
-                                      style: TextStyle(
-                                        color: _selectedIndex == 0 ? Colors.white : Colors.black,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                      // padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            // width: TDeviceUtils.getScreenWidth(context) * 6,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            // margin: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: TabBar(
+                                    controller: _tabController,
+                                    labelStyle: const TextStyle(
+                                      //The style of the labels
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
                                     ),
+                                    indicatorColor: Colors.green,
+                                    unselectedLabelColor: Colors.black,
+                                    labelColor: Colors.white,
+                                    indicatorWeight: 2,
+                                    indicator: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    indicatorSize: TabBarIndicatorSize.tab, //This adjusts the size of the tab
+                                    tabs: const [
+                                      Tab(
+                                        text: 'Information',
+                                      ),
+                                      Tab(
+                                        text: 'Lifestyle',
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () => _onTabSelected(1),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: _selectedIndex == 1 ? Colors.green : Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Tab(
-                                    child: Text(
-                                      'Lifestyle',
-                                      style: TextStyle(
-                                        color: _selectedIndex == 1 ? Colors.white : Colors.black,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   SliverFillRemaining(
-                    child: _selectedIndex == 0
-                        ? InformationTab(
-                            description: state.diagnosis['description'],
-                            precautions: [state.diagnosis['precautions']],
-                            medications: [state.diagnosis['medications']],
-                          )
-                        : LifestyleTab(
-                            diets: [state.diagnosis['diets']],
-                            workouts: [state.diagnosis['workout']],
-                          ),
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        InformationTab(
+                          description: state.diagnosis['description'],
+                          precautions: [state.diagnosis['precautions']],
+                          medications: [state.diagnosis['medications']],
+                        ),
+                        LifestyleTab(
+                          diets: [state.diagnosis['diets']],
+                          workouts: [state.diagnosis['workout']],
+                        ),
+                      ],
+                    ),
                   ),
+
+                  ///?
+                  // SliverFillRemaining(
+                  //   child: _selectedIndex == 0
+                  //       ? InformationTab(
+                  //           description: state.diagnosis['description'],
+                  //           precautions: [state.diagnosis['precautions']],
+                  //           medications: [state.diagnosis['medications']],
+                  //         )
+                  //       : LifestyleTab(
+                  //           diets: [state.diagnosis['diets']],
+                  //           workouts: [state.diagnosis['workout']],
+                  //         ),
+                  // ),
                 ],
               );
             } else {

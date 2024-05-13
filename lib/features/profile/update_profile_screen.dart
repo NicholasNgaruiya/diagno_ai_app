@@ -58,7 +58,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 elevation: 0,
               ),
             );
-            Navigator.of(context).pop();
+            // Navigator.of(context).pop();
           } else if (state is UserProfileUpdated) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -73,16 +73,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               ),
             );
             Navigator.of(context).pop();
-          } else if (state is UserProfileLoaded) {
-            // _firstNameController.text = state.fetchProfileModel.firstName;
-            // _lastNameController.text = state.fetchProfileModel.lastName;
-            // _emailController.text = state.fetchProfileModel.email;
-            // print('first name: ${_firstNameController.text}');
-            // print('last name: ${_lastNameController.text}');
-            // print('email: ${_emailController.text}');
-            // setState(() {
-            //   imageUrl = state.fetchProfileModel.image;
-            // });
+            BlocProvider.of<UserProfileBloc>(context).add(FetchUserProfile());
           }
         },
         builder: (context, state) {
@@ -189,7 +180,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                       const SnackBar(
                                         content: CustomSnackBarContent(
                                           snackBarTitle: 'Oops!',
-                                          snackBarSubtitle: 'User ID not found',
+                                          snackBarSubtitle: 'Error occurred when updating the profile. Please try again.',
                                           backgroundColor: TColors.error,
                                         ),
                                         behavior: SnackBarBehavior.floating,
@@ -217,6 +208,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 ),
               ),
             );
+          } else if (state is UserProfileUpdated) {
+            // Trigger a reload of the profile data
+            BlocProvider.of<UserProfileBloc>(context).add(FetchUserProfile());
+            return const SizedBox();
           } else {
             return const SizedBox();
           }
