@@ -1,3 +1,4 @@
+import 'package:diagno_ai_frontend/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../utils/constants/sizes.dart';
@@ -20,11 +21,12 @@ class OnBoardingNextButton extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
 
     return Positioned(
-      right: TSizes.defaultSpace,
-      bottom: TDeviceUtils.getBottomNavigationBarHeight(),
+      right: _isLastPage ? null : TSizes.defaultSpace,
+      left: _isLastPage ? 25 : null,
+      bottom: TDeviceUtils.getBottomNavigationBarHeight() + 10,
       child: _isLastPage
           ? SizedBox(
-              width: 130,
+              width: TDeviceUtils.getScreenWidth(context) * 0.85,
               child: ElevatedButton(
                 onPressed: () {
                   // Navigator.pushReplacement(
@@ -35,12 +37,15 @@ class OnBoardingNextButton extends StatelessWidget {
                   // );
                   Navigator.pushReplacementNamed(context, '/login');
                 },
-                child: const Text('Start'),
+                child: const Text(
+                  'Start',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             )
           : ElevatedButton(
               onPressed: () {
-                _controller.nextPage(duration: const Duration(milliseconds: 350), curve: Curves.easeIn);
+                _controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
               },
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
