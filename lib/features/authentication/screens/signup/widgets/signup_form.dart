@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
+import '../../../../../utils/local_storage/storage_utility.dart';
 import '../../../../../utils/validators/validation.dart';
 import 'terms_and_conditions_checkbox.dart';
 
@@ -32,11 +33,24 @@ class TSignupForm extends StatefulWidget {
 class _TSignupFormState extends State<TSignupForm> {
   late bool _passwordVisible;
   late bool _confirmPasswordVisible;
+  bool _hasAgreedToTerms = false;
+  bool _agreedToTermsError = false;
+
+  // Future<void> _checkAgreementStatus() async {
+  //   bool storedAgreementStatus = await TLocalStorage.getBool('agreed_to_terms') ?? false;
+  //   setState(() {
+  //     _hasAgreedToTerms = storedAgreementStatus;
+  //     if (_hasAgreedToTerms) {
+  //       _agreedToTermsError = false;
+  //     }
+  //   });
+  // }
 
   @override
   void initState() {
     _passwordVisible = false;
     _confirmPasswordVisible = false;
+    // _checkAgreementStatus();
     super.initState();
   }
 
@@ -153,8 +167,19 @@ class _TSignupFormState extends State<TSignupForm> {
                     height: TSizes.spaceBtwSections,
                   ),
 
-                  //TODO:Terms&Conditions Checkbox
                   // const TTermsAndConditionsCheckbox(),
+                  TTermsAndConditionsCheckbox(
+                    onChanged: (value) {
+                      setState(() {
+                        _hasAgreedToTerms = value;
+                        if (_hasAgreedToTerms) {
+                          _agreedToTermsError = false;
+                        }
+                      });
+                    },
+                    errorText: _agreedToTermsError ? 'Please agree to the terms before proceeding' : null,
+                  ),
+
                   const SizedBox(
                     height: TSizes.spaceBtwSections,
                   ),
@@ -164,13 +189,20 @@ class _TSignupFormState extends State<TSignupForm> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
+                        if (!_hasAgreedToTerms) {
+                          setState(() {
+                            _agreedToTermsError = true;
+                          });
+                          return;
+                        }
                         if (formKey.currentState!.validate()) {
-                          widget.onSubmit();
-                          print(widget.firstNameController.text);
-                          print(widget.lastNameController.text);
-                          print(widget.emailController.text);
-                          print(widget.passwordController.text);
-                          print(widget.confirmPasswordController.text);
+                          print('Validation passed');
+                          // widget.onSubmit();
+                          // print(widget.firstNameController.text);
+                          // print(widget.lastNameController.text);
+                          // print(widget.emailController.text);
+                          // print(widget.passwordController.text);
+                          // print(widget.confirmPasswordController.text);
                         }
                       },
                       child: const Text(

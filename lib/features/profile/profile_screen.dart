@@ -12,6 +12,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/constants/sizes.dart';
+import '../../utils/device/device_utility.dart';
 import '../../utils/helpers/helper_functions.dart';
 import '../../utils/local_storage/storage_utility.dart';
 import '../authentication/screens/login/login.dart';
@@ -165,14 +166,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     BlocProvider.of<UserProfileBloc>(context).add(FetchUserProfile());
                   },
                 ),
-                const SizedBox(
-                  height: TSizes.spaceBtwItems,
-                ),
-                ListTile(
-                  leading: const Icon(Iconsax.information, size: 20, color: TColors.primaryColor),
-                  title: const Text('Basic Information'),
-                  trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
-                ),
+                // const SizedBox(
+                //   height: TSizes.spaceBtwItems,
+                // ),
+                // ListTile(
+                //   leading: const Icon(Iconsax.information, size: 20, color: TColors.primaryColor),
+                //   title: const Text('Basic Information'),
+                //   trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
+                // ),
                 const SizedBox(
                   height: TSizes.spaceBtwItems,
                 ),
@@ -200,18 +201,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: const Icon(Iconsax.key, size: 20, color: TColors.primaryColor),
                   title: const Text('Privacy Policy'),
                   trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
+                  onTap: () {
+                    TDeviceUtils.launchUrl('https://www.privacypolicies.com/live/b63728cd-09a1-48fa-8a4a-d99b1def6d49');
+                  },
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtwItems,
                 ),
-                // ListTile(
-                //   leading: const Icon(Iconsax.setting, size: 20, color: TColors.primaryColor),
-                //   title: const Text('Settings'),
-                //   trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
-                // ),
-                // const SizedBox(
-                //   height: TSizes.spaceBtwItems,
-                // ),
+                ListTile(
+                  leading: const Icon(Iconsax.information, size: 20, color: TColors.primaryColor),
+                  title: const Text('Terms and Conditions'),
+                  trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
+                  onTap: () {
+                    TDeviceUtils.launchUrl('https://www.privacypolicies.com/live/966d15d7-3da1-41c6-ba67-47c6b78d16cb');
+                  },
+                ),
+                const SizedBox(
+                  height: TSizes.spaceBtwItems,
+                ),
                 ListTile(
                   leading: const Icon(Iconsax.setting, size: 20, color: TColors.primaryColor),
                   title: const Text('Remember Me'),

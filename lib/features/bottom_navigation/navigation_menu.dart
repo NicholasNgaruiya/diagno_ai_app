@@ -24,9 +24,9 @@ class _NavigationMenuState extends State<NavigationMenu> {
     const HomePageScreen(),
 
     const SymptomsEntryPage(),
-    Container(
-      color: Colors.orange,
-    ),
+    // Container(
+    //   color: Colors.orange,
+    // ),
     const ProfileScreen(),
   ];
   @override
@@ -80,15 +80,15 @@ class _NavigationMenuState extends State<NavigationMenu> {
                   ),
                   label: 'diagnose',
                 ),
-                NavigationDestination(
-                  icon: Icon(
-                    size: 20,
-                    // Iconsax.receipt,
-                    Iconsax.book,
-                    color: selectedIndex == 2 ? TColors.primaryColor : null,
-                  ),
-                  label: 'History',
-                ),
+                // NavigationDestination(
+                //   icon: Icon(
+                //     size: 20,
+                //     // Iconsax.receipt,
+                //     Iconsax.book,
+                //     color: selectedIndex == 2 ? TColors.primaryColor : null,
+                //   ),
+                //   label: 'History',
+                // ),
                 NavigationDestination(
                   icon: Icon(
                     size: 20,
