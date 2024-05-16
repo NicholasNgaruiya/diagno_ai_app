@@ -57,9 +57,9 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
       final updateProfileData = await AuthRepository().updateUserProfile(event.updateProfileModel);
       final updateProfile = UpdateProfileModel.fromJson(updateProfileData);
       emit(UserProfileUpdated(updateProfileModel: updateProfile));
-    } catch (e) {
-      print(e);
-      emit(const UserProfileError('Failed to update user profile.Please try again'));
+    } catch (error) {
+      print(error);
+      emit(UserProfileError(error.toString()));
     }
   }
 }

@@ -63,12 +63,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // Function to get the image widget, with a default image if _avatarImagePath is null
   Widget _getAvatarImageWidget() {
     if (_avatarImagePath != null) {
-      return ClipOval(
-        child: CachedNetworkImage(
-          imageUrl: _avatarImagePath!,
-          width: 100, // Adjust width and height as needed
-          height: 100,
-          fit: BoxFit.cover, // Specify the fit property
+      return Container(
+        height: 100,
+        width: 100,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: TColors.primaryColor,
+          ),
+        ),
+        child: ClipOval(
+          child: CachedNetworkImage(
+            imageUrl: _avatarImagePath!,
+            width: 100, // Adjust width and height as needed
+            height: 100,
+            fit: BoxFit.cover, // Specify the fit property
+          ),
         ),
       );
     } else {
@@ -77,15 +87,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
         height: 100,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: TColors.primaryColor, width: 2),
-        ),
-        child: ClipOval(
-          child: Image.asset(
-            'assets/images/profile/default_profile_photo-removebg-preview.png',
-            width: 90, // Adjust width and height as needed
-            height: 90,
-            fit: BoxFit.cover, // Specify the fit property
+          // color: TColors.primaryColor.withOpacity(0.2),
+
+          border: Border.all(
+            color: TColors.primaryColor,
           ),
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/images/profile/default_profile_photo-removebg-preview.png',
+            ),
+            fit: BoxFit.cover,
+          ),
+          // child: ClipOval(
+          //   child: Image.asset(
+          //     'assets/images/profile/default_profile_photo-removebg-preview.png',
+          //     width: 90, // Adjust width and height as needed
+          //     height: 90,
+          //     fit: BoxFit.cover, // Specify the fit property
+          //   ),
+          // ),
         ),
       );
     }

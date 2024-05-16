@@ -27,7 +27,7 @@ class UserProfileUpdated extends UserProfileState {
 }
 
 final class UserProfileError extends UserProfileState {
-  final String message;
+  final dynamic message;
 
   const UserProfileError(this.message);
 
