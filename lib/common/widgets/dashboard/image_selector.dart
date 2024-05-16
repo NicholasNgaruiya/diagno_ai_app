@@ -185,7 +185,7 @@ class _ImageSelectorWidgetState extends State<ImageSelectorWidget> {
             icon: const Icon(
               Icons.add_a_photo,
               size: 35,
-              color: TColors.success,
+              color: TColors.primaryColor,
             ),
           ),
         ),

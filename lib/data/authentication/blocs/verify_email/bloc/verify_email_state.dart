@@ -12,7 +12,7 @@ final class VerifyEmailInitial extends VerifyEmailState {}
 class VerifyEmailLoadingState extends VerifyEmailState {}
 
 class VerifyEmailSuccessState extends VerifyEmailState {
-  final Map<String, dynamic> response;
+  final dynamic response;
 
   const VerifyEmailSuccessState(this.response);
 

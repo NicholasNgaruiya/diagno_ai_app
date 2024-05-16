@@ -155,6 +155,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _submitForm() {
     print('Button Clicked');
+    print(_emailController.text);
+    print(_passwordController.text);
     if (_emailController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
       //Handle form submission here
       BlocProvider.of<LoginBloc>(context).add(

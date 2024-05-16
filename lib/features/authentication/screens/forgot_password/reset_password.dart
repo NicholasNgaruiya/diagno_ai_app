@@ -9,15 +9,15 @@ class ResetPassword extends StatelessWidget {
     required this.image,
     required this.title,
     required this.subTitle,
-    required this.textButtonName,
+    // required this.textButtonName,
     required this.elevatedButtonName,
     required this.elevatedButtononPressed,
-    required this.textButtononPressed,
+    // required this.textButtononPressed,
   });
   final String image, title, subTitle;
   final VoidCallback elevatedButtononPressed;
-  final VoidCallback textButtononPressed;
-  final String textButtonName;
+  // final VoidCallback textButtononPressed;
+  // final String textButtonName;
   final String elevatedButtonName;
 
   @override
@@ -31,7 +31,10 @@ class ResetPassword extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.close),
+            icon: const Icon(
+              Icons.close,
+              size: 40,
+            ),
           ),
         ],
       ),
@@ -68,13 +71,13 @@ class ResetPassword extends StatelessWidget {
                 height: TSizes.spaceBtwItems,
               ),
 
-              SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: textButtononPressed,
-                  child: Text(textButtonName, style: const TextStyle(color: Colors.black)),
-                ),
-              ),
+              // SizedBox(
+              //   width: double.infinity,
+              //   child: TextButton(
+              //     onPressed: textButtononPressed,
+              //     child: Text(textButtonName, style: const TextStyle(color: Colors.black)),
+              //   ),
+              // ),
             ],
           ),
         ),

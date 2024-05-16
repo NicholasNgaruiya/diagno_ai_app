@@ -23,6 +23,11 @@ class AuthRepository {
     try {
       final response = await AuthService.verifyOTP(otp);
       //Handle the response here if necessary
+      // if (response.isEmpty) {
+      //   return {'message': 'OTP verification successful'};
+      // } else {
+      //   return response;
+      // }
       return response;
     } catch (error) {
       //Handle errors if any
@@ -48,6 +53,7 @@ class AuthRepository {
   static Future<Map<String, dynamic>> login(String email, String password) async {
     try {
       final response = await AuthService.signIn(email, password);
+      if (response['full_name'] != null) {}
 
       //Extract full name and split into first name and last name
       final fullName = response['full_name'] as String;
@@ -64,7 +70,9 @@ class AuthRepository {
       //save user id  and name
       await TLocalStorage.saveString('id', response['id']);
       await TLocalStorage.saveString('user_name', response['full_name']);
-      await TLocalStorage.saveString('image_path', response['image']);
+      if (response['image'] != null) {
+        await TLocalStorage.saveString('image_path', response['image']);
+      }
       await TLocalStorage.saveString('first_name', firstName);
       await TLocalStorage.saveString('last_name', lastName);
       print('Access Token: ${response['access_token']}');
@@ -85,7 +93,7 @@ class AuthRepository {
       return response;
     } catch (error) {
       //Handle errors if any
-      print('Error getting user profile: $error');
+      print('Error getting user profile.Please try again');
       rethrow;
     }
   }

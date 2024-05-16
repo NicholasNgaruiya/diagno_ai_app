@@ -42,13 +42,13 @@ class HomePageScreen extends StatelessWidget {
                     // Icon(Icons.search),
                   ],
                 ),
-                Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: const Icon(
-                    Iconsax.user,
-                    color: TColors.primaryColor,
-                  ),
-                ),
+                // Container(
+                //   margin: const EdgeInsets.only(right: 10),
+                //   child: const Icon(
+                //     Iconsax.user,
+                //     color: TColors.primaryColor,
+                //   ),
+                // ),
               ],
             ),
           ],

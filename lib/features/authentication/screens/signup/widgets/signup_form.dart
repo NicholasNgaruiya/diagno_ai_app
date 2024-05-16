@@ -197,7 +197,7 @@ class _TSignupFormState extends State<TSignupForm> {
                         }
                         if (formKey.currentState!.validate()) {
                           print('Validation passed');
-                          // widget.onSubmit();
+                          widget.onSubmit();
                           // print(widget.firstNameController.text);
                           // print(widget.lastNameController.text);
                           // print(widget.emailController.text);

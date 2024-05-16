@@ -1,13 +1,13 @@
 flutter_native_splash:
-  image: assets/icons/icons8-stethoscope-64.png # Replace with the relative path to your image file
+  image: assets/icons/icons8-stethoscope-64.svg # Replace with the relative path to your image file
   color: "#FFFFFF"
-  image_dark: assets/icons/icons8-stethoscope-64.png # Replace with the relative path to your image file
+  image_dark: assets/icons/icons8-stethoscope-64.svg # Replace with the relative path to your image file image
   color_dark: "#272727"
 
   android_12:
-    image: assets/icons/icons8-stethoscope-64.png # Replace with the relative path to your image file
+    image: assets/icons/icons8-stethoscope-64.svg # Replace with the relative path to your image file
     color: "#FFFFFF"
-    image_dark: assets/icons/icons8-stethoscope-64.png # Replace with the relative path to your image file
+    image_dark: assets/icons/icons8-stethoscope-64.svg # Replace with the relative path to your image file
     color_dark: "#272727"
 
   web: false

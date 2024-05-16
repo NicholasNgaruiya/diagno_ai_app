@@ -72,12 +72,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       );
     } else {
-      return ClipOval(
-        child: Image.asset(
-          'assets/images/profile/default_profile_photo-removebg-preview.png',
-          width: 90, // Adjust width and height as needed
-          height: 90,
-          fit: BoxFit.cover, // Specify the fit property
+      return Container(
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: TColors.primaryColor, width: 2),
+        ),
+        child: ClipOval(
+          child: Image.asset(
+            'assets/images/profile/default_profile_photo-removebg-preview.png',
+            width: 90, // Adjust width and height as needed
+            height: 90,
+            fit: BoxFit.cover, // Specify the fit property
+          ),
         ),
       );
     }

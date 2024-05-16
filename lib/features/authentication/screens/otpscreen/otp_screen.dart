@@ -41,10 +41,11 @@ class _OtpScreenState extends State<OtpScreen> {
             if (state is VerifyEmailSuccessState) {
               //Handle success state to show a snackbar and navigate to the login screen
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
+                SnackBar(
                   content: CustomSnackBarContent(
                     snackBarTitle: 'Yohoo!',
-                    snackBarSubtitle: TTexts.getAccountVerifiedSuccessfully,
+                    // snackBarSubtitle: TTexts.getAccountVerifiedSuccessfully,
+                    snackBarSubtitle: state.response.toString(),
                     backgroundColor: TColors.success,
                   ),
                   behavior: SnackBarBehavior.floating,
@@ -57,10 +58,12 @@ class _OtpScreenState extends State<OtpScreen> {
             } else if (state is VerifyEmailErrorState) {
               //Handle failure state by showing a snackbar with the error message
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
+                SnackBar(
                   content: CustomSnackBarContent(
                     snackBarTitle: 'Oops!',
-                    snackBarSubtitle: 'Account Verification failed',
+                    // snackBarSubtitle: 'Account Verification failed',
+                    snackBarSubtitle: state.error.toString(),
+
                     backgroundColor: TColors.error,
                   ),
                   behavior: SnackBarBehavior.floating,

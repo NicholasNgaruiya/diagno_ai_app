@@ -75,7 +75,7 @@ class AuthService {
         throw Exception('Error fetching user profile');
       }
     } catch (e) {
-      throw Exception('Error fetching user profile: $e');
+      throw Exception('Error fetching user profile.Please try again');
     }
   }
 
@@ -122,8 +122,12 @@ class AuthService {
       } else {
         throw Exception('Error updating user profile');
       }
+    } on http.ClientException catch (e) {
+      print('Socket exception: $e');
+      throw Exception('Connection timeout.Please check your connection and try again.');
     } catch (e) {
-      throw Exception('Error updating user profile: $e');
+      print('Error updating user profile: $e');
+      throw Exception('Error updating user profile');
     }
   }
 }

@@ -29,7 +29,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
       emit(UserProfileLoaded(userProfile));
     } catch (e) {
       print(e);
-      emit(UserProfileError('Failed to load user profile: $e'));
+      emit(UserProfileError('Failed to load user profile.Please try again'));
     }
   }
 
@@ -59,7 +59,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
       emit(UserProfileUpdated(updateProfileModel: updateProfile));
     } catch (e) {
       print(e);
-      emit(const UserProfileError('Failed to update user profile'));
+      emit(const UserProfileError('Failed to update user profile.Please try again'));
     }
   }
 }

@@ -63,18 +63,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               title: TTexts.changeYourPasswordTitle,
               subTitle: TTexts.changeYourPasswordSubTitle,
               elevatedButtonName: 'Done',
-              textButtonName: 'Resend Email',
+              // textButtonName: 'Resend Email',
               elevatedButtononPressed: () {
                 Navigator.of(context).pop();
               },
-              textButtononPressed: () {
-                //Navigate to the login screen using material page route
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  (route) => false,
-                );
-              },
+              // textButtononPressed: () {
+              //   //Navigate to the login screen using material page route
+              //   Navigator.pushAndRemoveUntil(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()),
+              //     (route) => false,
+              //   );
+              // },
             );
           } else {
             return Scaffold(

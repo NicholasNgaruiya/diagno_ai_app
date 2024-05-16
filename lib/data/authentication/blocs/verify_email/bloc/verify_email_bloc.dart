@@ -18,7 +18,13 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
 
     try {
       final response = await AuthRepository.verifyEmail(event.otp);
-      emit(VerifyEmailSuccessState(response));
+      // if (response.isEmpty) {
+      //   emit(VerifyEmailSuccessState('Email verified successfully'));
+      // } else {
+      //   emit(VerifyEmailSuccessState(response));
+      // }
+
+      emit(VerifyEmailSuccessState(response['message']));
     } catch (error) {
       emit(VerifyEmailErrorState(error));
     }

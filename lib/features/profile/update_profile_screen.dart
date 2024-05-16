@@ -190,8 +190,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: TColors.success,
-                                  side: const BorderSide(color: TColors.success),
+                                  backgroundColor: TColors.primaryColor,
+                                  side: const BorderSide(color: TColors.primaryColor),
                                 ),
                                 child: const Text(
                                   'Update',
