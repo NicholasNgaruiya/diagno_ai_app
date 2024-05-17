@@ -30,7 +30,7 @@ class _HorizontalScrollableListState extends State<HorizontalScrollableList> {
   ];
 
   final List<String> _featureDescriptions = [
-    'Easily enter symptoms and receive tailored recommendations quickly and efficiently using our intuitive interface.',
+    'Easily enter symptoms and receive tailored recommendations quickly and efficiently using our app.',
     'Get accurate diagnosis by entering symptoms. Our AI-powered system ensures precise results.',
     'Receive personalized treatment recommendations based on diagnosis, powered by advanced AI algorithms.',
   ];

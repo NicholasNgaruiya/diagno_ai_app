@@ -98,14 +98,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             fit: BoxFit.cover,
           ),
-          // child: ClipOval(
-          //   child: Image.asset(
-          //     'assets/images/profile/default_profile_photo-removebg-preview.png',
-          //     width: 90, // Adjust width and height as needed
-          //     height: 90,
-          //     fit: BoxFit.cover, // Specify the fit property
-          //   ),
-          // ),
         ),
       );
     }
@@ -194,14 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     BlocProvider.of<UserProfileBloc>(context).add(FetchUserProfile());
                   },
                 ),
-                // const SizedBox(
-                //   height: TSizes.spaceBtwItems,
-                // ),
-                // ListTile(
-                //   leading: const Icon(Iconsax.information, size: 20, color: TColors.primaryColor),
-                //   title: const Text('Basic Information'),
-                //   trailing: Icon(Icons.arrow_forward_ios, size: 18, color: dark ? TColors.white : TColors.black),
-                // ),
+
                 const SizedBox(
                   height: TSizes.spaceBtwItems,
                 ),
@@ -277,6 +262,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     );
                   },
                 ),
+                // display version number of the app
+                const ListTile(
+                  title: Text('Version 2.1.2'),
+                  dense: true,
+                ),
 
                 // Add more list items as needed
               ],
@@ -286,26 +276,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-
-  // void _feedback(BuildContext context) {
-  //   BetterFeedback.of(context).show((UserFeedback feedback) {
-  //     showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) => SimpleDialog(
-  //         title: Column(
-  //           children: [
-  //             Text(
-  //               feedback.text,
-  //               style: const TextStyle(
-  //                 fontSize: 24,
-  //               ),
-  //             ),
-  //             const SizedBox(height: 10),
-  //             Image.memory(feedback.screenshot, width: 250, height: 500),
-  //           ],
-  //         ),
-  //       ),
-  //     );
-  //   });
-  // }
 }

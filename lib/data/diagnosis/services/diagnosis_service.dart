@@ -44,6 +44,7 @@ class DiagnosisService {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
+        print(responseData);
         return responseData;
       } else if (response.statusCode == 204) {
         //Handle 204 No Content

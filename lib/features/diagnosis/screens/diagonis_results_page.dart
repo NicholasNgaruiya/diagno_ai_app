@@ -15,7 +15,7 @@ class DiagnosisResultsPage extends StatefulWidget {
 }
 
 class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with SingleTickerProviderStateMixin {
-  int _selectedIndex = 0;
+  // int _selectedIndex = 0;
   late TabController _tabController;
   // bool _isLoading = true;
 
@@ -23,11 +23,11 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    _tabController.addListener(() {
-      setState(() {
-        _selectedIndex = _tabController.index;
-      });
-    });
+    // _tabController.addListener(() {
+    //   setState(() {
+    //     _selectedIndex = _tabController.index;
+    //   });
+    // });
   }
 
   @override
@@ -35,17 +35,6 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
     _tabController.dispose();
     super.dispose();
   }
-
-  // void _onTabSelected(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //     _tabController.animateTo(
-  //       index,
-  //       curve: Curves.easeInOut,
-  //       // duration: const Duration(milliseconds: 900),
-  //     );
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -205,30 +194,16 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                       children: [
                         InformationTab(
                           description: state.diagnosis['description'],
-                          precautions: [state.diagnosis['precautions']],
-                          medications: [state.diagnosis['medications']],
+                          precautions: (state.diagnosis['precautions'] as List<dynamic>).cast<String>(),
+                          medications: (state.diagnosis['medications'] as List<dynamic>).cast<String>(),
                         ),
                         LifestyleTab(
-                          diets: [state.diagnosis['diets']],
-                          workouts: [state.diagnosis['workout']],
+                          diets: (state.diagnosis['diets'] as List<dynamic>).cast<String>(),
+                          workouts: (state.diagnosis['workout'] as List<dynamic>).cast<String>(),
                         ),
                       ],
                     ),
                   ),
-
-                  ///?
-                  // SliverFillRemaining(
-                  //   child: _selectedIndex == 0
-                  //       ? InformationTab(
-                  //           description: state.diagnosis['description'],
-                  //           precautions: [state.diagnosis['precautions']],
-                  //           medications: [state.diagnosis['medications']],
-                  //         )
-                  //       : LifestyleTab(
-                  //           diets: [state.diagnosis['diets']],
-                  //           workouts: [state.diagnosis['workout']],
-                  //         ),
-                  // ),
                 ],
               );
             } else {
@@ -244,8 +219,8 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
 
 class InformationTab extends StatelessWidget {
   final String description;
-  final List<dynamic> precautions;
-  final List<dynamic> medications;
+  final List<String> precautions;
+  final List<String> medications;
 
   const InformationTab({
     super.key,
@@ -256,10 +231,6 @@ class InformationTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   alignment: Alignment.center,
-    //   child: const Text('Details Tab Content'),
-    // );
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
@@ -293,31 +264,31 @@ class InformationTab extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
+          // Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          // children: precautions.map((precaution) {
+          // final List<String> precautionList = precaution
+          //     .toString()
+          //     .replaceAll('[', '') // Remove leading [
+          //     .replaceAll(']', '') // Remove trailing ]
+          //     .split(',') // Split by comma
+          //     .map((e) => e.trim()) // Trim any extra spaces
+          //     .toList(); // Convert back to list
+
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: precautions.map((precaution) {
-              final List<String> precautionList = precaution
-                  .toString()
-                  .replaceAll('[', '') // Remove leading [
-                  .replaceAll(']', '') // Remove trailing ]
-                  .split(',') // Split by comma
-                  .map((e) => e.trim()) // Trim any extra spaces
-                  .toList(); // Convert back to list
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: precautionList.map((precautionItem) {
-                  return Text(
-                    '• ${precautionItem[0].toUpperCase()}${precautionItem.substring(1)}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey[700],
-                    ),
-                  );
-                }).toList(),
+              return Text(
+                '• ${precaution[0].toUpperCase()}${precaution.substring(1)}',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey[700],
+                ),
               );
             }).toList(),
           ),
+          // }).toList(),
+          // ),
           const SizedBox(
             height: 20,
           ),
@@ -330,30 +301,33 @@ class InformationTab extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
+          // Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          // children: medications[0].map<Widget>((medication) {
+          // final List<String> medicationList = medication
+          //     .toString()
+          //     .replaceAll('[', '') // Remove leading [
+          //     .replaceAll(']', '') // Remove trailing ]
+          //     .replaceAll("'", ' ')
+          //     .split(','); // Split by comma
+
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: medications[0].map<Widget>((medication) {
-              final List<String> medicationList = medication
-                  .toString()
-                  .replaceAll('[', '') // Remove leading [
-                  .replaceAll(']', '') // Remove trailing ]
-                  .replaceAll("'", ' ')
-                  .split(','); // Split by comma
+            children: medications.map((medication) {
+              //Remove singl quotes and trim spaces
+              final formattedMedication = medication.replaceAll("'", '').trim();
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: medicationList.map((medicationItem) {
-                  return Text(
-                    '• $medicationItem',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey[700],
-                    ),
-                  );
-                }).toList(),
+              return Text(
+                '• $formattedMedication',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey[700],
+                ),
               );
             }).toList(),
           ),
+          // }).toList(),
+          // ),
         ],
       ),
     );
@@ -361,9 +335,9 @@ class InformationTab extends StatelessWidget {
 }
 
 class LifestyleTab extends StatelessWidget {
-  final List<dynamic> diets;
+  final List<String> diets;
 
-  final List<dynamic> workouts;
+  final List<String> workouts;
 
   const LifestyleTab({Key? key, required this.workouts, required this.diets}) : super(key: key);
 
@@ -385,15 +359,11 @@ class LifestyleTab extends StatelessWidget {
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: workouts[0].map<Widget>((workout) {
-              final String workoutItem = workout
-                  .toString()
-                  .replaceAll('[', '') // Remove leading [
-                  .replaceAll(']', '') // Remove trailing ]
-                  .replaceAll("'", ''); // Remove single quotes
+            children: workouts.map((workout) {
+              final String formattedWorkout = workout.replaceAll("'", '').trim();
 
               return Text(
-                '• $workoutItem',
+                '• $formattedWorkout',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   color: Colors.grey[700],
@@ -413,30 +383,22 @@ class LifestyleTab extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
+
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: diets[0].map<Widget>((diet) {
-              final List<String> dietList = diet
-                  .toString()
-                  .replaceAll('[', '') // Remove leading [
-                  .replaceAll(']', '') // Remove trailing ]
-                  .replaceAll("'", '') // Remove single quotes
-                  .split(','); // Split by comma
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: dietList.map((dietItem) {
-                  return Text(
-                    '• $dietItem',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey[700],
-                    ),
-                  );
-                }).toList(),
+            children: diets.map((diet) {
+              final String formattedDiet = diet.replaceAll("'", '').trim();
+              return Text(
+                '• $formattedDiet',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey[700],
+                ),
               );
             }).toList(),
           ),
+          // }).toList(),
+          // ),
         ],
       ),
     );
