@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 
@@ -22,8 +23,10 @@ class ResetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: darkMode ? TColors.black : TColors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false, // Remove the back arrow
         actions: [
@@ -31,9 +34,10 @@ class ResetPassword extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.close,
               size: 40,
+              color: darkMode ? TColors.white : TColors.black,
             ),
           ),
         ],

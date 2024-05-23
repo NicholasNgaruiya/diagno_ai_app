@@ -77,7 +77,7 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                 scrollbarProps: ScrollbarProps(
                   thickness: 10,
                   // interactive: true,
-                  thumbColor: TColors.black.withOpacity(0.5),
+                  thumbColor: dark ? TColors.white : TColors.black,
                   fadeDuration: const Duration(milliseconds: 500),
                 ),
                 isFilterOnline: true,
@@ -88,14 +88,14 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    suffixIcon: const Icon(
+                    suffixIcon: Icon(
                       Icons.search,
-                      color: TColors.darkGrey,
+                      color: dark ? TColors.white : TColors.darkGrey,
                       size: 30,
                     ),
                     hintText: 'Search for symptom',
-                    hintStyle: const TextStyle(
-                      color: TColors.darkGrey,
+                    hintStyle: TextStyle(
+                      color: dark ? TColors.white.withOpacity(0.8) : TColors.darkGrey,
                     ),
                   ),
                 ),
@@ -114,11 +114,11 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
                   });
                 }
               },
-              dropdownDecoratorProps: const DropDownDecoratorProps(
+              dropdownDecoratorProps: DropDownDecoratorProps(
                 dropdownSearchDecoration: InputDecoration(
                   suffixIcon: Icon(
                     Icons.search,
-                    color: TColors.black,
+                    color: dark ? TColors.white : TColors.black,
                   ),
                   // hintStyle: TextStyle(
                   //   color: Colors.black,
@@ -130,9 +130,9 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
               dropdownBuilder: (context, selectedItem) {
                 return Text(
                   selectedItem ?? 'Search',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
-                    color: Colors.black,
+                    color: dark ? TColors.white : TColors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 );
@@ -145,17 +145,17 @@ class _SymptomsEntryPageState extends State<SymptomsEntryPage> {
             Column(
               children: [
                 selectedSymptoms.isEmpty
-                    ? const Text(
+                    ? Text(
                         'No symptoms selected',
                         style: TextStyle(
-                          color: TColors.darkGrey,
+                          color: dark ? TColors.white.withOpacity(0.8) : TColors.darkGrey,
                           fontSize: 16,
                         ),
                       )
-                    : const Text(
+                    : Text(
                         'Selected Symptoms',
                         style: TextStyle(
-                          color: TColors.black,
+                          color: dark ? TColors.white : TColors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),

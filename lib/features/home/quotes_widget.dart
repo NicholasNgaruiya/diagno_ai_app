@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/home/bloc/home_bloc.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/device/device_utility.dart';
+import '../../utils/helpers/helper_functions.dart';
 
 class QuotesWidget extends StatelessWidget {
   const QuotesWidget({
@@ -12,6 +13,8 @@ class QuotesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         if (state is LoadingState) {
@@ -50,10 +53,11 @@ class QuotesWidget extends StatelessWidget {
                     child: Text(
                       '"${state.text}"',
                       // textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         // fontStyle: FontStyle.italic,
                         // fontSize: 15,
                         fontWeight: FontWeight.w600,
+                        color: darkMode ? TColors.black : TColors.black,
                       ),
                     ),
                   ),
@@ -64,6 +68,9 @@ class QuotesWidget extends StatelessWidget {
                     child: Text(
                       '- ${state.author}',
                       textAlign: TextAlign.end,
+                      style: TextStyle(
+                        color: darkMode ? TColors.black : TColors.black,
+                      ),
                     ),
                   ),
                 ],

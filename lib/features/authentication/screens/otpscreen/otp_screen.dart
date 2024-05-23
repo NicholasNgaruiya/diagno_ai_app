@@ -7,6 +7,7 @@ import '../../../../data/authentication/blocs/verify_email/bloc/verify_email_blo
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
+import '../../../../utils/helpers/helper_functions.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({Key? key}) : super(key: key);
@@ -33,131 +34,134 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(),
-        body: BlocListener<VerifyEmailBloc, VerifyEmailState>(
-          listener: (context, state) {
-            if (state is VerifyEmailSuccessState) {
-              //Handle success state to show a snackbar and navigate to the login screen
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: CustomSnackBarContent(
-                    snackBarTitle: 'Yohoo!',
-                    // snackBarSubtitle: TTexts.getAccountVerifiedSuccessfully,
-                    snackBarSubtitle: state.response.toString(),
-                    backgroundColor: TColors.success,
-                  ),
-                  behavior: SnackBarBehavior.floating,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  // content: Text(TTexts.getAccountVerifiedSuccessfully),
+    final darkMode = THelperFunctions.isDarkMode(context);
+
+    return Scaffold(
+      backgroundColor: darkMode ? TColors.black : TColors.white,
+      appBar: AppBar(
+        backgroundColor: darkMode ? TColors.black : TColors.white,
+      ),
+      body: BlocListener<VerifyEmailBloc, VerifyEmailState>(
+        listener: (context, state) {
+          if (state is VerifyEmailSuccessState) {
+            //Handle success state to show a snackbar and navigate to the login screen
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: CustomSnackBarContent(
+                  snackBarTitle: 'Yohoo!',
+                  // snackBarSubtitle: TTexts.getAccountVerifiedSuccessfully,
+                  snackBarSubtitle: state.response.toString(),
+                  backgroundColor: TColors.success,
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                // content: Text(TTexts.getAccountVerifiedSuccessfully),
+              ),
+            );
+            Navigator.pushReplacementNamed(context, '/login');
+          } else if (state is VerifyEmailErrorState) {
+            //Handle failure state by showing a snackbar with the error message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: CustomSnackBarContent(
+                  snackBarTitle: 'Oops!',
+                  // snackBarSubtitle: 'Account Verification failed',
+                  snackBarSubtitle: state.error.toString(),
+
+                  backgroundColor: TColors.error,
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                // content: Text(state.error.toString()),
+              ),
+            );
+          }
+        },
+        child: BlocBuilder<VerifyEmailBloc, VerifyEmailState>(
+          builder: (context, state) {
+            if (state is VerifyEmailLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: TColors.primaryColor,
                 ),
               );
-              Navigator.pushReplacementNamed(context, '/login');
-            } else if (state is VerifyEmailErrorState) {
-              //Handle failure state by showing a snackbar with the error message
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: CustomSnackBarContent(
-                    snackBarTitle: 'Oops!',
-                    // snackBarSubtitle: 'Account Verification failed',
-                    snackBarSubtitle: state.error.toString(),
-
-                    backgroundColor: TColors.error,
+            } else {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(TSizes.defaultSpace),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ///Title
+                      Text(
+                        TTexts.verifyEmailTitle,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                      Text(
+                        TTexts.confirmEmailSubTitle,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      const SizedBox(
+                        height: TSizes.spaceBtwSections,
+                      ),
+                      Form(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: List.generate(6, (index) {
+                            return SizedBox(
+                              height: 48,
+                              width: 44,
+                              child: TextFormField(
+                                controller: controllers[index],
+                                onChanged: (value) {
+                                  if (value.length == 1) {
+                                    // Move focus to the next field
+                                    if (index < controllers.length - 1) {
+                                      FocusScope.of(context).nextFocus();
+                                    } else {
+                                      // If this is the last field, unfocus to dismiss the keyboard
+                                      FocusScope.of(context).unfocus();
+                                    }
+                                  }
+                                },
+                                style: Theme.of(context).textTheme.titleLarge,
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly,
+                                ],
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: TSizes.appBarHeight,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            String otp = getOtp();
+                            BlocProvider.of<VerifyEmailBloc>(context).add(VerifyEmailButtonClickedEvent(otp));
+                            // Now you can use the otp
+                          },
+                          child: const Text(
+                            'Verify',
+                            style: TextStyle(color: TColors.white),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  behavior: SnackBarBehavior.floating,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  // content: Text(state.error.toString()),
                 ),
               );
             }
           },
-          child: BlocBuilder<VerifyEmailBloc, VerifyEmailState>(
-            builder: (context, state) {
-              if (state is VerifyEmailLoadingState) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: TColors.primaryColor,
-                  ),
-                );
-              } else {
-                return SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(TSizes.defaultSpace),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ///Title
-                        Text(
-                          TTexts.verifyEmailTitle,
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                        const SizedBox(height: TSizes.spaceBtwItems),
-                        Text(
-                          TTexts.confirmEmailSubTitle,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        const SizedBox(
-                          height: TSizes.spaceBtwSections,
-                        ),
-                        Form(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(6, (index) {
-                              return SizedBox(
-                                height: 48,
-                                width: 44,
-                                child: TextFormField(
-                                  controller: controllers[index],
-                                  onChanged: (value) {
-                                    if (value.length == 1) {
-                                      // Move focus to the next field
-                                      if (index < controllers.length - 1) {
-                                        FocusScope.of(context).nextFocus();
-                                      } else {
-                                        // If this is the last field, unfocus to dismiss the keyboard
-                                        FocusScope.of(context).unfocus();
-                                      }
-                                    }
-                                  },
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly,
-                                  ],
-                                ),
-                              );
-                            }),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: TSizes.appBarHeight,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              String otp = getOtp();
-                              BlocProvider.of<VerifyEmailBloc>(context).add(VerifyEmailButtonClickedEvent(otp));
-                              // Now you can use the otp
-                            },
-                            child: const Text(
-                              'Verify',
-                              style: TextStyle(color: TColors.white),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }
-            },
-          ),
         ),
       ),
     );

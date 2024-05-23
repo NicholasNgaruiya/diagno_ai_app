@@ -5,6 +5,7 @@ import '../../../../common/styles/spacing_styles.dart';
 import '../../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../../data/authentication/blocs/login/bloc/login_bloc.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/helpers/helper_functions.dart';
 import '../../../../utils/local_storage/storage_utility.dart';
 import 'widgets/login_form.dart';
 import 'widgets/login_header.dart';
@@ -75,11 +76,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final dark = THelperFunctions.isDarkMode(context);
+    final darkMode = THelperFunctions.isDarkMode(context);
+
     return Scaffold(
-      backgroundColor: TColors.white,
+      backgroundColor: darkMode ? TColors.black : TColors.white,
       appBar: AppBar(
-        backgroundColor: TColors.white,
+        backgroundColor: darkMode ? TColors.black : TColors.white,
       ),
       body: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {

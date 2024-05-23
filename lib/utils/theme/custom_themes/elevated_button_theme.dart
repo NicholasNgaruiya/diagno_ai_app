@@ -20,33 +20,33 @@ class TElevatedButtonTheme {
     ),
   );
 
-  ///--Light Theme
-  static final darkElevatedButtonTheme = ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      elevation: 0,
-      foregroundColor: TColors.black,
-      backgroundColor: TColors.buttonPrimary,
-      disabledForegroundColor: TColors.buttonDisabled,
-      disabledBackgroundColor: TColors.buttonDisabled,
-      side: const BorderSide(color: TColors.buttonPrimary),
-      padding: const EdgeInsets.symmetric(vertical: 18),
-      textStyle: const TextStyle(fontSize: 16, color: TColors.textWhite, fontWeight: FontWeight.w600),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    ),
-  );
-
-  // ///---Dark Theme
+  // ///--Light Theme
   // static final darkElevatedButtonTheme = ElevatedButtonThemeData(
   //   style: ElevatedButton.styleFrom(
   //     elevation: 0,
-  //     foregroundColor: TColors.white,
+  //     foregroundColor: TColors.black,
   //     backgroundColor: TColors.buttonPrimary,
   //     disabledForegroundColor: TColors.buttonDisabled,
   //     disabledBackgroundColor: TColors.buttonDisabled,
-  //     side: const BorderSide(color: TColors.primaryColor),
+  //     side: const BorderSide(color: TColors.buttonPrimary),
   //     padding: const EdgeInsets.symmetric(vertical: 18),
   //     textStyle: const TextStyle(fontSize: 16, color: TColors.textWhite, fontWeight: FontWeight.w600),
   //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
   //   ),
   // );
+
+  ///---Dark Theme
+  static final darkElevatedButtonTheme = ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      elevation: 0,
+      foregroundColor: TColors.white,
+      backgroundColor: TColors.buttonPrimary,
+      disabledForegroundColor: TColors.buttonDisabled,
+      disabledBackgroundColor: TColors.buttonDisabled,
+      side: const BorderSide(color: TColors.primaryColor),
+      padding: const EdgeInsets.symmetric(vertical: 18),
+      textStyle: const TextStyle(fontSize: 16, color: TColors.textWhite, fontWeight: FontWeight.w600),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    ),
+  );
 }

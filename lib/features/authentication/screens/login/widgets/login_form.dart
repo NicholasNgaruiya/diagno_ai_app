@@ -1,3 +1,4 @@
+import 'package:diagno_ai_frontend/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -82,30 +83,42 @@ class _TLoginFormState extends State<TLoginForm> {
 
             ///Remember me and Forgot Password
             ///Remember me
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Checkbox(
-                      value: widget.rememberMe,
-                      onChanged: (newValue) {
-                        print(newValue);
-                        widget.onRememberMe(newValue ?? false);
-                      },
+            Container(
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Checkbox(
+                        value: widget.rememberMe,
+                        onChanged: (newValue) {
+                          print(newValue);
+                          widget.onRememberMe(newValue ?? false);
+                        },
+                      ),
+                      const Text(
+                        TTexts.rememberMe,
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/forget_password');
+                    },
+                    child: const Text(
+                      TTexts.forgetPasswordTitle,
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
                     ),
-                    const Text(
-                      TTexts.rememberMe,
-                    ),
-                  ],
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/forget_password');
-                  },
-                  child: const Text(TTexts.forgetPasswordTitle),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: TSizes.spaceBtwSections,

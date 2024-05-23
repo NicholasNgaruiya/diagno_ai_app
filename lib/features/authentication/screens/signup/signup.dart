@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../../data/authentication/blocs/signup/bloc/sign_up_bloc.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/helpers/helper_functions.dart';
 import '../../models/user_model.dart';
 import 'widgets/signup_form.dart';
 
@@ -33,10 +34,23 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+
     return Scaffold(
-      backgroundColor: TColors.white,
+      backgroundColor: darkMode ? TColors.black : TColors.white,
       appBar: AppBar(
-        backgroundColor: TColors.white,
+        backgroundColor: darkMode ? TColors.black : TColors.white,
+
+        //Icon going back
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: darkMode ? TColors.white : TColors.black,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: BlocListener<SignUpBloc, SignUpState>(
         listener: (context, state) {

@@ -6,6 +6,7 @@ import '../../../common/widgets/errors/custom_snackbar_content.dart';
 import '../../../data/diagnosis/bloc/diagnosis_bloc.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
+import '../../../utils/helpers/helper_functions.dart';
 
 class DiagnosisResultsPage extends StatefulWidget {
   const DiagnosisResultsPage({super.key});
@@ -38,8 +39,10 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: darkMode ? TColors.black : TColors.grey,
       body: BlocListener<DiagnosisBloc, DiagnosisState>(
         listener: (context, state) {
           if (state is GetDiagnosisFailure) {
@@ -147,7 +150,7 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                             // width: TDeviceUtils.getScreenWidth(context) * 6,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Colors.grey[300],
+                              color: TColors.white,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             // margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -165,12 +168,13 @@ class _DiagnosisResultsPageState extends State<DiagnosisResultsPage> with Single
                                     indicatorColor: Colors.green,
                                     unselectedLabelColor: Colors.black,
                                     labelColor: Colors.white,
-                                    indicatorWeight: 2,
+                                    // indicatorWeight: 2,
                                     indicator: BoxDecoration(
                                       color: Colors.green,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     indicatorSize: TabBarIndicatorSize.tab, //This adjusts the size of the tab
+                                    dividerColor: Colors.transparent,
                                     tabs: const [
                                       Tab(
                                         text: 'Information',
@@ -231,6 +235,8 @@ class InformationTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
@@ -249,7 +255,7 @@ class InformationTab extends StatelessWidget {
             description,
             style: TextStyle(
               fontWeight: FontWeight.w400,
-              color: Colors.grey[700],
+              color: darkMode ? TColors.grey : Colors.grey[700],
             ),
           ),
           const SizedBox(
@@ -264,16 +270,6 @@ class InformationTab extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          // Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          // children: precautions.map((precaution) {
-          // final List<String> precautionList = precaution
-          //     .toString()
-          //     .replaceAll('[', '') // Remove leading [
-          //     .replaceAll(']', '') // Remove trailing ]
-          //     .split(',') // Split by comma
-          //     .map((e) => e.trim()) // Trim any extra spaces
-          //     .toList(); // Convert back to list
 
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -282,7 +278,7 @@ class InformationTab extends StatelessWidget {
                 '• ${precaution[0].toUpperCase()}${precaution.substring(1)}',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  color: Colors.grey[700],
+                  color: darkMode ? TColors.grey : Colors.grey[700],
                 ),
               );
             }).toList(),
@@ -301,15 +297,6 @@ class InformationTab extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          // Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          // children: medications[0].map<Widget>((medication) {
-          // final List<String> medicationList = medication
-          //     .toString()
-          //     .replaceAll('[', '') // Remove leading [
-          //     .replaceAll(']', '') // Remove trailing ]
-          //     .replaceAll("'", ' ')
-          //     .split(','); // Split by comma
 
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -321,7 +308,7 @@ class InformationTab extends StatelessWidget {
                 '• $formattedMedication',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  color: Colors.grey[700],
+                  color: darkMode ? TColors.grey : Colors.grey[700],
                 ),
               );
             }).toList(),
@@ -343,6 +330,8 @@ class LifestyleTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
@@ -366,7 +355,7 @@ class LifestyleTab extends StatelessWidget {
                 '• $formattedWorkout',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  color: Colors.grey[700],
+                  color: darkMode ? TColors.grey : Colors.grey[700],
                 ),
               );
             }).toList(),
@@ -392,7 +381,7 @@ class LifestyleTab extends StatelessWidget {
                 '• $formattedDiet',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  color: Colors.grey[700],
+                  color: darkMode ? TColors.grey : Colors.grey[700],
                 ),
               );
             }).toList(),

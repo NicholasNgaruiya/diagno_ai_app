@@ -1,56 +1,64 @@
+import 'package:diagno_ai_frontend/utils/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/constants/colors.dart';
 import '../../utils/constants/sizes.dart';
+import '../../utils/helpers/helper_functions.dart';
 import '../profile/widgets/get_username_widget.dart';
 import 'health_tips_list.dart';
 import 'horizontal_list_view.dart';
 import 'quotes_widget.dart';
+import 'theme_switcher_icon.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+
     return Scaffold(
-      backgroundColor: TColors.white,
+      backgroundColor: darkMode ? TColors.black : TColors.white,
       appBar: AppBar(
-        backgroundColor: TColors.white,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        backgroundColor: darkMode ? TColors.black : TColors.white,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Hello,',
-              style: TextStyle(
-                fontSize: 15,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w300,
-                // color: ,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Row(
+                Text(
+                  'Hello,',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w300,
+                    color: darkMode ? TColors.white : TColors.black,
+                    // color: ,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GetUsernameWidget(),
-                    SizedBox(
-                      width: 2,
+                    const Row(
+                      children: [
+                        GetUsernameWidget(),
+                        SizedBox(
+                          width: 2,
+                        ),
+                        Text('!'),
+                        // Icon(Icons.search),
+                      ],
                     ),
-                    Text('!'),
-                    // Icon(Icons.search),
                   ],
                 ),
-                // Container(
-                //   margin: const EdgeInsets.only(right: 10),
-                //   child: const Icon(
-                //     Iconsax.user,
-                //     color: TColors.primaryColor,
-                //   ),
-                // ),
               ],
             ),
+
+            ///Theme Switcher icon
+            ThemeSwitcherIcon(),
           ],
         ),
       ),

@@ -105,7 +105,12 @@ class _TTermsAndConditionsCheckboxState extends State<TTermsAndConditionsCheckbo
               child: Text.rich(
                 TextSpan(
                   children: [
-                    TextSpan(text: '${TTexts.iAgreeTo} ', style: Theme.of(context).textTheme.bodySmall),
+                    TextSpan(
+                      text: '${TTexts.iAgreeTo} ',
+                      style: Theme.of(context).textTheme.bodySmall!.apply(
+                            color: dark ? TColors.white : TColors.black,
+                          ),
+                    ),
                     TextSpan(
                       text: '${TTexts.privacyPolicy} ',
                       style: Theme.of(context).textTheme.bodySmall!.apply(
@@ -118,7 +123,12 @@ class _TTermsAndConditionsCheckboxState extends State<TTermsAndConditionsCheckbo
                           TDeviceUtils.launchUrl('https://www.privacypolicies.com/live/b63728cd-09a1-48fa-8a4a-d99b1def6d49');
                         },
                     ),
-                    TextSpan(text: '${TTexts.and} ', style: Theme.of(context).textTheme.bodySmall),
+                    TextSpan(
+                      text: '${TTexts.and} ',
+                      style: Theme.of(context).textTheme.bodySmall!.apply(
+                            color: dark ? TColors.white : TColors.black,
+                          ),
+                    ),
                     TextSpan(
                       text: '${TTexts.termsOfService} ',
                       style: Theme.of(context).textTheme.bodySmall!.apply(

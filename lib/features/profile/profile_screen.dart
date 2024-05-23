@@ -144,7 +144,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     right: 0,
                     child: Container(
                       height: 50, // Half the height of the app bar
-                      color: dark ? Colors.white : Colors.white, // Color for the lower half of the avatar
+                      color: dark ? TColors.black : TColors.white, // Color for the lower half of the avatar
                     ),
                   ),
                   Positioned(

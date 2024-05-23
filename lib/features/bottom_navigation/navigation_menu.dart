@@ -93,7 +93,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
                   icon: Icon(
                     size: 20,
                     Iconsax.user,
-                    color: selectedIndex == 3 ? TColors.primaryColor : null,
+                    color: selectedIndex == 2 ? TColors.primaryColor : null,
                   ),
                   label: 'Profile',
                 ),
