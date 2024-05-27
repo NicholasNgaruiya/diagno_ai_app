@@ -21,4 +21,4 @@ Diagno AI, powered by Flutter and Dart on the frontend and Django on the backend
 
 # Important Note
 
-While this app seems to offer health diagnosis,it's crucial to understand that it should never replacing consulting a licensed medical professional
+While this app seems to offer health diagnosis,it's crucial to understand that it should never replace consulting a licensed medical professional
