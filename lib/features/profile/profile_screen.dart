@@ -264,7 +264,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 // display version number of the app
                 const ListTile(
-                  title: Text('Version 2.1.2'),
+                  title: Text('Version 2.2.0'),
                   dense: true,
                 ),
 
