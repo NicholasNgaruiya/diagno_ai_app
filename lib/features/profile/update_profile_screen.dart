@@ -9,6 +9,7 @@ import '../../data/authentication/blocs/profile/bloc/user_profile_bloc.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/constants/sizes.dart';
 import '../../utils/device/device_utility.dart';
+import '../../utils/helpers/helper_functions.dart';
 import 'models/update_profile_model.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
@@ -36,11 +37,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+
     return Scaffold(
-      backgroundColor: TColors.white,
+      backgroundColor: darkMode ? TColors.black : TColors.white,
       appBar: AppBar(
-        title: const Text('Update Profile'),
-        backgroundColor: TColors.white,
+        title: Text('Update Profile', style: TextStyle(color: darkMode ? TColors.white : TColors.black)),
+        backgroundColor: darkMode ? TColors.black : TColors.white,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: darkMode ? TColors.white : TColors.black),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: BlocConsumer<UserProfileBloc, UserProfileState>(
         listener: (context, state) {
@@ -96,7 +105,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   children: [
                     Text(
                       'Add Image',
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: darkMode ? TColors.white : TColors.black),
                     ),
                     const SizedBox(height: 10),
                     ImageSelectorWidget(
@@ -111,16 +120,20 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     const SizedBox(height: 10),
                     Text(
                       'User info',
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: darkMode ? TColors.white : TColors.black),
                     ),
                     const SizedBox(height: 10),
                     Form(
                       child: Column(
                         children: [
                           TextFormField(
+                            //color of the text to be conditional based on dark mode
                             controller: _firstNameController,
-                            decoration: const InputDecoration(
+                            style: TextStyle(color: darkMode ? TColors.white : TColors.black),
+
+                            decoration: InputDecoration(
                               labelText: 'First Name',
+                              labelStyle: TextStyle(color: darkMode ? TColors.white : TColors.black),
                             ),
                             maxLines: 1,
                           ),
@@ -129,8 +142,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           ),
                           TextFormField(
                             controller: _lastNameController,
-                            decoration: const InputDecoration(
+                            style: TextStyle(color: darkMode ? TColors.white : TColors.black),
+                            decoration: InputDecoration(
                               labelText: 'Last Name',
+                              labelStyle: TextStyle(color: darkMode ? TColors.white : TColors.black),
                             ),
                             maxLines: 1,
                           ),
@@ -139,8 +154,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           ),
                           TextFormField(
                             controller: _emailController,
-                            decoration: const InputDecoration(
+                            style: TextStyle(color: darkMode ? TColors.white : TColors.black),
+                            decoration: InputDecoration(
+                              //change the color of the text to be conditional based on dark mode
                               labelText: 'Email read-only',
+                              labelStyle: TextStyle(color: darkMode ? TColors.white : TColors.black),
                             ),
                             maxLines: 1,
                             readOnly: true,
